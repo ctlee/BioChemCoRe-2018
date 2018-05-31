@@ -1,0 +1,18 @@
+Part 1) Open wt1mg_eq_v.out in a text editor.
+
+Did you notice that the expression begins with a "grep" to select lines that contain the word "TEMP"? Why would we want to filter for those?
+
+What might that 6 and 9 represent in the awk command? What happens if you take the redirect "> temp.dat" off the end of the command?
+
+What happens if you change the 6 or the 9?
+
+Part 2) Try taking out the "-persist" part, or remove "with lines" or change "1:2" to some other numbers (like "0:1" or "0:2").
+
+Part 3) Look at the "paste" command! 
+
+Can you do it from just one file? If not, try making eptot.dat and combining it with temp.dat instead of starting from wt1mg_eq_v.out.
+
+Part 4) Try the command
+gnuplot -persist -e "plot 'temp.dat' using 1:2 with lines, 'temp.dat' using 2:1 with lines" to plot two lines at once!
+
+

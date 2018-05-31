@@ -1,0 +1,32 @@
+I'd make a python script. First, grab the first argument on the command like using the sys command:
+
+import sys
+filename = sys.argv[1]
+
+If you want to be fancier you may also opt to use argparse.
+
+
+
+Then open the file with a line like:
+
+my_file = open(filename)
+
+
+
+Then read it with:
+
+my_data = my_file.read() or .readlines()
+
+
+
+
+You'll then want to iterate through the file searching for certain patterns where your energy will appear. Lots of "if" statements will get the job done, but consdier googling the "re" (regular expression) module. I use the function re.findall all the time. It will take some practice, but the "re" module is an absolute beast for dealing with file formatting.
+
+http://xkcd.com/208/
+
+
+
+Then you'll want to format your numbers logically. A general rule of thumb when dealing with lists of numbers that may get large is to use python lists to get the raw data (maybe like a list of [timestep, potential energy] pairs, then once you have them all in a python list, convert it to a numpy array. It's important to use the python list to aggregate all the data first, because you can append things to it. Numpy arrays are lightning fast but their size is (basically) set in stone. Also, making the data into numpy arrays will make your program extensible and gives you access to fancy sorting and slicing.
+
+
+Finally, plot it. I'd use "pylab" for this (it's a simple interface to the powerful "matplotlib" module).

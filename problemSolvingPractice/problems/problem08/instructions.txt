@@ -1,0 +1,5 @@
+a1.pdf contains an assignment taken from the CSE182 class, which I found to be particularly brilliant. Do problems 3 and 4.
+
+You can view the pdf with the command "evince a1.pdf". This sort of problem is extremely common when dealing with, for example, programs from the dark ages (the 90's) that require funny input formats.
+
+Make the python programs cat.py and filter.py to complete the assignment.

@@ -1,0 +1,17 @@
+You may or may not want to check out the python glob module to help you get a list of the file names. Try the code:
+
+import glob
+files = glob.glob('origFiles/*')
+print files[:10] #Just print the first 10, otherwise the output will be obnoxiously long)
+
+
+If you're having trouble with the leading 0's, google "python leading zeroes". There's an excellent and concise stack overflow post on the subject.
+
+To get the right number of 0's, try a string substitution method:
+
+filename = 'frame%07d.pdb' %(frameNumber)
+
+or try
+
+'100'.zfill(7)
+

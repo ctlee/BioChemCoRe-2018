@@ -1,0 +1,1 @@
+This problem deals with the basics of using numpy. Open my_program.txt in a text editor. The exercise task is at the end of the file.

@@ -1,0 +1,1 @@
+This problem has to do with paths. There are two folders here - working_folder and program_folder. You want to run my_script.py in working_folder, but it needs to import from program.py in program_folder. Get my_script.py to run from a terminal inside of working_folder *without moving or copying any files*. Good luck!

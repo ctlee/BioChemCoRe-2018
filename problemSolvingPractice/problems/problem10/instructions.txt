@@ -1,0 +1,5 @@
+I extracted some frames from an MD simulation. They're numbered frame0.pdb, frame50.pdb... frame15000.pdb and are in the folder origFiles. However, I'd rather have them named by picosecond of simulation instead of frame. There's 3.5 picoseconds per frame. Also, I want their filenames to be written with leading 0's so that they'll be sorted correctly by ls (leading 0's should be added so that all the new frame names have the same number of characters). For example, origFiles/frame50 could be copied to newFiles/frame0000175.pdb.
+
+This is a difficult problem! Try using the python os module (with os.system or shutil). Consider having the program print out the shell commands it will run as you're testing your code (instead of running them). If you execute all the copy commands before your program works there's a decent chance you'll spew copies all over the place!
+
+When you're done with the exercise, even if you get it right, take a look at solution.py

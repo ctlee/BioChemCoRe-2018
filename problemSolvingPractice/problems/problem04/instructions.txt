@@ -1,0 +1,3 @@
+I've just sent you my favorite program and a bash script that runs it. The bash script runs just fine on *my* computer. Please make any necessary changes so that the bash script runs on your computer as well!
+
+You can run the bash script using the command "source run_my_program.bash" or ". run_my_program.bash"

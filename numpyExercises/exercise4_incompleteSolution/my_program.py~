@@ -1,0 +1,24 @@
+import numpy
+#The original data file for the NBA is a bit uglier - Nobody removed the original formatting so we'll have to modify our numpy.genfromtxt command. To understand all of the modifications we can make you can check the online documentation for numpy. In this exercise I'll just show some of the ones I found useful
+
+my_data = numpy.genfromtxt('NBA_attendance_price.csv', delimiter = ',')
+
+#print my_data
+
+#First appreciate how ugly that is, then comment out the print statement and move on
+
+my_data = numpy.genfromtxt('NBA_attendance_price.csv', 
+                           delimiter = ',', 
+                           skip_header = 3,
+                           usecols = (1,2)) 
+#Remember in python that the first thing will have index 0! That's why we take columns 1 and 2 to get the second and third columns!
+
+#print my_data
+
+
+
+#EXERCISE: Modify the code below to cleanly read the unemployment rates file and make a plot of unemployment vs. time!
+my_data = numpy.genfromtxt('unemployment_rates.csv', delimiter = ',')
+print my_data
+
+Now

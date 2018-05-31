@@ -1,0 +1,20 @@
+This problem is quite a bit trickier than the previous ones! Good job for getting this far.
+
+Part 1) A tutorial online asked you to take this data file from your AMBER simulation and run the following command on it:
+grep TEMP wt1mg_eq_v.out | awk '{print $6, $9}' > temp.dat
+
+Look at the file wt1mg_eq_v.out, and then look at the temp.dat file that this command created. What is the command doing?
+
+Modify it to take NSTEP instead of TEMP and make a file "step.dat".
+
+Part 2) Then the tutorial says to plot temp.dat using gnuplot with the command 
+
+gnuplot -persist -e "plot 'temp.dat' using 1:2 with lines"
+
+What is this line doing? Try taking parts out of it and see what each argument does.
+
+Now, plot NSTEP vs. TIME.
+
+Part 3) Use a one-liner to make a file where the first column is TIME, the second is NSTEP, and the third is TEMP. See if you can google a solution before you check the hints!
+
+Part 4) For more of a challenge, make a file with columns for TIME, NSTEP, TEMP, EKtot, and EPtot. Plot time vs. temp, time vs. EKtot, andtime vs.  EPtot vs. time on the same graph. This might be more than one line! 

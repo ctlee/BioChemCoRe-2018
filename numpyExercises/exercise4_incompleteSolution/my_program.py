@@ -1,0 +1,24 @@
+import numpy
+#The original data file for the NBA is a bit uglier - Nobody removed the  formatting so we'll have to modify our numpy.genfromtxt command. To understand all of the modifications we can make you can check the online documentation for numpy.
+
+my_data = numpy.genfromtxt('NBA_attendance_price.csv', delimiter = ',')
+
+print my_data
+
+#First take a moment to appreciate how irritating it would be to work with data like that all day. "nan" in computerspeak means "not a number", which is how numpy sees the team names and the column headers. Now comment out that print statement and uncomment the next one.
+
+my_data = numpy.genfromtxt('NBA_attendance_price.csv', 
+                           delimiter = ',', 
+                           skip_header = 3,
+                           usecols = (1,2)) 
+#Remember in python that the first thing will have index 0! That's why we take columns 1 and 2 to get the second and third columns!
+
+#print my_data
+
+
+
+#EXERCISE: Modify the code below to cleanly read the unemployment rates file and use pylab to make a plot of unemployment vs. time!
+my_data = numpy.genfromtxt('unemployment_rates.csv', delimiter = ',')
+
+#print my_data
+

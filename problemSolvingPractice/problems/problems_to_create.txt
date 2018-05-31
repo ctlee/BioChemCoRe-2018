@@ -1,0 +1,8 @@
+scp/rsync
+MDAnalysis
+Structure file searching with Maestro/OE/MOE
+Structure analysis with ProDy
+Compiling and running a package or python module
+Automate GLIDE docking
+Automate score analysis
+Transfer ligand from one structure to another using Pymol

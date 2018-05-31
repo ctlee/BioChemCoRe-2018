@@ -1,0 +1,6 @@
+Here's a weirdly formatted file from some god-awful MD package, let's say, oh, "SCHMOMACS". If you scroll way down through "minimization.log", you'll find some values labeled "Potential" in the iteration section. I'd like you to plot the potential energy as a function of time. Your program should take as input the filename and pop up a plot. That is, running it from the command line should look something like "python plot_PE.py schmomacs.log". This should be a one line command.
+
+This one is difficult. The data formatting is more hideous than usual, which makes it interesting. Consider taking some time to learn regular expressions. They'll be your faithful servants forever.
+
+
+Also, yes, I know, the SCHMOMACS package has tools to do this, but for the sake of learning you'll have to do it yourself.

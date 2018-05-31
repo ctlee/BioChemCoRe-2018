@@ -1,0 +1,28 @@
+1) To make the directory, you use the command "mkdir favorite_animals". Then you can enter the firectory with the command "cd favorite_animals". Once inside, you could open the files using emacs, with a command like "emacs a", then type in the name of your favorite animal, and then hit the "save current buffer to its file" button, or hit Ctrl-X Ctrl-S.
+
+2) You'll need to use the "ls" command and "I/O redirection" to accomplish this. Inside of the favorite_animals directory, the command "ls > d" will accomplish the task.
+
+3) To make the directories, you should type "mkdir folder_1" and "mkdir folder_2". Then to move the files, you'll type "mv a b folder_1" and "mv c d folder_2".
+
+4) Type "cd folder_1"
+
+5) You'll want to use to "cp" command to copy, "../" to give a path that goes one directory up, and "." to refer to the current directory. So the full commands would be "cp ../folder_2/c ." and "cp ../folder_2/d ."
+
+6) Like in #5, making a path that goes "up" in directories requires "../". Thus this command is "cd ../"
+
+7) The commands for this part are:
+mkdir greetings
+cd greetings
+(you could use a text editor for this part, but instead I'll use a trick)
+echo English > jolly_good
+echo American > hi
+echo Spanish > hola
+echo French > bonjour
+echo Australian > gday
+
+8) It's probably just repetition by now, but this would be:
+mkdir greetings_beginning_with_h
+
+9) When you put an incomplete filename with the "*" (called asterisk) character, it is a wildcard that will match any sequence letters or numbers. In this case, it meant "any file in this folder beginning with "h" - so the command that the computer actually ran was "mv hi hola greetings_beginning_with_h"
+
+10) The grep command searches for certain words inside of files. Its syntax is "grep X Y, which searches for the letters/words "X" in the file(s) "Y". In this case, the grep command searched for the letter "i" inside of every file in the current directory (as indicated by the asterisk character)

@@ -1,0 +1,41 @@
+HETATM    1  N   HAR A 512      25.417  15.531  26.605  1.00 44.88           N  
+HETATM    2  CA  HAR A 512      25.975  15.501  25.210  1.00 43.20           C  
+HETATM    3  C   HAR A 512      26.560  16.863  24.805  1.00 34.97           C  
+HETATM    4  O   HAR A 512      27.776  16.976  24.619  1.00 30.40           O  
+HETATM    5  CB  HAR A 512      24.895  15.031  24.208  1.00 46.13           C  
+HETATM    6  CG  HAR A 512      24.919  13.512  23.868  1.00 47.32           C  
+HETATM    7  CD  HAR A 512      23.616  12.764  24.184  1.00 43.73           C  
+HETATM    8  NE  HAR A 512      22.452  13.422  23.608  1.00 45.87           N  
+HETATM    9  CZ  HAR A 512      21.935  13.145  22.417  1.00 49.00           C  
+HETATM   10  NH1 HAR A 512      22.467  12.192  21.649  1.00 49.28           N  
+HETATM   11  NH2 HAR A 512      20.881  13.831  21.989  1.00 49.48           N  
+HETATM   12  OH1 HAR A 512      21.924  11.862  20.391  1.00 39.95           O  
+HETATM   13  OXT HAR A 512      25.813  17.837  24.757  1.00 35.38           O  
+CONECT    1    2
+CONECT    2    1    3    5
+CONECT    3    2
+CONECT    3    4
+CONECT    3    4
+CONECT    3    4
+CONECT    3    4
+CONECT    3   13
+CONECT    3   13
+CONECT    3   13
+CONECT    3   13
+CONECT    4    3
+CONECT    4    3
+CONECT    4    3
+CONECT    4    3
+CONECT    5    2    6
+CONECT    6    5    7
+CONECT    7    6    8
+CONECT    8    7    9
+CONECT    9    8   10   11
+CONECT   10    9   12
+CONECT   11    9
+CONECT   12   10
+CONECT   13    3
+CONECT   13    3
+CONECT   13    3
+CONECT   13    3
+END

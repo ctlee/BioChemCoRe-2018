@@ -1,0 +1,7 @@
+Look at the environment variable PYTHONPATH. You can see it by typing "echo $PYTHONPATH", and you can look at your entire environment with the command "env". The PYTHONPATH environment variable is a list of directories that python checks when you have an "import" command.
+
+Did you know that you can set an environment variable for the terminal you're currently using with the "export" command? For example, "export MYVARIABLE=cats" will make a variable for this terminal session containing the value "cats". That's why there are so many "export" commands in your ~/.bashrc file. The ~/.bashrc file runs whenever you open a terminal and sets a bunch of environment variables. If you mess up your environment 
+
+If you only want to modify your environment for a single command, you can start the command with (for example) "MYVARIABLE=cats meow_program". Then, when meow_program looks at your environment, there will be a variable called MYVARIABLE with a value of "cats".
+
+You can add on to a variable too. For example, your PYTHONPATH already has some important stuff in it. It's a bunch of directory names separated by ":"s. Type "PYTHONPATH=${PYTHONPATH}:/home/j5wagner/my_folder" to include my_folder in the list of directories python checks when you try to import modules.

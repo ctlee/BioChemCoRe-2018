@@ -1,0 +1,7 @@
+Try to solve the problem given by the instructions.txt file in each folder. Some helpful resources might be Google (particularly links to "Stack Overflow" questions), "<command> --help", "man <command>", or even "apropos <keyword>". There can be multiple ways to solve each problem, and it can be helpful when working to know a variety of tools, so be open-minded!
+
+Many questions also have "hint.txt" in case you get stuck and "solution.txt.gz" in case you're really struggling to do it!
+
+Please let me know if there are any problems with these...problems, or feel free to send me more!
+
+Jeff

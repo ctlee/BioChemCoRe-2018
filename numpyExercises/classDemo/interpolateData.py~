@@ -1,0 +1,2 @@
+import numpy
+points = numpy.load('points')

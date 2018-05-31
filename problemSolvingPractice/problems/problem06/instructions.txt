@@ -1,0 +1,1 @@
+We've intercepted a spy communication. We think that there's a difference between these two messages, but we don't have time to read them both. Can you spot how the message was modified?

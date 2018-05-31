@@ -1,0 +1,3 @@
+One of the files in the folder "things_i_like" has a normal looking name, but contains my deep dark secret (that I like *brownies*!). Study and use the "grep" command to find which one it is! 
+
+Hint! Google for help, or type "man grep" or "grep --help".

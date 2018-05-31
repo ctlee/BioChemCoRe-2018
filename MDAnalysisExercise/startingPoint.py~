@@ -1,0 +1,12 @@
+import MDAnalysis as MDA
+import numpy
+import pylab
+
+U = MDA.Universe('exampleProtein.pdb','exampleTraj.dcd')
+
+firstShells = []
+
+for frame in U.trajectory:
+    if c%10 == 0:
+        print 'Finding hydration shells for frame', c
+    firstShell = set(U.selectAtoms('resname WAT and name O and around 2 protein').indices())

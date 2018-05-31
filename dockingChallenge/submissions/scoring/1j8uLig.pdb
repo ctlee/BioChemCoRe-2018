@@ -1,0 +1,100 @@
+HETATM    1  N1  H4B A 429      -7.459  22.619   7.378  1.00 21.56           N  
+ANISOU    1  N1  H4B A 429     2796   3102   2295    104    479    175       N  
+HETATM    2  C2  H4B A 429      -6.382  21.899   7.644  1.00 25.73           C  
+ANISOU    2  C2  H4B A 429     2988   3281   3508     10    260   1112       C  
+HETATM    3  N2  H4B A 429      -6.568  20.618   8.118  1.00 26.10           N  
+ANISOU    3  N2  H4B A 429     3549   3122   3244    132   1166    844       N  
+HETATM    4  N3  H4B A 429      -5.085  22.348   7.557  1.00 23.68           N  
+ANISOU    4  N3  H4B A 429     2893   3115   2988     22   -105    875       N  
+HETATM    5  C4  H4B A 429      -4.802  23.737   7.332  1.00 25.44           C  
+ANISOU    5  C4  H4B A 429     3170   2972   3523     99    392    739       C  
+HETATM    6  C4A H4B A 429      -5.980  24.512   7.041  1.00 24.22           C  
+ANISOU    6  C4A H4B A 429     3245   3043   2913    153    558    798       C  
+HETATM    7  O4  H4B A 429      -3.624  24.144   7.199  1.00 25.77           O  
+ANISOU    7  O4  H4B A 429     3220   2919   3653     22    405    566       O  
+HETATM    8  N5  H4B A 429      -5.808  25.870   6.659  1.00 25.76           N  
+ANISOU    8  N5  H4B A 429     3701   2934   3153    319    528    627       N  
+HETATM    9  C6  H4B A 429      -6.939  26.793   6.862  1.00 26.72           C  
+ANISOU    9  C6  H4B A 429     3518   3261   3373    378    811   1298       C  
+HETATM   10  C7  H4B A 429      -8.210  26.116   6.331  1.00 28.93           C  
+ANISOU   10  C7  H4B A 429     3810   3590   3591    586    275    934       C  
+HETATM   11  C8A H4B A 429      -7.240  23.927   6.995  1.00 23.06           C  
+ANISOU   11  C8A H4B A 429     3261   3132   2370    214    107    381       C  
+HETATM   12  N8  H4B A 429      -8.327  24.730   6.835  1.00 25.37           N  
+ANISOU   12  N8  H4B A 429     3381   3330   2929    389    147    364       N  
+HETATM   13  C9  H4B A 429      -6.454  28.133   6.258  1.00 25.29           C  
+ANISOU   13  C9  H4B A 429     3623   3485   2500    776   1225   1545       C  
+HETATM   14  O9  H4B A 429      -6.377  28.037   4.822  1.00 32.23           O  
+ANISOU   14  O9  H4B A 429     4918   4770   2559    894   1038   1232       O  
+HETATM   15  C10 H4B A 429      -7.366  29.357   6.497  1.00 25.74           C  
+ANISOU   15  C10 H4B A 429     3709   3046   3023    517  -1236    -71       C  
+HETATM   16  O10 H4B A 429      -8.652  28.950   5.916  1.00 28.12           O  
+ANISOU   16  O10 H4B A 429     3731   4408   2546    301  -1202   -104       O  
+HETATM   17  C11 H4B A 429      -7.484  29.687   7.976  1.00 21.32           C  
+ANISOU   17  C11 H4B A 429     2071   2924   3106   -148   -917   -225       C  
+CONECT    1    2
+CONECT    1    2
+CONECT    1    2
+CONECT    1    2
+CONECT    1   11
+CONECT    1   11
+CONECT    1   11
+CONECT    1   11
+CONECT    2    1
+CONECT    2    1
+CONECT    2    1
+CONECT    2    1
+CONECT    2    3
+CONECT    2    4
+CONECT    2    4
+CONECT    2    4
+CONECT    2    4
+CONECT    3    2
+CONECT    4    2
+CONECT    4    2
+CONECT    4    2
+CONECT    4    2
+CONECT    4    5
+CONECT    4    5
+CONECT    4    5
+CONECT    4    5
+CONECT    5    4
+CONECT    5    4
+CONECT    5    4
+CONECT    5    4
+CONECT    5    6
+CONECT    5    6
+CONECT    5    6
+CONECT    5    6
+CONECT    5    7
+CONECT    5    7
+CONECT    6    5
+CONECT    6    5
+CONECT    6    5
+CONECT    6    5
+CONECT    6    8
+CONECT    6   11
+CONECT    6   11
+CONECT    6   11
+CONECT    6   11
+CONECT    7    5
+CONECT    7    5
+CONECT    8    6    9
+CONECT    9    8   10   13
+CONECT   10    9   12
+CONECT   11    1
+CONECT   11    1
+CONECT   11    1
+CONECT   11    1
+CONECT   11    6
+CONECT   11    6
+CONECT   11    6
+CONECT   11    6
+CONECT   11   12
+CONECT   12   10   11
+CONECT   13    9   14   15
+CONECT   14   13
+CONECT   15   13   16   17
+CONECT   16   15
+CONECT   17   15
+END

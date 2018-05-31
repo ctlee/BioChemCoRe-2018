@@ -1,0 +1,21 @@
+Ok - This one is more of a warmup!
+
+1) Make a new directory called "favorite_animals" and enter it with the cd command. Use a text editor to create three different files named a, b, and c, each containing the name of your favorite animal that starts with that letter (Try using the text editor "gedit" or "emacs"!)
+
+2) Without using a text editor, make a fourth file named "d" containing the names of all the files in the current directory (so if you made files called "a", "b", and "c", then the fourth file would contain the text "a     b    c")
+
+3) Make two folders, called "folder_1" and "folder_2", and move "a" and "b" into folder_1 and "c" and "d" into folder_2
+
+4) Use the "cd" command to enter folder_1
+
+5) Staying inside folder_1, copy the two files from folder_2 into folder_1
+
+6) Exit folder_1 and return to the directory you started this exercise in
+
+7) In a new folder called "greetings", make files called "jolly_good", "hi", "hola", "bonjour", and "gday". They should contain the text "English", "American", "Spanish", "French", and "Australian", respectively.
+
+8) Make a folder called "greetings_beginning_with_h"
+
+9) Use the command "mv h* greetings_beginning_with_h". What happened?
+
+10) Run the command "grep i *". What happened? (Hint: Try "grep --color i *")
