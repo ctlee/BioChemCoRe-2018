@@ -31,7 +31,7 @@ In this tutorial, we will prepare a protein (HSP90) and its inhibitor for a mole
 We will use Schrodinger’s Maestro for protein preparation followed by parameterization using AmberTools Antechamber.
 The simulations will be run using the GPU-accelerated version of Amber18.
 
-##Looking at the Crystal Structure
+## Looking at the Crystal Structure
 
 
 1. First download the Protein Data Bank (PDB) structure that corresponds with you 
@@ -40,10 +40,10 @@ BioChemCoRe PDB identifier from the website.
 2. Visualize this structure by loading it in PyMol; replacing "my_proein_name" 
 with the appropriate filename for your structure.
 
-'''
+```
 module load pymol
 pymol my_protein_name.pdb
-'''
+```
 
 TODO: image of HSP90 Structure
 
@@ -57,21 +57,21 @@ TODO: Sequence Alignment
 ##Protein Preparation Workflow
 1. One tool of extreme utility is Maestro (http://www.schrodinger.com/Maestro/). It acts as a molecular visualizer, and a workflow starting point for many of Schrodinger’s tools. Today we will be using the Protein Preparation workflow to clean up our structure. To load the Schrodinger toolkits, in Keck II issue the command:
 
-'''
+```
 module load schrodinger
 maestro
-'''
+```
 
 2. Next, load your pdb file. 
 
-'''File > Import Structures'''
+```File > Import Structures```
 
 After importing, the Workspace will show a representation of our protein. Using the left mouse button allows you to select residues or areas, middle mouse rotates the view, and the right mouse button translates. 
 
 3. HSP90 is a dimer, which means it may have multiple chains.
 On the bottom center of the Maestro window, look for the info table entry for "CHAINS." If there are multiple chains, separate them by right clicking on the structure name in the left pane and selecting: 
 
-'''Split > By Chain'''
+```Split > By Chain```
 
 4. Once split, each chain will show up in the "Entry List" pane on the left. Select chain A by clicking the blue dot.
 
@@ -88,18 +88,20 @@ TODO: check structure for addtl ligands
 
 Click the boxes to select the following options:
 
-Assign bond orders:	assigns whether each bond is a single or double bond
-Add Hydrogens: 	hydrogens are not resolved, so we have to add them back
-Remove original hydrogens: delete any resloved hydrogens from the X-ray structure
-Create disulfide bonds: 
-Convert selenomethionines to methionines: Selenomethionine is used for phasing (not biologically relevant) 
-Fill in missing side chains using Prime:		this structure has both missing side chains and loops. Prime will fill them in.
-Fill in missing loops using Prime:
-Cap termini:
-Delete waters...:		delete waters beyond 5 A, we will further filter later.
+- Assign bond orders:							assigns whether each bond is a single or double bond
+- Add Hydrogens: 								hydrogens are not resolved, so we have to add them back
+- Remove original hydrogens: 					delete any resloved hydrogens from the X-ray structure
+- Create disulfide bonds: 
+- Convert selenomethionines to methionines: 		Selenomethionine is used for phasing (not biologically relevant) 
+- Fill in missing side chains using Prime:		this structure has both missing side chains and loops. Prime will fill them in.
+- Fill in missing loops using Prime:
+- Cap termini:
+- Delete waters...:								delete waters beyond 5 A, we will further filter later.
 
 
-Next, click preprocess. Prime will take a couple of minutes to run and the results will be incorporated into the Workspace automatically. After this is complete you can “View Problems”, “Protein Reports”, and the “Ramachandran Plot”, these tools give you an idea of what potential issues to lookout for when preparing your structure.
+Next, click preprocess. You should see a pop-up asking for a .fasta ..
+
+Prime will take a couple of minutes to run and the results will be incorporated into the Workspace automatically. After this is complete you can “View Problems”, “Protein Reports”, and the “Ramachandran Plot”, these tools give you an idea of what potential issues to lookout for when preparing your structure.
 
 TODO: Image of Import and process pane of prep wizard
 
