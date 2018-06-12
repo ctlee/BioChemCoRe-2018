@@ -3,8 +3,8 @@
 
 title                    : "BioChemCoRe 2018"
 description              : "Biology and Chemistry Computational Research"
-url                      : ctlee.github.cio/BioChemCoRE-2018
-baseurl                  : "" # the subpath of your site, e.g. "/blog"
+url                      : "https://ctlee.github.io"
+baseurl                  : "/BioChemCoRe-2018" # the subpath of your site, e.g. "/blog"
 repository               : "ctlee/BioChemCoRe-2018" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 logo_image               : "images/BCCRlogo_highlights.jpg"
 company_name             : "BioChemCoRe"
@@ -45,3 +45,4 @@ defaults:
 sidebars:
 
 description: "FOO"
+
