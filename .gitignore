@@ -109,3 +109,5 @@ venv.bak/
 *.sublime-workspace
 *Icon[
 ]
+
+docs/_site

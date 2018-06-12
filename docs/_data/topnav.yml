@@ -7,15 +7,10 @@ topnav:
       external_url: http://biochemcore.ucsd.edu/
 
 # #Topnav dropdowns
-# topnav_dropdowns:
-# - title: Topnav dropdowns
-#   folders:
-#     - title: Jekyll Help
-#       folderitems:
-#         - title: Jekyll documentation
-#           external_url: http://jekyllrb.com/docs/home/
-#     - title: Products
-#       folderitems:
-#         - title: Jekyll Documentation Theme
-#           url: /mydoc_introduction.html
-#         - title: Product 1
+topnav_dropdowns:
+- title: Topnav dropdowns
+  folders:
+    - title: Tutorials
+      folderitems:
+        - title: System Preparation
+          url: /system-prep/tutorial
