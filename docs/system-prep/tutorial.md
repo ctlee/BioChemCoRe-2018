@@ -1,9 +1,14 @@
-# Preparing Your System for Molecular Dynamics (MD)
+---
+title: "Preparing Your System for Molecular Dynamics (MD)"
+permalink: /system-prep/tutorial
 
-In this tutorial you will learn how to setup your system to begin running
-molecular dynamics in Amber. As a part of this tutorial you will be introduced
-to the use of Schrödinger's Maestro software for protein preparation followed
-by parameterization using AmberTools Antechamber. At this point, you should
+summary: In this tutorial you will learn how to setup your system to begin running molecular dynamics in Amber. As a part of this tutorial you will be introduced to the use of Schrödinger's Maestro software for protein preparation followed by parameterization using AmberTools Antechamber.
+---
+
+
+
+
+At this point, you should
 have been given a PDB file containing your system of interest from the
 BioChemCoRe teaching team. If you did not, please let us know now.
 
@@ -21,3 +26,5 @@ to protein stability and receptor-ligand interactions, X-ray crystal s
 tructures cannot be used used in molecular dynamics (MD) right “off the
 shelf”. To help resolve this and many other issues, a variety of software
 tools have been developed.
+
+{% include links.html %}

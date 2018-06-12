@@ -1,1 +1,47 @@
-theme: jekyll-theme-slate
+# theme: jekyll-theme-slate
+
+
+title                    : "BioChemCoRe 2018"
+description              : "Biology and Chemistry Computational Research"
+url                      : ctlee.github.cio/BioChemCoRE-2018
+baseurl                  : "" # the subpath of your site, e.g. "/blog"
+repository               : "ctlee/BioChemCoRe-2018" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+logo_image               : "images/BCCRlogo_highlights.jpg"
+company_name             : "BioChemCoRe"
+
+
+markdown: kramdown
+highlighter: rouge
+
+# Markdown Processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+
+# collections:
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: page
+      topnav: topnav
+  - scope:
+      path: "system-prep"
+      type: system-prep
+    values:
+      layout: page
+      topnav: topnav
+
+# these are defaults used for the frontmatter for these file types
+sidebars:
+
+description: "FOO"

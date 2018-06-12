@@ -1,0 +1,21 @@
+## Topnav single links
+## if you want to list an external url, use external_url instead of url. the theme will apply a different link base.
+topnav:
+- title: Topnav
+  items:
+    - title: BioChemCoRe
+      external_url: http://biochemcore.ucsd.edu/
+
+# #Topnav dropdowns
+# topnav_dropdowns:
+# - title: Topnav dropdowns
+#   folders:
+#     - title: Jekyll Help
+#       folderitems:
+#         - title: Jekyll documentation
+#           external_url: http://jekyllrb.com/docs/home/
+#     - title: Products
+#       folderitems:
+#         - title: Jekyll Documentation Theme
+#           url: /mydoc_introduction.html
+#         - title: Product 1
