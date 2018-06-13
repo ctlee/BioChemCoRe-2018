@@ -66,9 +66,6 @@ body {
 .gi-5x{font-size: 5em;}
 
 
-
-
-
 .breadcrumb > .active {color: #777 !important;}
 
 /* make room for the nav bar */
@@ -1197,4 +1194,20 @@ h4.panel-title {
     .collapse.in{
         display:block !important;
     }
+}
+
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.stickybar {
+  position: sticky;
+  top: 71px;
+}
+
+.sticky + .container {
+  padding-top: 70px;
 }

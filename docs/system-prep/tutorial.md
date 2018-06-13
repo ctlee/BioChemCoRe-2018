@@ -1,7 +1,6 @@
 ---
 title: "Preparing Your System for Molecular Dynamics (MD)"
-permalink: /system-prep/tutorial
-layout: page
+permalink: /system-prep
 toc: true
 
 summary: In this tutorial you will learn how to setup your system to begin running molecular dynamics in Amber. As a part of this tutorial you will be introduced to the use of Schrödinger's Maestro software for protein preparation followed by parameterization using AmberTools Antechamber.
@@ -21,15 +20,15 @@ have resolved protons. Take a second and research why this is. Write your
 answer in your notebook.
 
 Given the importance of hydrogen bonding, which requires proton participation,
-for protein stability and receptor-ligand interactions, X-ray crystal s
-tructures cannot be used used in molecular dynamics (MD) right “off the
+for protein stability and receptor-ligand interactions, X-ray crystal
+structures cannot be used used in molecular dynamics (MD) right “off the
 shelf”. To help resolve this and many other issues, a variety of software
 tools have been developed.
 
 ## Looking at the Crystal Structure
 
-
-1. First download the Protein Data Bank (PDB) structure that corresponds with you
+### 1. Downloading PDB
+First download the Protein Data Bank (PDB) structure that corresponds with you
 BioChemCoRe PDB identifier from the website.
 
 2. Visualize this structure by loading it in PyMol; replacing "my_proein_name"
@@ -41,6 +40,7 @@ pymol my_protein_name.pdb
 ```
 
 TODO: image of HSP90 Structure
+
 
 3. Take some time to examine the structure, can you locate the inhibitor molecule?
 Are there any crystallographic waters present?
