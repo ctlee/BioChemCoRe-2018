@@ -96,18 +96,17 @@ Do you have any dark-shaded residues extending past the beginnig or end of the r
    - Cap termini:
 
 
-   Next, click Preprocess. You should see a pop-up asking for a .fasta. Just like when we did the sequence alignment, go up one directory and select HSP90.fasta. This will tell Maestro how to fill in missing residues and atoms.
+   Next, click Preprocess. You should see a pop-up asking for a .fasta. Click "Yes". Just like when we did the sequence alignment, go up one directory and select HSP90.fasta. This will tell Maestro how to fill in missing residues and atoms.
 
    Prime will take a couple of minutes to run and the results will be incorporated into the Workspace automatically. You can monitor the progress of these jobs by clicking on the "Jobs" tab on the top right of the main window. Preprocessing will notify you that the results have been incorporated when it's done. 
    
    After this is complete you can “View Problems”, “Protein Reports”, and “Ramachandran Plot”, these tools give you an idea of what potential issues to lookout for when preparing your structure.
 
-
 {% include image.html file="/system-prep/ramaPlot.png" alt="Ramachandran Plot" caption="Figure 1: An example Ramachandran plot" width-percent=30 %}
 
 8. We can now move on to the next tab, Review and Modify. First click on Analyze Workspace, Maestro will take a second to load up all waters and other ligands (metals, inhibitors etc). In this pane, we can manually inspect each water or ligand to determine whether or not to modify or delete it.
 
-9. Move onto the final tab of the Workflow, Refine. Here under H-bond assignment to Sample Water Orientations, as well as to use PROPKA to assign the protonation states of each residue. Click optimize…
+9. Move onto the final tab of the Workflow, Refine. Here under H-bond assignment select Sample Water Orientations, as well as use PROPKA to assign the protonation states of each residue. Click optimize.
 
 {% include image.html file="/system-prep/proteinRefine.png" alt="Maestro Protein Prep Refine Tab" caption="Figure 8. The Refine tab contains options for hydrogen bond assignment, pKa prediction, and minimization." %}
 
@@ -117,7 +116,9 @@ Finally, look at your protein structure in the main window. We're going to save 
 
 To save the whole system, right click the minimized entry in the Entry List and select `Export > Structures`, then save this as `<your protein name>_maestro.pdb`.
 
-To save the ligand, make sure the mouse is in Residue Selecting mode (there should be a big upper-case "R" in the top left of the window), then left click on the ligand. Once it's selected, right click on one of the ligand atoms and select `Create new entry by > Extracting selected atoms`. Now, right click on the new entry (should be called "Structure##") in the Entry List and select `Export > Structures`. Save this as `<your ligand name>_maestro.pdb`. (SDF stands for "Structure Descriptor File").
+To save the ligand, go to the Structure Hierarchy listing below the Entry List. Expand the object corresponding to your final prepared protein, then Expand "Ligands", and right click the ligand and select "Copy to New Entry". Now, right click on the new entry (should be called "Structure##") in the Entry List and select `Export > Structures`. Save this as `<your ligand name>_maestro.mol2`.
+
+Also, this is the time to determine the net charge on your ligand. View just the ligand by itself. Make sure that Maestro is in residue sleecting mode (There will be a bit "R" in the top left corner of the screen). Then, click on your ligand to select it. The net charge should be shown at the bottom of the screen next to the word "Charge". For most of you this should be 0, but write it down just in case.
 
 10. First, let’s try to assign parameters to the resulting whole system pdb using the Amber forcefield "FF14SB". Parameterization requires a lot of technical expertise, and can be one of the most frustrating parts of setting up an MD simulation.
 
@@ -129,7 +130,8 @@ First we must load amber into our work environment, in the terminal type:
 
 Into this prompt type the following commands (Note that my protein file is called "1sj0_maestro.pdb" in this tutorial -- Yours will have a different name):
 ```
-source leaprc.ff14SB
+source leaprc.protein.ff14SB
+source leaprc.water.tip4pew
 pdb=loadpdb 1sj0_maestro.pdb
 ```
 
@@ -161,6 +163,8 @@ There are three classes of errors here:
 3) We have this non-protein molecule (the ligand) in the mix. AMBER has never seen this thing before (it's not in FF99SB), so it has no clue how to parameterize it. We'll have to determine the charges on these atoms (because that's what will determine most of its interactions), and then we can use generic parameters for the bonds (the Generalized Amber Force Field, or GAFF).
 
 At this point, let's exit out of tleap to resolve these problems. We will return later to try to setup the simulation once things are resolved.
+
+In the tleap terminal, type `quit`.
 
 12. **First, the capping groups.** Open the PDB file in a text editor. The caps are the first and last "residues" in the protein. They're not really residues/amino acids, just little groups that were stuck on the ends, but PDB files require everything to have a residue number. It's a real pain in the neck to rename all the atoms in a capping group, so let's not. Tleap is clever and will reconstruct any atoms that it knows should be there, so let's just leave in the important atoms from each cap and let tleap do the rest.
   * In the ACE ("acetyl") cap, delete all the atoms except the ones named "C", "O", and "CH3".
@@ -217,8 +221,9 @@ A frcmod file is an Amber forcefield supplementary file defining the various par
 
 14. At this point, we should have resolved the previously encountered issues. Let’s try running everything through tleap again. Comments are shown after the !, do not type this.
 ```
-source leaprc.ff14SB
+source leaprc.protein.ff14SB
 source leaprc.gaff				! needed for ligand parms
+source leaprc.water.tip4pew                     ! needed for water params
 loadamberprep e4d.in				! from antechamber
 loadamberparams e4d.frcmod			! also from antechamber
 loadamberparams frcmod.tip4pew		! tip4pew water model
@@ -226,13 +231,20 @@ loadamberparams frcmod.ionsjc_tip4pew	! ions for the water model
 pdb=loadpdb 1sj0_leap.pdb
 ```
 
-At this point, the pdb should load without any errors and tleap should add in any extra necessary atoms for you. If there are no issues, please proceed with the following.
+At this point, the pdb should load without any errors and tleap should add in any extra necessary atoms for you. **Have your mentor ensure that the above steps loaded the protein correctly.** If there are no issues, please proceed with the following.
+
+First, we determine if the system has a net charge, and how many ions we'll need to counterbalance it. 
+
+`charge pdb`
+
+This command will tell you the net charge of the system. To simulate being in cytoplasm, we will add some ions (cells are kinda salty). These atoms will be Na+ and Cl-. Add 30 or 31ions to neutralize your system. For example, if your system has a net charge of -3, add 17 Na ions and 14 Cl- ions.
 
 ```
 	solvateBox pdb TIP4PEWBOX 10		! solvate with 10 A buffer
-	addions pdb Na+ 5				! balance charges
+	addions2 pdb Na+ 17				! balance charges
+	addions2 pdb Cl+ 14				! balance charges
 	saveamberparm pdb system.prmtop system.inpcrd
-	savepdb pdb 1sj0_formd.pdb
+	savepdb pdb 1sj0_forMd.pdb
 	quit
 ```
 
