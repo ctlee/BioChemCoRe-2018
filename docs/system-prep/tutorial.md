@@ -101,7 +101,9 @@ NO   - Generate het states using Epik:  pH 7.0 +/- 3.0   : use protonation state
 
    TODO: Image of Import and process pane of prep wizard
 
-   TODO: Image Ramachandran Plot
+![Ramachandran Plot](https://github.com/ctlee/BioChemCoRe-2018/blob/master/docs/images/system-prep/ramaPlot.png "Figure 1: An example Ramachandran plot")
+
+Figure 1: An example Ramachandran plot
 
 
 7. We can now move on to the next tab, Review and Modify. First click on Analyze Workspace, Maestro will take a second to load up all waters and other ligands (metals, inhibitors etc). In this pane, we can manually inspect each water or ligand to determine whether or not to modify or delete it. 
@@ -112,6 +114,7 @@ For this protein, we need to generate states for the inhibitor. Click the line f
 
 8. Move onto the final tab of the Workflow, Refine. Here under H-bond assignment to Sample Water Orientations, as well as to use PROPKA to assign the protonation states of each residue. Click optimize…
 
+![Maestro Protein Prep Refine Tab](https://github.com/ctlee/BioChemCoRe-2018/blob/master/docs/images/system-prep/proteinRefine.png "Figure 8. The Refine tab contains options for hydrogen bond assignment, pKa prediction, and minimization.")
 
 Figure 8. The Refine tab contains options for hydrogen bond assignment, pKa prediction, and minimization.
 
@@ -151,22 +154,32 @@ Created a new atom named: N within residue: .R<NMA 225>
 
 These errors are popping up because the force field “ff14SB” does not contain types for several of these molecules. 
 
-At this point, exit out of xleap to resolve these problems. We will return later to try to setup the simulation once things are resolved.
+There are three classes of errors here:
+1) AMBER has a built-in forcefield for proteins (and a few other molecules) called FF14SB. This expects each protein atom to have a residue and atom name which perfectly matches what it expects. However, Maestro has different names for a few of these.
+2) We capped the termini of the protein so it wouldn't have charged groups hanging out at the beginning and end of the amino acid chain. While real proteins do have these charged groups hanging out at their N- and C-termini, we're missing amino acids from the beginning and end, so there shouldn't really be a charge there. We use "caps" to add a small, neutral group to the termini of the chains to prevent there from being a charge. This is important, because +1 and -1 charges make a big difference on an atomic scale.
+3) We have this non-protein molecule (the ligand) in the mix. AMBER has never seen this thing before, so it has no clue how to parameterize it.
 
-11. First let’s open up the structure “1sj0_maestro.pdb” in vmd. Open up the Tinker Console by going to `Extensions-Tk Console`. Execute the following command which selects the alpha carbons of all residues which have the namd HIS, it then gets the residue ID’s for our convenience.
+At this point, exit out of tleap to resolve these problems. We will return later to try to setup the simulation once things are resolved. Open the PDB file in a text editor. 
+
+11. **First, the capping groups.** The caps are the first and last "residues" in the protein. They're not really amino acids, just little groups that were stuck on the ends, but PDB files require everything to have a residue number. It's a real pain in the neck to rename all the atoms in a capping group, so let's not. Tleap is clever and will reconstruct any atoms that it knows should be there, so let's just leave in one atom from each cap and let tleap do the rest. In the ACE cap, delete all the atoms except the one named "C". Then, scroll down to the end of the chain and delete all the NMA atoms except the "N". Also, FF14SB calls it NME instead of NMA, so change that too. Save the current file with a new name, replacing "_maestro" with "fixedCaps".
+
+11. **Now let's take care of the histidines.** First let’s open up the structure in vmd. Open up the Tinker Console by going to `Extensions > Tk Console`. Execute the following command which selects the alpha carbons of all residues which have the namd HIS, it then gets the residue ID’s for our convenience.
 
 `[atomselect top “resname HIS and alpha”] get resid`
 
 We can then go to Graphics-Graphical Representations and go through each of the histidines to assign it’s state. Shown in Figure 10 is an example of how to view an individual histidine. The zoom in the main window can be set using the = key.
 
+![VMD view of a histidine](https://github.com/ctlee/BioChemCoRe-2018/blob/master/docs/images/system-prep/vmdHisView.png "Figure 10. VMD view of a histidine. This instance should be named HID.")
 
-Figure 10. VMD view of a histidine. This instance should be name HID.
+Figure 10. VMD view of a histidine. This instance should be named HID.
 
+
+![VMD view of a histidine](https://github.com/ctlee/BioChemCoRe-2018/blob/master/docs/images/system-prep/hisProtNames.png "Scheme 1. The Amber residue naming convention for the various histidine connectivities.")
 
 Scheme 1. The Amber residue naming convention for the various histidine connectivities.
 
-Visually inspect and compare with Scheme 1 to determine what the name of each histidine should be. The resname can be set using the following TCL command.
-[atomselect top “resid 353”] set resname HIE
+Visually inspect and compare with Scheme 1 to determine what the name of each histidine should be. Then go to the appropriate atoms in your PDB file and change the HIS label to what it should be.
+
 
 NOTE: How much easier would this be if you could write a script to parse each residue automatically?!?
 
