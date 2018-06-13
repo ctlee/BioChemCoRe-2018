@@ -27,11 +27,7 @@ tools have been developed.
 
 ## Looking at the Crystal Structure
 
-### 1. Downloading PDB
-First download the Protein Data Bank (PDB) structure that corresponds with you
-BioChemCoRe PDB identifier from the website.
-
-2. Visualize this structure by loading it in PyMol; replacing "my_proein_name"
+1. **Visualize this structure** by loading it in PyMol; replacing "my_protein_name"
 with the appropriate filename for your structure.
 
 ```
@@ -42,7 +38,7 @@ pymol my_protein_name.pdb
 TODO: image of HSP90 Structure
 
 
-3. Take some time to examine the structure, can you locate the inhibitor molecule?
+2. **Take some time to examine the structure.** Can you locate the inhibitor molecule?
 Are there any crystallographic waters present?
 
 
@@ -71,7 +67,13 @@ On the bottom center of the Maestro window, look for the info table entry for "C
 
 4. Once split, each chain will show up in the "Entry List" pane on the left. Select chain A by clicking the blue dot.
 
-5. With Chain A selected, click the "Protein Preparation" button in the top bar. This will open up the Protein Preparation workflow tab.
+5. **Cut your structure down to the desired length.** With chain A selected, go to `Tasks` and go to "Multiple Sequence Alignment". This window shows the sequence of your loaded protein highlighted in dark letters. If there's additional data in the pdb file about unresolved residues, there may be some light shaded letters as well. 
+
+In the MSA window, click on `File > Import Sequence`. Then go one directory up and load HSP90.fasta. Ensure that the loaded sequence begins with "VETFA" and ends with "TLFVE". Now, click the "Pairwise Alignment" button, which looks like two blue arrows going opposite directions. 
+
+Do you have any dark-shaded residues extending past the beginnig or end of the reference sequence? If so, go to the sequence view at the bottom of the main Maestro window, and right-click any overhanging residues, then click "Delete"
+
+6. With Chain A selected, click the "Protein Preparation" button in the top bar. This will open up the Protein Preparation workflow tab.
 
 
    TODO: Image of protein prep window
@@ -79,7 +81,7 @@ On the bottom center of the Maestro window, look for the info table entry for "C
    TODO: check structure for addtl ligands
 
 
-6. On the first tab, we have Import and Process. We have the option of also including the diffraction data, biological unit, and alternate positions. These are often useful for validating the quality of the structure, but here we will not be using them.
+7. On the first tab, we have Import and Process. We have the option of also including the diffraction data, biological unit, and alternate positions. These are often useful for validating the quality of the structure, but here we will not be using them.
 
    Before proceeding, make sure only the following options are selected:
 
@@ -92,24 +94,20 @@ On the bottom center of the Maestro window, look for the info table entry for "C
    - Fill in missing side chains using Prime:		this structure has both missing side chains and loops. Prime will fill them in.
    - Fill in missing loops using Prime:
    - Cap termini:
-NO   - Generate het states using Epik:  pH 7.0 +/- 3.0   : use protonation states that might really be present at a cell-like pH
 
 
-   Next, click Preprocess. You should see a pop-up asking for a .fasta ..
+   Next, click Preprocess. You should see a pop-up asking for a .fasta. Just like when we did the sequence alignment, go up one directory and select HSP90.fasta. This will tell Maestro how to fill in missing residues and atoms.
 
-   Prime will take a couple of minutes to run and the results will be incorporated into the Workspace automatically. After this is complete you can “View Problems”, “Protein Reports”, and the “Ramachandran Plot”, these tools give you an idea of what potential issues to lookout for when preparing your structure.
+   Prime will take a couple of minutes to run and the results will be incorporated into the Workspace automatically. You can monitor the progress of these jobs by clicking on the "Jobs" tab on the top right of the main window. Preprocessing will notify you that the results have been incorporated when it's done. 
+   
+   After this is complete you can “View Problems”, “Protein Reports”, and “Ramachandran Plot”, these tools give you an idea of what potential issues to lookout for when preparing your structure.
 
-   TODO: Image of Import and process pane of prep wizard
 
 {% include image.html file="/system-prep/ramaPlot.png" alt="Ramachandran Plot" caption="Figure 1: An example Ramachandran plot" width-percent=30 %}
 
-7. We can now move on to the next tab, Review and Modify. First click on Analyze Workspace, Maestro will take a second to load up all waters and other ligands (metals, inhibitors etc). In this pane, we can manually inspect each water or ligand to determine whether or not to modify or delete it.
+8. We can now move on to the next tab, Review and Modify. First click on Analyze Workspace, Maestro will take a second to load up all waters and other ligands (metals, inhibitors etc). In this pane, we can manually inspect each water or ligand to determine whether or not to modify or delete it.
 
-### As we are only going to run one system per ligand, I'm not sure if we need multiple pH states for the ligand.
-For this protein, we need to generate states for the inhibitor. Click the line for the inhibitor and Generate States for pH 7.0 +/- 3.0. This will take the ligand and generate a couple of possible protonation states. When the generation is complete, you can view the structures of each state in the Workspace.
-
-
-8. Move onto the final tab of the Workflow, Refine. Here under H-bond assignment to Sample Water Orientations, as well as to use PROPKA to assign the protonation states of each residue. Click optimize…
+9. Move onto the final tab of the Workflow, Refine. Here under H-bond assignment to Sample Water Orientations, as well as to use PROPKA to assign the protonation states of each residue. Click optimize…
 
 {% include image.html file="/system-prep/proteinRefine.png" alt="Maestro Protein Prep Refine Tab" caption="Figure 8. The Refine tab contains options for hydrogen bond assignment, pKa prediction, and minimization." %}
 
@@ -121,13 +119,13 @@ To save the whole system, right click the minimized entry in the Entry List and 
 
 To save the ligand, make sure the mouse is in Residue Selecting mode (there should be a big upper-case "R" in the top left of the window), then left click on the ligand. Once it's selected, right click on one of the ligand atoms and select `Create new entry by > Extracting selected atoms`. Now, right click on the new entry (should be called "Structure##") in the Entry List and select `Export > Structures`. Save this as `<your ligand name>_maestro.pdb`. (SDF stands for "Structure Descriptor File").
 
-9. First, let’s try to assign parameters to the resulting whole system pdb using the Amber forcefield "FF14SB". Parameterization requires a lot of technical expertise, and can be one of the most frustrating parts of setting up an MD simulation.
+10. First, let’s try to assign parameters to the resulting whole system pdb using the Amber forcefield "FF14SB". Parameterization requires a lot of technical expertise, and can be one of the most frustrating parts of setting up an MD simulation.
 
 First we must load amber into our work environment, in the terminal type:
 
 ```module load amber```
 
-10. xleap and tleap are the utilities provided by Amber for system setup. Today we will be using the terminal-based version of leap (tleap). Simply type “tleap” in the terminal. A new program will pop up in the terminal. Type “help” to show lists of available commands.
+11. xleap and tleap are the utilities provided by Amber for system setup. Today we will be using the terminal-based version of leap (tleap). Simply type “tleap” in the terminal. A new program will pop up in the terminal. Type “help” to show lists of available commands.
 
 Into this prompt type the following commands (Note that my protein file is called "1sj0_maestro.pdb" in this tutorial -- Yours will have a different name):
 ```
@@ -164,13 +162,13 @@ There are three classes of errors here:
 
 At this point, let's exit out of tleap to resolve these problems. We will return later to try to setup the simulation once things are resolved.
 
-11. **First, the capping groups.** Open the PDB file in a text editor. The caps are the first and last "residues" in the protein. They're not really residues/amino acids, just little groups that were stuck on the ends, but PDB files require everything to have a residue number. It's a real pain in the neck to rename all the atoms in a capping group, so let's not. Tleap is clever and will reconstruct any atoms that it knows should be there, so let's just leave in the important atoms from each cap and let tleap do the rest.
+12. **First, the capping groups.** Open the PDB file in a text editor. The caps are the first and last "residues" in the protein. They're not really residues/amino acids, just little groups that were stuck on the ends, but PDB files require everything to have a residue number. It's a real pain in the neck to rename all the atoms in a capping group, so let's not. Tleap is clever and will reconstruct any atoms that it knows should be there, so let's just leave in the important atoms from each cap and let tleap do the rest.
   * In the ACE ("acetyl") cap, delete all the atoms except the ones named "C", "O", and "CH3".
   * Then, scroll down to the end of the chain to NMA ("N-methyl amide"). Change "CA" to "CH3" (delete a space afterwards to make the columns line up.
   * Then delete all the NMA atoms except "N" and "CH3".
   * Also, FF14SB calls it NME instead of NMA, so change that too. Save the current file with a new name, replacing "_maestro" with "_fixedCaps".
 
-11. **Now let's take care of the histidines.** A histidine sidechain can have three protonation states. Maestro already did the calculation to figure out where the hydrogen on each histidine sidechain should be, but it didn't name them in the way that AMBER/FF14SB wants. We'll need to look at each one by eye. First let’s open up the structure in vmd. Open up the Tinker Console by going to `Extensions > Tk Console`. Execute the following command which selects the alpha carbons of all residues which have the namd HIS, it then gets the residue ID’s for our convenience.
+13. **Now let's take care of the histidines.** A histidine sidechain can have three protonation states. Maestro already did the calculation to figure out where the hydrogen on each histidine sidechain should be, but it didn't name them in the way that AMBER/FF14SB wants. We'll need to look at each one by eye. First let’s open up the structure in vmd. Open up the Tinker Console by going to `Extensions > Tk Console`. Execute the following command which selects the alpha carbons of all residues which have the namd HIS, it then gets the residue ID’s for our convenience.
 
 `[atomselect top “resname HIS and alpha”] get resid`
 
@@ -187,7 +185,7 @@ Visually inspect and compare with Scheme 1 to determine what the name of each hi
 
 When done, save the coordinates to a new PDB file with "fixedCaps" replaced by "namedHises".
 
-13. **Singling out the ligand for special treatment** The next step is to prepare the ligand for simulation. Here we use the AMBER utility "antechamber" to run an AM1-BCC semi-empirical quantum mechanics calculation to determine partial charges. The ligand used in this example is "e4d.pdb", but yours will have a different name.
+14. **Singling out the ligand for special treatment** The next step is to prepare the ligand for simulation. Here we use the AMBER utility "antechamber" to run an AM1-BCC semi-empirical quantum mechanics calculation to determine partial charges. The ligand used in this example is "e4d.pdb", but yours will have a different name.
 
 Does your ligand have a net charge? This is imporant!
 # Note: Students need to know how to see if there's a net ligand charge here
@@ -209,7 +207,8 @@ In english, these arguments mean:
 Once the program completes, execute the following command to parse the prepi file to generate a frcmod.
 
 ```
-parmchk -i e4d.in -o e4d.frcmod -f prepi -a Y```
+parmchk -i e4d.in -o e4d.frcmod -f prepi -a Y
+```
 
 A frcmod file is an Amber forcefield supplementary file defining the various parameters. It’s just a normal text file, try to open it with your favorite text editor (`gedit e4d.frcmod`). We will need the e4d.in and e4d.frcmod files in the next step.
 
