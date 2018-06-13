@@ -101,12 +101,9 @@ NO   - Generate het states using Epik:  pH 7.0 +/- 3.0   : use protonation state
 
    TODO: Image of Import and process pane of prep wizard
 
-![Ramachandran Plot](https://github.com/ctlee/BioChemCoRe-2018/blob/master/docs/images/system-prep/ramaPlot.png "Figure 1: An example Ramachandran plot")
+{% include image.html file="/system-prep/ramaPlot.png" alt="Ramachandran Plot" caption="Figure 1: An example Ramachandran plot" width-percent=30 %}
 
-Figure 1: An example Ramachandran plot
-
-
-7. We can now move on to the next tab, Review and Modify. First click on Analyze Workspace, Maestro will take a second to load up all waters and other ligands (metals, inhibitors etc). In this pane, we can manually inspect each water or ligand to determine whether or not to modify or delete it. 
+7. We can now move on to the next tab, Review and Modify. First click on Analyze Workspace, Maestro will take a second to load up all waters and other ligands (metals, inhibitors etc). In this pane, we can manually inspect each water or ligand to determine whether or not to modify or delete it.
 
 ### As we are only going to run one system per ligand, I'm not sure if we need multiple pH states for the ligand.
 For this protein, we need to generate states for the inhibitor. Click the line for the inhibitor and Generate States for pH 7.0 +/- 3.0. This will take the ligand and generate a couple of possible protonation states. When the generation is complete, you can view the structures of each state in the Workspace.
@@ -114,19 +111,17 @@ For this protein, we need to generate states for the inhibitor. Click the line f
 
 8. Move onto the final tab of the Workflow, Refine. Here under H-bond assignment to Sample Water Orientations, as well as to use PROPKA to assign the protonation states of each residue. Click optimize…
 
-![Maestro Protein Prep Refine Tab](https://github.com/ctlee/BioChemCoRe-2018/blob/master/docs/images/system-prep/proteinRefine.png "Figure 8. The Refine tab contains options for hydrogen bond assignment, pKa prediction, and minimization.")
-
-Figure 8. The Refine tab contains options for hydrogen bond assignment, pKa prediction, and minimization.
+{% include image.html file="/system-prep/proteinRefine.png" alt="Maestro Protein Prep Refine Tab" caption="Figure 8. The Refine tab contains options for hydrogen bond assignment, pKa prediction, and minimization." %}
 
 After optimization is complete, remove all waters will fewer than 2 H-bonds to non-waters and perform a restrained minimization with the default RMSD of 0.30 A. This removes all waters which are not interacting substantially with the protein, and relaxes the structure in preparation for MD. Each step will create a new entry in the Entry List. Make sure you're using the lastest entry before you move forward through each step.
 
-Finally, look at your protein structure in the main window. We're going to save the whole system first, then we're going to save the ligand in a separate file. 
+Finally, look at your protein structure in the main window. We're going to save the whole system first, then we're going to save the ligand in a separate file.
 
 To save the whole system, right click the minimized entry in the Entry List and select `Export > Structures`, then save this as `<your protein name>_maestro.pdb`.
 
-To save the ligand, make sure the mouse is in Residue Selecting mode (there should be a big upper-case "R" in the top left of the window), then left click on the ligand. Once it's selected, right click on one of the ligand atoms and select `Create new entry by > Extracting selected atoms`. Now, right click on the new entry (should be called "Structure##") in the Entry List and select `Export > Structures`. Save this as `<your ligand name>_maestro.pdb`. (SDF stands for "Structure Descriptor File"). 
+To save the ligand, make sure the mouse is in Residue Selecting mode (there should be a big upper-case "R" in the top left of the window), then left click on the ligand. Once it's selected, right click on one of the ligand atoms and select `Create new entry by > Extracting selected atoms`. Now, right click on the new entry (should be called "Structure##") in the Entry List and select `Export > Structures`. Save this as `<your ligand name>_maestro.pdb`. (SDF stands for "Structure Descriptor File").
 
-9. First, let’s try to assign parameters to the resulting whole system pdb using the Amber forcefield "FF14SB". Parameterization requires a lot of technical expertise, and can be one of the most frustrating parts of setting up an MD simulation. 
+9. First, let’s try to assign parameters to the resulting whole system pdb using the Amber forcefield "FF14SB". Parameterization requires a lot of technical expertise, and can be one of the most frustrating parts of setting up an MD simulation.
 
 First we must load amber into our work environment, in the terminal type:
 
@@ -135,13 +130,15 @@ First we must load amber into our work environment, in the terminal type:
 10. xleap and tleap are the utilities provided by Amber for system setup. Today we will be using the terminal-based version of leap (tleap). Simply type “tleap” in the terminal. A new program will pop up in the terminal. Type “help” to show lists of available commands.
 
 Into this prompt type the following commands (Note that my protein file is called "1sj0_maestro.pdb" in this tutorial -- Yours will have a different name):
-```source leaprc.ff14SB
-pdb=loadpdb 1sj0_maestro.pdb 
+```
+source leaprc.ff14SB
+pdb=loadpdb 1sj0_maestro.pdb
 ```
 
 At this point you will see a bunch of error messages pop up!
 
-```Loading PDB file: ./0YDD5_maestro.pdb
+```
+Loading PDB file: ./0YDD5_maestro.pdb
 Unknown residue: NMA   number: 209   type: Terminal/last
 ..relaxing end constraints to try for a dbase match
   -no luck
@@ -158,19 +155,19 @@ Created a new atom named: N within residue: .R<NMA 225>
 ...
 ```
 
-These errors are popping up because the force field “ff14SB” does not contain types for several of these molecules. 
+These errors are popping up because the force field “ff14SB” does not contain types for several of these molecules.
 
 There are three classes of errors here:
 1) AMBER has a built-in forcefield for proteins (and a few other molecules) called FF14SB. This expects each protein atom to have a residue and atom name which perfectly matches what it expects. However, Maestro has different names for a few of these.
 2) We capped the termini of the protein so it wouldn't have charged groups hanging out at the beginning and end of the amino acid chain. While real proteins do have these charged groups hanging out at their N- and C-termini, we're missing amino acids from the beginning and end, so there shouldn't really be a charge there. We use "caps" to add a small, neutral group to the termini of the chains to prevent there from being a charge. This is important, because +1 and -1 charges make a big difference on an atomic scale.
 3) We have this non-protein molecule (the ligand) in the mix. AMBER has never seen this thing before (it's not in FF99SB), so it has no clue how to parameterize it. We'll have to determine the charges on these atoms (because that's what will determine most of its interactions), and then we can use generic parameters for the bonds (the Generalized Amber Force Field, or GAFF).
 
-At this point, let's exit out of tleap to resolve these problems. We will return later to try to setup the simulation once things are resolved.  
+At this point, let's exit out of tleap to resolve these problems. We will return later to try to setup the simulation once things are resolved.
 
-11. **First, the capping groups.** Open the PDB file in a text editor. The caps are the first and last "residues" in the protein. They're not really residues/amino acids, just little groups that were stuck on the ends, but PDB files require everything to have a residue number. It's a real pain in the neck to rename all the atoms in a capping group, so let's not. Tleap is clever and will reconstruct any atoms that it knows should be there, so let's just leave in the important atoms from each cap and let tleap do the rest. 
-  * In the ACE ("acetyl") cap, delete all the atoms except the ones named "C", "O", and "CH3". 
+11. **First, the capping groups.** Open the PDB file in a text editor. The caps are the first and last "residues" in the protein. They're not really residues/amino acids, just little groups that were stuck on the ends, but PDB files require everything to have a residue number. It's a real pain in the neck to rename all the atoms in a capping group, so let's not. Tleap is clever and will reconstruct any atoms that it knows should be there, so let's just leave in the important atoms from each cap and let tleap do the rest.
+  * In the ACE ("acetyl") cap, delete all the atoms except the ones named "C", "O", and "CH3".
   * Then, scroll down to the end of the chain to NMA ("N-methyl amide"). Change "CA" to "CH3" (delete a space afterwards to make the columns line up.
-  * Then delete all the NMA atoms except "N" and "CH3". 
+  * Then delete all the NMA atoms except "N" and "CH3".
   * Also, FF14SB calls it NME instead of NMA, so change that too. Save the current file with a new name, replacing "_maestro" with "_fixedCaps".
 
 11. **Now let's take care of the histidines.** A histidine sidechain can have three protonation states. Maestro already did the calculation to figure out where the hydrogen on each histidine sidechain should be, but it didn't name them in the way that AMBER/FF14SB wants. We'll need to look at each one by eye. First let’s open up the structure in vmd. Open up the Tinker Console by going to `Extensions > Tk Console`. Execute the following command which selects the alpha carbons of all residues which have the namd HIS, it then gets the residue ID’s for our convenience.
@@ -179,20 +176,16 @@ At this point, let's exit out of tleap to resolve these problems. We will return
 
 We can then go to `Graphics > Graphical Representations` and go through each of the histidines to assign it’s state. Shown in Figure 10 is an example of how to view an individual histidine. The the main window can be reoriented on the visible atoms using the `=` key.
 
-![VMD view of a histidine](https://github.com/ctlee/BioChemCoRe-2018/blob/master/docs/images/system-prep/vmdHisView.png "Figure 10. VMD view of a histidine. This instance should be named HID.")
+{% include image.html file="/system-prep/vmdHisView.png" alt="VMD view of a histidine" caption="Figure 10. VMD view of a histidine. This instance should be named HID." %}
 
-Figure 10. VMD view of a histidine. This instance should be named HID.
+{% include image.html file="/system-prep/hisProtNames.png" alt="HIS Protonation Names" caption="Scheme 1. The Amber residue naming convention for the various histidine connectivities." max-width=500 %}
+
+Visually inspect and compare with Scheme 1 to determine what the name of each histidine should be. Then go to the appropriate atoms in your PDB file and change the HIS label to what it should be ("HID", "HIE", or "HIP").
+
+{% include note.html content="How much easier would this be if you could write a script to do this automatically?!?" %}
 
 
-![VMD view of a histidine](https://github.com/ctlee/BioChemCoRe-2018/blob/master/docs/images/system-prep/hisProtNames.png "Scheme 1. The Amber residue naming convention for the various histidine connectivities.")
-
-Scheme 1. The Amber residue naming convention for the various histidine connectivities.
-
-Visually inspect and compare with Scheme 1 to determine what the name of each histidine should be. Then go to the appropriate atoms in your PDB file and change the HIS label to what it should be ("HID", "HIE", or "HIP"). 
-
-NOTE: How much easier would this be if you could write a script to do this automatically?!?
-
-When done, save the coordinates to a new PDB file with "fixedCaps" replaced by "namedHises". 
+When done, save the coordinates to a new PDB file with "fixedCaps" replaced by "namedHises".
 
 13. **Singling out the ligand for special treatment** The next step is to prepare the ligand for simulation. Here we use the AMBER utility "antechamber" to run an AM1-BCC semi-empirical quantum mechanics calculation to determine partial charges. The ligand used in this example is "e4d.pdb", but yours will have a different name.
 
@@ -204,15 +197,19 @@ With the ligand pdb, we are now ready to run the calculation
 
 In english, these arguments mean:
 
-```-i		input file
+```
+-i		input file
 -fi 		input format
 -o		output file
 -fo		output format
 -c 		calculation type here AM1-BCC
 -nc		net charge +1 (e4d has a protonated amide)
 ```
+
 Once the program completes, execute the following command to parse the prepi file to generate a frcmod.
-```parmchk -i e4d.in -o e4d.frcmod -f prepi -a Y```
+
+```
+parmchk -i e4d.in -o e4d.frcmod -f prepi -a Y```
 
 A frcmod file is an Amber forcefield supplementary file defining the various parameters. It’s just a normal text file, try to open it with your favorite text editor (`gedit e4d.frcmod`). We will need the e4d.in and e4d.frcmod files in the next step.
 
@@ -220,7 +217,8 @@ A frcmod file is an Amber forcefield supplementary file defining the various par
 # Molecular Dynamics with pmemd.cuda
 
 14. At this point, we should have resolved the previously encountered issues. Let’s try running everything through tleap again. Comments are shown after the !, do not type this.
-```	source leaprc.ff14SB
+```
+source leaprc.ff14SB
 source leaprc.gaff				! needed for ligand parms
 loadamberprep e4d.in				! from antechamber
 loadamberparams e4d.frcmod			! also from antechamber
@@ -228,13 +226,17 @@ loadamberparams frcmod.tip4pew		! tip4pew water model
 loadamberparams frcmod.ionsjc_tip4pew	! ions for the water model
 pdb=loadpdb 1sj0_leap.pdb
 ```
+
 At this point, the pdb should load without any errors and tleap should add in any extra necessary atoms for you. If there are no issues, please proceed with the following.
-```	solvateBox pdb TIP4PEWBOX 10		! solvate with 10 A buffer
+
+```
+	solvateBox pdb TIP4PEWBOX 10		! solvate with 10 A buffer
 	addions pdb Na+ 5				! balance charges
 	saveamberparm pdb system.prmtop system.inpcrd
 	savepdb pdb 1sj0_formd.pdb
 	quit
 ```
+
 15. We are now ready to run the simulation. The Amaro group has developed a set of default simulation parameters which we will be using. They can be downloaded from the following link.
 https://dl.dropboxusercontent.com/u/2781671/defaultMD.tgz
 
