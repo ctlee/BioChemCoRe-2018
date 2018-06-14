@@ -13,4 +13,8 @@ topnav_dropdowns:
     - title: Tutorials
       folderitems:
         - title: System Preparation
+<<<<<<< HEAD
           url: /system-prep/
+=======
+          url: /system-prep
+>>>>>>> f0719a78761a0feea90a112faf210e9715df85d9

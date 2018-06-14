@@ -32,13 +32,8 @@
             });
 
         });
-
     </script>
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
+    {% if page.toc == true %}
     <script>
         $(document).ready(function() {
             $("#tg-sb-link").click(function() {
@@ -50,33 +45,54 @@
             });
         });
     </script>
+    {% endif %}
 </head>
 <body>
-{% include topnav.html %}
-<!-- Page Content -->
-<div class="container">
-  <div id="main">
-    <!-- Content Row -->
-    <div class="row">
-        {% assign content_col_size = "col-md-12" %}
-        {% unless page.hide_sidebar %}
+    {% include topnav.html %}
+    <!-- Page Content -->
+    <div class="container">
+      <div id="main">
+        <!-- Content Row -->
+        <div class="row">
+            {% assign content_col_size = "col-md-12" %}
+            {% if page.toc == true %}
             <!-- Sidebar Column -->
             <div class="col-md-3" id="tg-sb-sidebar">
                 {% include sidebar.html %}
             </div>
             {% assign content_col_size = "col-md-9" %}
-        {% endunless %}
+            {% endif %}
 
-        <!-- Content Column -->
-        <div class="{{content_col_size}}" id="tg-sb-content">
-            {{content}}
+            <!-- Content Column -->
+            <div class="{{content_col_size}}" id="tg-sb-content">
+                {{content}}
+            </div>
+            <!-- /.row -->
         </div>
-    <!-- /.row -->
-</div>
-<!-- /.container -->
-</div>
-<!-- /#main -->
+        <!-- /.container -->
     </div>
+    <!-- /#main -->
+</div>
+<script>
+window.onscroll = function() {stickyNav()};
 
+// Get the navbar
+var navbar = document.getElementById("topnav");
+var sidebar = document.getElementById("tg-sb-sidebar");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function stickyNav() {
+    if (window.pageYOffset > sticky && window.innerWidth > 990) {
+        navbar.classList.add("sticky");
+        sidebar.classList.add("stickybar");
+    } else {
+        navbar.classList.remove("sticky");
+        sidebar.classList.remove("stickybar");
+    }
+}
+</script>
 </body>
 </html>

@@ -41,7 +41,8 @@
 
     var level = get_level(headers[0]),
       this_level,
-      html = settings.title + " <"+settings.listType+">";
+      html = "<li class='sidebarTitle'>Table of Contents</li>"
+      // settings.title + " <"+settings.listType+">";
     headers.on('click', function() {
       if (!settings.noBackToTopLinks) {
         window.location.hash = this.id;
@@ -69,7 +70,7 @@
       }
       level = this_level; // update for the next one
     });
-    html += "</"+settings.listType+">";
+    // html += "</"+settings.listType+">";
     if (!settings.noBackToTopLinks) {
       $(document).on('click', '.back-to-top', function() {
         $(window).scrollTop(0);

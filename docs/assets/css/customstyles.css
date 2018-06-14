@@ -66,9 +66,6 @@ body {
 .gi-5x{font-size: 5em;}
 
 
-
-
-
 .breadcrumb > .active {color: #777 !important;}
 
 /* make room for the nav bar */
@@ -460,14 +457,13 @@ dl.dl-horizontal dd {
 }
 
 figcaption {
-
     padding-bottom:12px;
     padding-top:6px;
     max-width: 90%;
     margin-bottom:20px;
     font-style: italic;
     color: gray;
-
+    text-align: center;
 }
 
 .testing {
@@ -913,6 +909,12 @@ span.soft {
     }
 }
 
+figure img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 *:hover > .anchorjs-link {
     transition: color .25s linear;
     text-decoration: none;
@@ -1162,7 +1164,6 @@ h4.panel-title {
 }
 
 /*set navbar breakpoint so that it converts to hamburger earlier */
-
 @media (max-width: 1200px) {
     .navbar-header {
         float: none;
@@ -1197,4 +1198,19 @@ h4.panel-title {
     .collapse.in{
         display:block !important;
     }
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.stickybar {
+  position: sticky;
+  top: 71px;
+}
+
+.sticky + .container {
+  padding-top: 70px;
 }
