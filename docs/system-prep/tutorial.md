@@ -67,7 +67,7 @@ On the bottom center of the Maestro window, look for the info table entry for "C
 
 4. Once split, each chain will show up in the "Entry List" pane on the left. Select chain A by clicking the blue dot.
 
-5. **Cut your structure down to the desired length.** With chain A selected, go to `Tasks`  (in the top right) and go to "Multiple Sequence Alignment". This window shows the sequence of your loaded protein highlighted in dark letters. If there's additional data in the pdb file about unresolved residues, there may be some light shaded letters as well.
+5. **Cut your structure down to the desired length.** With chain A selected, go to `Tasks`  (in the top right) and open "Multiple Sequence Viewer" by searching. This window shows the sequence of your loaded protein highlighted in dark letters. If there's additional data in the pdb file about unresolved residues, there may be some light shaded letters as well.
 
 In the MSA window, click on `File > Import Sequence`. Then go one directory up and load HSP90.fasta. Ensure that the loaded sequence begins with "VETFA" and ends with "TLFVE". Now, click the "Pairwise Alignment" button, which looks like two blue arrows going opposite directions. This will align the protein sequences.
 
