@@ -1,6 +1,6 @@
 ---
 title: "Preparing Your System for Molecular Dynamics (MD)"
-permalink: /system-prep
+permalink: /system-prep/
 toc: true
 
 summary: In this tutorial you will learn how to setup your system to begin running molecular dynamics in Amber. As a part of this tutorial you will be introduced to the use of Schrödinger's Maestro software for protein preparation followed by parameterization using AmberTools Antechamber.
@@ -67,7 +67,7 @@ On the bottom center of the Maestro window, look for the info table entry for "C
 
 4. Once split, each chain will show up in the "Entry List" pane on the left. Select chain A by clicking the blue dot.
 
-5. **Cut your structure down to the desired length.** With chain A selected, go to `Tasks`  (in the top right) and go to "Multiple Sequence Alignment". This window shows the sequence of your loaded protein highlighted in dark letters. If there's additional data in the pdb file about unresolved residues, there may be some light shaded letters as well. 
+5. **Cut your structure down to the desired length.** With chain A selected, go to `Tasks`  (in the top right) and go to "Multiple Sequence Alignment". This window shows the sequence of your loaded protein highlighted in dark letters. If there's additional data in the pdb file about unresolved residues, there may be some light shaded letters as well.
 
 In the MSA window, click on `File > Import Sequence`. Then go one directory up and load HSP90.fasta. Ensure that the loaded sequence begins with "VETFA" and ends with "TLFVE". Now, click the "Pairwise Alignment" button, which looks like two blue arrows going opposite directions. This will align the protein sequences.
 
@@ -92,8 +92,8 @@ Do you have any dark-shaded residues extending past the beginning or end of the 
 
    Next, click Preprocess. You should see a pop-up asking for a .fasta. Click "Yes". Just like when we did the sequence alignment, go up one directory and select HSP90.fasta. This will tell Maestro how to fill in missing residues and atoms.
 
-   Prime will take a couple of minutes to run and the results will be incorporated into the Workspace automatically. You can monitor the progress of these jobs by clicking on the "Jobs" tab on the top right of the main window. Preprocessing will notify you that the results have been incorporated when it's done. 
-   
+   Prime will take a couple of minutes to run and the results will be incorporated into the Workspace automatically. You can monitor the progress of these jobs by clicking on the "Jobs" tab on the top right of the main window. Preprocessing will notify you that the results have been incorporated when it's done.
+
    After this is complete you can “View Problems”, “Protein Reports”, and “Ramachandran Plot”, these tools give you an idea of what potential issues to lookout for when preparing your structure.
 
 {% include image.html file="/system-prep/ramaPlot.png" alt="Ramachandran Plot" caption="Figure 1: An example Ramachandran plot" width-percent=30 %}
@@ -112,7 +112,7 @@ To save the whole system, right click the minimized entry in the Entry List and 
 
 To save the ligand, go to the Structure Hierarchy listing below the Entry List. Expand the object corresponding to your final prepared protein, then Expand "Ligands", and right click the ligand and select "Copy to New Entry". You should learn your ligand's 3-character name. View just the ligand by itself. Make sure that Maestro is in residue selecting mode (There will be a big "R" in the top left corner of the screen). Then, click on your ligand to select it. In the bottom center of the screen, there should be a 3-character code. **That is your ligand's name - Write it down!** Now, right click on the new entry (should be called "Structure##") in the Entry List and select `Export > Structures`. Save this as `<your ligand name>_maestro.mol2`.
 
-Before leaving Maestro, 
+Before leaving Maestro,
 
 <!-- Also, this is the time to determine the net charge on your ligand. View just the ligand by itself. Make sure that Maestro is in residue sleecting mode (There will be a bit "R" in the top left corner of the screen). Then, click on your ligand to select it. The net charge should be shown at the bottom of the screen next to the word "Charge". For most of you this should be 0, but write it down just in case. -->
 
@@ -232,7 +232,7 @@ pdb=loadpdb 1sj0_leap.pdb
 
 At this point, the pdb should load without any errors and tleap should add in any extra necessary atoms for you. **Have your mentor ensure that the above steps loaded the protein correctly.** If there are no issues, please proceed with the following.
 
-First, we determine if the system has a net charge, and how many ions we'll need to counterbalance it. 
+First, we determine if the system has a net charge, and how many ions we'll need to counterbalance it.
 
 `charge pdb`
 
