@@ -3,6 +3,8 @@
 topnav:
 - title: Topnav
   items:
+    - title: Proteins
+      url: /pdbs/
     - title: BioChemCoRe
       external_url: http://biochemcore.ucsd.edu/
 

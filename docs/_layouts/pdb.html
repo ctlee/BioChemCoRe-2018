@@ -8,16 +8,22 @@ layout: default
 
 <div class="post-content">
 
-    {% if page.summary %}
-        <div class="summary">{{page.summary}}</div>
-    {% endif %}
+  {% if page.summary %}
+    <div class="summary">{{page.summary}}</div>
+  {% endif %}
 
-    <h2>PDB:</h2><a href="/assets/pdbs/{{ page.title }}/{{ page.title }}.pdb">{{ page.title }}.pdb</a>
+  <h2>PDB:</h2><a href="{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.pdb">{{ page.title }}.pdb</a>
+  <h2>FASTA:</h2><a href="{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.fasta">{{ page.title }}.fasta</a>
 
-    <h2>FASTA:</h2>
+  <h2>Visualization:</h2>
+  <div style="height: 400px; width: 400px; position: relative;" id='viewer_3Dmoljs' class='viewer_3Dmoljs' data-href='{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.pdb' data-backgroundcolor='0xffffff' data-select1='chain:A'
+  data-style1='cartoon:color=spectrum' data-surface1='opacity:.8;color:white'
+  data-select2='resn:{{ page.ligand }}' data-style2='stick'></div>
+
   {{content}}
 
 </div>
+
 
 {{site.data.alerts.hr_shaded}}
 

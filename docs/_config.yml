@@ -31,26 +31,22 @@ collections:
     permalink: /:collection/:path/
 
 defaults:
-  - scope:
+  -
+    scope:
+      path: "_pdbs"
+      type: pdbs
+    values:
+      layout: pdb
+      topnav: topnav
+      sidebar: pdbs_sidebar
+  -
+    scope:
       path: ""
       type: pages
     values:
       layout: page
       topnav: topnav
-  - scope:
-      path: "system-prep"
-      type: system-prep
-    values:
-      layout: page
-      topnav: topnav
-  - scope:
-      path: ""
-      type: pdb
-    values:
-      layout: pdb
-      topnav: topnav
 
-# these are defaults used for the frontmatter for these file types
 sidebars:
 - pdbs_sidebar
 

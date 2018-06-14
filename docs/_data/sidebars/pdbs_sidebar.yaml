@@ -1,23 +1,99 @@
-# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
-
 entries:
 - title: Protein Data Files
-  product: PDBS
-  version: 1.0
-
   folders:
   - title: '0YDD5'
     folderitems:
+    - title: 'Overview'
+      url: /pdbs/0YDD5/
     - title: 'PDB'
+      url: /assets/pdbs/0YDD5/0YDD5.pdb
     - title: 'FASTA'
+      url: /assets/pdbs/0YDD5/0YDD5.fasta
   - title: 'TNRT6'
+    folderitems:
+    - title: 'Overview'
+      url: /pdbs/TNRT6/
+    - title: 'PDB'
+      url: /assets/pdbs/TNRT6/TNRT6.pdb
+    - title: 'FASTA'
+      url: /assets/pdbs/TNRT6/TNRT6.fasta
   - title: 'VEH1I'
+    folderitems:
+    - title: 'Overview'
+      url: /pdbs/VEH1I/
+    - title: 'PDB'
+      url: /assets/pdbs/VEH1I/VEH1I.pdb
+    - title: 'FASTA'
+      url: /assets/pdbs/VEH1I/VEH1I.fasta
   - title: 'NIZGV'
+    folderitems:
+    - title: 'Overview'
+      url: /pdbs/NIZGV/
+    - title: 'PDB'
+      url: /assets/pdbs/NIZGV/NIZGV.pdb
+    - title: 'FASTA'
+      url: /assets/pdbs/NIZGV/NIZGV.fasta
   - title: 'DJ1H3'
+    folderitems:
+    - title: 'Overview'
+      url: /pdbs/DJ1H3/
+    - title: 'PDB'
+      url: /assets/pdbs/DJ1H3/DJ1H3.pdb
+    - title: 'FASTA'
+      url: /assets/pdbs/DJ1H3/DJ1H3.fasta
   - title: 'OVHRZ'
+    folderitems:
+    - title: 'Overview'
+      url: /pdbs/OVHRZ/
+    - title: 'PDB'
+      url: /assets/pdbs/OVHRZ/OVHRZ.pdb
+    - title: 'FASTA'
+      url: /assets/pdbs/OVHRZ/OVHRZ.fasta
   - title: 'NLSYQ'
+    folderitems:
+    - title: 'Overview'
+      url: /pdbs/NLSYQ/
+    - title: 'PDB'
+      url: /assets/pdbs/NLSYQ/NLSYQ.pdb
+    - title: 'FASTA'
+      url: /assets/pdbs/NLSYQ/NLSYQ.fasta
   - title: 'NEQSA'
+    folderitems:
+    - title: 'Overview'
+      url: /pdbs/NEQSA/
+    - title: 'PDB'
+      url: /assets/pdbs/NEQSA/NEQSA.pdb
+    - title: 'FASTA'
+      url: /assets/pdbs/NEQSA/NEQSA.fasta
   - title: '6WCGO'
+    folderitems:
+    - title: 'Overview'
+      url: /pdbs/6WCGO/
+    - title: 'PDB'
+      url: /assets/pdbs/6WCGO/6WCGO.pdb
+    - title: 'FASTA'
+      url: /assets/pdbs/6WCGO/6WCGO.fasta
   - title: 'A73SR'
+    folderitems:
+    - title: 'Overview'
+      url: /pdbs/A73SR/
+    - title: 'PDB'
+      url: /assets/pdbs/A73SR/A73SR.pdb
+    - title: 'FASTA'
+      url: /assets/pdbs/A73SR/A73SR.fasta
   - title: 'JHGSB'
+    folderitems:
+    - title: 'Overview'
+      url: /pdbs/JHGSB/
+    - title: 'PDB'
+      url: /assets/pdbs/JHGSB/JHGSB.pdb
+    - title: 'FASTA'
+      url: /assets/pdbs/JHGSB/JHGSB.fasta
   - title: 'LLCXM'
+    folderitems:
+    - title: 'Overview'
+      url: /pdbs/LLCXM/
+    - title: 'PDB'
+      url: /assets/pdbs/LLCXM/LLCXM.pdb
+    - title: 'FASTA'
+      url: /assets/pdbs/LLCXM/LLCXM.fasta
