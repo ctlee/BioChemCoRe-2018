@@ -27,19 +27,7 @@ tools have been developed.
 
 ## Looking at the Crystal Structure
 
-1. **Visualize this structure** by loading it in PyMol; replacing "my_protein_name"
-with the appropriate filename for your structure.
 
-```
-module load pymol
-pymol my_protein_name.pdb
-```
-
-TODO: image of HSP90 Structure
-
-
-2. **Take some time to examine the structure.** Can you locate the inhibitor molecule?
-Are there any crystallographic waters present?
 
 
 TODO: Sequence Alignment
@@ -59,6 +47,13 @@ TODO: Sequence Alignment
    ```File > Import Structures```
 
    After importing, the Workspace will show a representation of our protein. Using the left mouse button allows you to select residues or areas, middle mouse rotates the view, and the right mouse button translates.
+   
+1.**Take some time to examine the structure.** Can you locate the inhibitor molecule?
+Are there any crystallographic waters present?
+
+
+TODO: image of HSP90 Structure
+
 
 3. HSP90 is a dimer, which means it may have multiple chains.
 On the bottom center of the Maestro window, look for the info table entry for "CHAINS." If there are multiple chains, separate them by right clicking on the structure name in the left pane and selecting:
