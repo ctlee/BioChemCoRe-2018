@@ -71,7 +71,7 @@ On the bottom center of the Maestro window, look for the info table entry for "C
 
 In the MSA window, click on `File > Import Sequence`. Then go one directory up and load HSP90.fasta. Ensure that the loaded sequence begins with "VETFA" and ends with "TLFVE". Now, click the "Pairwise Alignment" button, which looks like two blue arrows going opposite directions. This will align the protein sequences.
 
-Do you have any dark-shaded residues extending past the beginning or end of the reference sequence? If so, go to the sequence view at the bottom of the main Maestro window, and right-click any overhanging residues, then click "Delete"
+Do you have any dark-shaded residues extending past the beginning or end of the reference sequence? If so, return to the main Maestro window and open the sequence viewer (`Window > Sequence Viewer`). Then go to the sequence view at the bottom of the window, and right-click any overhanging residues you observed and click "Delete"
 
 6. With Chain A selected, click the "Protein Preparation" button in the top bar. This will open up the Protein Preparation workflow tab.
 
