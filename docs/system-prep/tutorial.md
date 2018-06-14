@@ -75,8 +75,6 @@ Do you have any dark-shaded residues extending past the beginning or end of the 
 
 6. With Chain A selected, click the "Protein Preparation" button in the top bar. This will open up the Protein Preparation workflow tab.
 
-   TODO: check structure for addtl ligands
-
 7. On the first tab, we have Import and Process. We have the option of also including the diffraction data, biological unit, and alternate positions. These are often useful for validating the quality of the structure, but here we will not be using them.
 
    Before proceeding, make sure only the following options are selected:
@@ -100,9 +98,9 @@ Do you have any dark-shaded residues extending past the beginning or end of the 
 
 {% include image.html file="/system-prep/ramaPlot.png" alt="Ramachandran Plot" caption="Figure 1: An example Ramachandran plot" width-percent=30 %}
 
-8. We can now move on to the next tab, Review and Modify. First click on Analyze Workspace, Maestro will take a second to load up all waters and other ligands (metals, inhibitors etc). In this pane, we can manually inspect each water or ligand to determine whether or not to modify or delete it.
+8. We can now move on to the next tab, Review and Modify. First click on Analyze Workspace, Maestro will take a second to load up all waters and other ligands (metals, inhibitors etc). In this pane, we can manually inspect each water or ligand to determine whether or not to modify or delete it. You should keep the waters and the inhibitor in the active site, but delete any other small molecules that are around.
 
-9. Move onto the final tab of the Workflow, Refine. Here under H-bond assignment select Sample Water Orientations, as well as use PROPKA to assign the protonation states of each residue. Click optimize.
+9. Move onto the final tab of the Workflow, Refine. Here under H-bond assignment select Sample Water Orientations, as well as Use PROPKA to assign the protonation states of each residue. Click optimize.
 
 {% include image.html file="/system-prep/proteinRefine.png" alt="Maestro Protein Prep Refine Tab" caption="Figure 8. The Refine tab contains options for hydrogen bond assignment, pKa prediction, and minimization." %}
 
@@ -112,9 +110,9 @@ Finally, look at your protein structure in the main window. We're going to save 
 
 To save the whole system, right click the minimized entry in the Entry List and select `Export > Structures`, then save this as `<your protein name>_maestro.pdb`.
 
-To save the ligand, go to the Structure Hierarchy listing below the Entry List. Expand the object corresponding to your final prepared protein, then Expand "Ligands", and right click the ligand and select "Copy to New Entry". Now, right click on the new entry (should be called "Structure##") in the Entry List and select `Export > Structures`. Save this as `<your ligand name>_maestro.mol2`.
+To save the ligand, go to the Structure Hierarchy listing below the Entry List. Expand the object corresponding to your final prepared protein, then Expand "Ligands", and right click the ligand and select "Copy to New Entry". You should learn your ligand's 3-character name. View just the ligand by itself. Make sure that Maestro is in residue selecting mode (There will be a big "R" in the top left corner of the screen). Then, click on your ligand to select it. In the bottom center of the screen, there should be a 3-character code. **That is your ligand's name - Write it down!** Now, right click on the new entry (should be called "Structure##") in the Entry List and select `Export > Structures`. Save this as `<your ligand name>_maestro.mol2`.
 
-Before leaving Maestro, you should learn your ligand's 3-character name. View just the ligand by itself. Make sure that Maestro is in residue sleecting mode (There will be a big "R" in the top left corner of the screen). Then, click on your ligand to select it. In the bottom center of the screen, there should be a 
+Before leaving Maestro, 
 
 <!-- Also, this is the time to determine the net charge on your ligand. View just the ligand by itself. Make sure that Maestro is in residue sleecting mode (There will be a bit "R" in the top left corner of the screen). Then, click on your ligand to select it. The net charge should be shown at the bottom of the screen next to the word "Charge". For most of you this should be 0, but write it down just in case. -->
 
@@ -124,7 +122,7 @@ First we must load amber into our work environment, in the terminal type:
 
 ```module load amber```
 
-11. xleap and tleap are the utilities provided by Amber for system setup. Today we will be using the terminal-based version of leap (tleap). Simply type “tleap” in the terminal. A new program will pop up in the terminal. Type “help” to show lists of available commands.
+11. tleap is a utility provided by Amber for system setup. Simply type `tleap` in the terminal. A new program will pop up in the terminal. Type “help” to show lists of available commands.
 
 Into this prompt type the following commands (Note that my protein file is called "1sj0_maestro.pdb" in this tutorial -- Yours will have a different name):
 ```
@@ -136,7 +134,7 @@ pdb=loadpdb 1sj0_maestro.pdb
 At this point you will see a bunch of error messages pop up!
 
 ```
-Loading PDB file: ./0YDD5_maestro.pdb
+Loading PDB file: ./1sj0_maestro.pdb
 Unknown residue: NMA   number: 209   type: Terminal/last
 ..relaxing end constraints to try for a dbase match
   -no luck
@@ -158,7 +156,7 @@ These errors are popping up because the force field “ff14SB” does not contai
 There are three classes of errors here:
 1) AMBER has a built-in forcefield for proteins (and a few other molecules) called FF14SB. This expects each protein atom to have a residue and atom name which perfectly matches what it expects. However, Maestro has different names for a few of these.
 2) We capped the termini of the protein so it wouldn't have charged groups hanging out at the beginning and end of the amino acid chain. While real proteins do have these charged groups hanging out at their N- and C-termini, we're missing amino acids from the beginning and end, so there shouldn't really be a charge there. We use "caps" to add a small, neutral group to the termini of the chains to prevent there from being a charge. This is important, because +1 and -1 charges make a big difference on an atomic scale.
-3) We have this non-protein molecule (the ligand) in the mix. AMBER has never seen this thing before (it's not in FF99SB), so it has no clue how to parameterize it. We'll have to determine the charges on these atoms (because that's what will determine most of its interactions), and then we can use generic parameters for the bonds (the Generalized Amber Force Field, or GAFF).
+3) We have this non-protein molecule (the ligand) in the mix. AMBER has never seen this thing before (it's not in FF14SB), so it has no clue how to parameterize it. We'll have to determine the charges on these atoms (because that's what will determine most of its interactions), and then we can use generic parameters for the bonds (the Generalized Amber Force Field, or GAFF).
 
 At this point, let's exit out of tleap to resolve these problems. We will return later to try to setup the simulation once things are resolved.
 
