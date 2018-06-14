@@ -1,6 +1,6 @@
 ---
 title: "Preparing Your System for Molecular Dynamics (MD)"
-permalink: /system-prep/tutorial
+permalink: /system-prep/
 layout: page
 toc: true
 

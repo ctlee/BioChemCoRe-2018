@@ -1,0 +1,26 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+- title: Protein Data Files
+  product: PDBS
+  version: 1.0
+
+  folders:
+
+  - title: '0YDD5'
+    folderitems:
+    - title: 'PDB'
+      url: /
+    - title: 'FASTA'
+      url: /tocpage.html
+  - title: 'TNRT6'
+  - title: 'VEH1I'
+  - title: 'NIZGV'
+  - title: 'DJ1H3'
+  - title: 'OVHRZ'
+  - title: 'NLSYQ'
+  - title: 'NEQSA'
+  - title: '6WCGO'
+  - title: 'A73SR'
+  - title: 'JHGSB'
+  - title: 'LLCXM'
