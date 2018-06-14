@@ -107,7 +107,6 @@ venv.bak/
 *.DS_Store
 *.sublime-project
 *.sublime-workspace
-*Icon[
-]
+Icon
 
 docs/_site
