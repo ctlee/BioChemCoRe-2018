@@ -62,6 +62,8 @@ On the bottom center of the Maestro window, look for the info table entry for "C
 
 4. Once split, each chain will show up in the "Entry List" pane on the left. Select chain A by clicking the blue dot.
 
+5. Open the sequence viewer pane `Window > Sequence Viewer`. Now you should see the one letter amino acid codes for your protein sequence at the bottom of the screen. 
+
 5. **Cut your structure down to the desired length.** With chain A selected, go to `Tasks`  (in the top right) and open "Multiple Sequence Viewer" by searching. This window shows the sequence of your loaded protein highlighted in dark letters. If there's additional data in the pdb file about unresolved residues, there may be some light shaded letters as well.
 
 In the MSA window, click on `File > Import Sequence`. Then go one directory up and load HSP90.fasta. Ensure that the loaded sequence begins with "VETFA" and ends with "TLFVE". Now, click the "Pairwise Alignment" button, which looks like two blue arrows going opposite directions. This will align the protein sequences.
@@ -95,19 +97,22 @@ Do you have any dark-shaded residues extending past the beginning or end of the 
 
 8. We can now move on to the next tab, Review and Modify. First click on Analyze Workspace, Maestro will take a second to load up all waters and other ligands (metals, inhibitors etc). In this pane, we can manually inspect each water or ligand to determine whether or not to modify or delete it. You should keep the waters and the inhibitor in the active site, but delete any other small molecules that are around.
 
-9. Move onto the final tab of the Workflow, Refine. Here under H-bond assignment select Sample Water Orientations, as well as Use PROPKA to assign the protonation states of each residue. Click optimize.
+9. Move onto the final tab of the Workflow, Refine. Here under H-bond assignment select Sample Water Orientations, as well as Use PROPKA pH: 7.0 to assign the protonation states of each residue. Click optimize.
 
 {% include image.html file="/system-prep/proteinRefine.png" alt="Maestro Protein Prep Refine Tab" caption="Figure 8. The Refine tab contains options for hydrogen bond assignment, pKa prediction, and minimization." %}
 
-After optimization is complete, remove all waters will fewer than 2 H-bonds to non-waters and perform a restrained minimization with the default RMSD of 0.30 A. This removes all waters which are not interacting substantially with the protein, and relaxes the structure in preparation for MD. Each step will create a new entry in the Entry List. Make sure you're using the lastest entry before you move forward through each step.
+After optimization is complete, remove all waters with fewer than 2 H-bonds to non-waters and perform a restrained minimization with the default RMSD of 0.30 A. Make sure the "Hydrogens only" box is **NOT** checked. This removes all waters which are not interacting substantially with the protein and relaxes the structure in preparation for MD. Each step will create a new entry in the Entry List. Make sure you're using the lastest entry before you move forward through each step.
 
 Finally, look at your protein structure in the main window. We're going to save the whole system first, then we're going to save the ligand in a separate file.
 
 To save the whole system, right click the minimized entry in the Entry List and select `Export > Structures`, then save this as `<your protein name>_maestro.pdb`.
 
-To save the ligand, go to the Structure Hierarchy listing below the Entry List. Expand the object corresponding to your final prepared protein, then Expand "Ligands", and right click the ligand and select "Copy to New Entry". You should learn your ligand's 3-character name. View just the ligand by itself. Make sure that Maestro is in residue selecting mode (There will be a big "R" in the top left corner of the screen). Then, click on your ligand to select it. In the bottom center of the screen, there should be a 3-character code. **That is your ligand's name - Write it down!** Now, right click on the new entry (should be called "Structure##") in the Entry List and select `Export > Structures`. Save this as `<your ligand name>_maestro.mol2`.
+To save the ligand, go to the Structure Hierarchy listing below the Entry List. Expand the object corresponding to your final prepared protein, then Expand "Ligands", and right click the ligand and select "Copy to New Entry". View just the ligand by itself (should be called "Structure##") in the Entry List. 
 
-Before leaving Maestro,
+You should learn your ligand's 3-character name.  Make sure that Maestro is in residue selecting mode (There will be a big "R" in the top left corner of the screen). Then, click on your ligand to select it. In the bottom center of the screen, there should be a 3-character residue code. **That is your ligand's name - Write it down!** Also, note the charge of the ligand which is visible in the bottom pane when the mouse is not over any atoms. **This is your ligand's charge - Also write this down!** 
+
+In the entry list, right click on the ligand entry and select `Export > Structures`. Save this as `<your ligand name>_maestro.mol2`.
+
 
 <!-- Also, this is the time to determine the net charge on your ligand. View just the ligand by itself. Make sure that Maestro is in residue sleecting mode (There will be a bit "R" in the top left corner of the screen). Then, click on your ligand to select it. The net charge should be shown at the bottom of the screen next to the word "Charge". For most of you this should be 0, but write it down just in case. -->
 
@@ -119,17 +124,17 @@ First we must load amber into our work environment, in the terminal type:
 
 11. tleap is a utility provided by Amber for system setup. Simply type `tleap` in the terminal. A new program will pop up in the terminal. Type “help” to show lists of available commands.
 
-Into this prompt type the following commands (Note that my protein file is called "1sj0_maestro.pdb" in this tutorial -- Yours will have a different name):
+Into this prompt type the following commands (Note that my protein file is called "protein_name_maestro.pdb" in this tutorial -- Yours will have a different name):
 ```
 source leaprc.protein.ff14SB
 source leaprc.water.tip4pew
-pdb=loadpdb 1sj0_maestro.pdb
+pdb=loadpdb protein_name_maestro.pdb
 ```
 
 At this point you will see a bunch of error messages pop up!
 
 ```
-Loading PDB file: ./1sj0_maestro.pdb
+Loading PDB file: ./protein_name_maestro.pdb
 Unknown residue: NMA   number: 209   type: Terminal/last
 ..relaxing end constraints to try for a dbase match
   -no luck
@@ -164,30 +169,25 @@ In the tleap terminal, type `quit`.
   * Then delete all the NMA atoms except "N" and "CH3".
   * Also, FF14SB calls it NME instead of NMA, so change that too. Save the current file with a new name, replacing "_maestro" with "_fixedCaps".
 
-13. **Now let's take care of the histidines.** A histidine sidechain can have three protonation states. Maestro already did the calculation to figure out where the hydrogen on each histidine sidechain should be, but it didn't name them in the way that AMBER/FF14SB wants. We'll need to look at each one by eye. First let’s open up the structure in vmd. Open up the Tinker Console by going to `Extensions > Tk Console`. Execute the following command which selects the alpha carbons of all residues which have the namd HIS, it then gets the residue ID’s for our convenience.
-
-`[atomselect top “resname HIS and alpha”] get resid`
-
-We can then go to `Graphics > Graphical Representations` and go through each of the histidines to assign it’s state. Shown in Figure 10 is an example of how to view an individual histidine. The the main window can be reoriented on the visible atoms using the `=` key.
-
-{% include image.html file="/system-prep/vmdHisView.png" alt="VMD view of a histidine" caption="Figure 10. VMD view of a histidine. This instance should be named HID." %}
+13. **Now let's take care of the histidines.** A histidine sidechain can have three protonation states. Maestro already did the calculation to figure out where the hydrogen on each histidine sidechain should be, but it didn't name them in the way that AMBER/FF14SB wants. We'll need to look at each one by eye. If you closed the window already, reopen your final structure in Maestro. 
 
 {% include image.html file="/system-prep/hisProtNames.png" alt="HIS Protonation Names" caption="Scheme 1. The Amber residue naming convention for the various histidine connectivities." max-width=500 %}
 
-Visually inspect and compare with Scheme 1 to determine what the name of each histidine should be. Then go to the appropriate atoms in your PDB file and change the HIS label to what it should be ("HID", "HIE", or "HIP").
+
+Our HSP90 system has four histidines. Visually inspect each and compare with Scheme 1 to determine what the name of each histidine should be. To center the view on a specific histidine, middle click on its one letter code in the sequence viewer pane. Then go to the appropriate atoms in your PDB text file and change the "HIS" label to what it should be ("HID", "HIE", or "HIP").
 
 {% include note.html content="How much easier would this be if you could write a script to do this automatically?!?" %}
 
 
-When done, save the coordinates to a new PDB file with "fixedCaps" replaced by "namedHises".
+When done, save the coordinates to a new PDB file with "fixedCaps" replaced by "fixedCapsHises".
 
 14. **Singling out the ligand for special treatment** The next step is to prepare the ligand for simulation. Here we use the AMBER utility "antechamber" to run an AM1-BCC semi-empirical quantum mechanics calculation to determine partial charges. The ligand used in this example is "e4d.pdb", but yours will have a different name.
 
-Does your ligand have a net charge? This is imporant!
-# Note: Students need to know how to see if there's a net ligand charge here
+Does your ligand have a net charge? This is imporant! Change the "-nc" argument below to match.
+
 
 With the ligand pdb, we are now ready to run the calculation
-`antechamber -i e4d.pdb -fi pdb -o e4d.in -fo prepi -c bcc -nc 1`
+```antechamber -i ligand_name.mol2 -fi mol2 -o ligand_name.in -fo prepi -c bcc -nc ##```
 
 In english, these arguments mean:
 
@@ -197,16 +197,16 @@ In english, these arguments mean:
 -o		output file
 -fo		output format
 -c 		calculation type here AM1-BCC
--nc		net charge +1 (e4d has a protonated amide)
+-nc		net charge (the charge you wrote down for your ligand)
 ```
 
 Once the program completes, execute the following command to parse the prepi file to generate a frcmod.
 
 ```
-parmchk -i e4d.in -o e4d.frcmod -f prepi -a Y
+parmchk -i ligand_name.in -o ligand_name.frcmod -f prepi -a Y
 ```
 
-A frcmod file is an Amber forcefield supplementary file defining the various parameters. It’s just a normal text file, try to open it with your favorite text editor (`gedit e4d.frcmod`). We will need the e4d.in and e4d.frcmod files in the next step.
+A frcmod file is an Amber forcefield supplementary file defining the various parameters. It’s just a normal text file, try to open it with your favorite text editor (`gedit ligand_name.frcmod`). We will need the e4d.in and e4d.frcmod files in the next step.
 
 
 # Molecular Dynamics with pmemd.cuda
@@ -220,9 +220,9 @@ Comments are shown after the !, do not type this.
 source leaprc.protein.ff14SB
 source leaprc.gaff				! needed for ligand parms
 source leaprc.water.tip4pew                     ! needed for water params
-loadamberprep e4d.in				! from antechamber
-loadamberparams e4d.frcmod			! also from antechamber
-pdb=loadpdb 1sj0_leap.pdb
+loadamberprep ligand_name.in			! from antechamber
+loadamberparams ligand_name.frcmod		! also from antechamber
+pdb=loadpdb protein_name_fixedCapsHises.pdb
 ```
 
 At this point, the pdb should load without any errors and tleap should add in any extra necessary atoms for you. **Have your mentor ensure that the above steps loaded the protein correctly.** If there are no issues, please proceed with the following.
@@ -231,23 +231,28 @@ First, we determine if the system has a net charge, and how many ions we'll need
 
 `charge pdb`
 
-This command will tell you the net charge of the system. To simulate being in cytoplasm, we will add some ions (cells are kinda salty). These atoms will be Na+ and Cl-. Add 50 or 51 ions to neutralize your system. For example, if your system has a net charge of -3, add 17 Na ions and 14 Cl- ions.
+This command will tell you the net charge of the system. To simulate being in cytoplasm, we will add some ions (cells are kinda salty). These atoms will be Na+ and Cl-. Add 50 or 51 ions to neutralize your system. For example, if your system has a net charge of -3, add 27 Na ions and 24 Cl- ions.
 
 ```
 	solvateBox pdb TIP4PEWBOX 10		! solvate with 10 A buffer
 	addions2 pdb Na+ ##			! How many positive charges should you add? I had to add 17 (see above)
-	addions2 pdb C- ##			! How many negative charges should you add? I had to add 14 (see above)
-	charge pdb
+	addions2 pdb Cl- ##			! How many negative charges should you add? I had to add 14 (see above)
 ```
 Check your ion math by making sure the resulting charge is 0.
+```
+	charge pdb
+```
+
+If it's 0, then continue on.
+
 
 ```
-	saveamberparm pdb system.prmtop system.inpcrd
-	savepdb pdb 1sj0_forMd.pdb
+	saveamberparm pdb protein_name.prmtop protein_name.inpcrd
+	savepdb pdb protein_name_leap.pdb
 	quit
 ```
 
-15. We are now ready to run the simulation. The Amaro group has developed a set of default simulation parameters which we will be using. They can be downloaded from the following link.
+15. We are now ready to run the MD simulation. The Amaro group has developed a set of default simulation parameters which we will be using. They can be downloaded from the following link.
 https://dl.dropboxusercontent.com/u/2781671/defaultMD.tgz
 
 The tarball tgz or tar.gz file can be extracted using the following command. Be sure to extract it to your personal scratch folder on your machine (/scratch/[username]).
