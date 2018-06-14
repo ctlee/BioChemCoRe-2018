@@ -11,9 +11,10 @@ layout: default
   {% if page.summary %}
     <div class="summary">{{page.summary}}</div>
   {% endif %}
-
-  <h2>PDB:</h2><a href="{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.pdb">{{ page.title }}.pdb</a>
-  <h2>FASTA:</h2><a href="{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.fasta">{{ page.title }}.fasta</a>
+  <h2>Download Files:<h2>
+  <h3>Tarball: <a href="{{ site.baseurl }}/assets/pdbs/{{ page.title }}.tgz">{{ page.title }}.tgz</a></h3>
+  <h3>PDB: <a href="{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.pdb">{{ page.title }}.pdb</a></h3>
+  <!-- <h3>FASTA: <a href="{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.fasta">{{ page.title }}.fasta</a></h3> -->
 
   <h2>Visualization:</h2>
   <div style="height: 400px; width: 400px; position: relative;" id='viewer_3Dmoljs' class='viewer_3Dmoljs' data-href='{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.pdb' data-backgroundcolor='0xffffff' data-select1='chain:A'

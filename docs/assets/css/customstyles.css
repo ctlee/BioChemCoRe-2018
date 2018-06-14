@@ -1214,3 +1214,20 @@ h4.panel-title {
 .sticky + .container {
   padding-top: 70px;
 }
+
+table#pdbtable {
+    text-align: center;
+    width: 100%;
+    background-color: #f1f1c1;
+}
+
+table#pdbtable tr:nth-child(even) {
+    background-color: #dddddd;
+}
+table#pdbtable tr:nth-child(odd) {
+    background-color: #fff;
+}
+table#pdbtable th {
+    color: white;
+    background-color: #444;
+}
