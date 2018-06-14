@@ -6,13 +6,10 @@ entries:
   version: 1.0
 
   folders:
-
   - title: '0YDD5'
     folderitems:
     - title: 'PDB'
-      url: /
     - title: 'FASTA'
-      url: /tocpage.html
   - title: 'TNRT6'
   - title: 'VEH1I'
   - title: 'NIZGV'

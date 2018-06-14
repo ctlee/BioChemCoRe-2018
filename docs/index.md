@@ -6,5 +6,3 @@ summary: Welcome to BioChemCoRe 2018's Github landing page. You will find here l
 ---
 
 If you are looking for the main BioChemCoRe website please go here: [http://biochemcore.ucsd.edu/](http://biochemcore.ucsd.edu/)
-
-{% include links.html %}
