@@ -67,19 +67,15 @@ On the bottom center of the Maestro window, look for the info table entry for "C
 
 4. Once split, each chain will show up in the "Entry List" pane on the left. Select chain A by clicking the blue dot.
 
-5. **Cut your structure down to the desired length.** With chain A selected, go to `Tasks` and go to "Multiple Sequence Alignment". This window shows the sequence of your loaded protein highlighted in dark letters. If there's additional data in the pdb file about unresolved residues, there may be some light shaded letters as well. 
+5. **Cut your structure down to the desired length.** With chain A selected, go to `Tasks`  (in the top right) and go to "Multiple Sequence Alignment". This window shows the sequence of your loaded protein highlighted in dark letters. If there's additional data in the pdb file about unresolved residues, there may be some light shaded letters as well. 
 
-In the MSA window, click on `File > Import Sequence`. Then go one directory up and load HSP90.fasta. Ensure that the loaded sequence begins with "VETFA" and ends with "TLFVE". Now, click the "Pairwise Alignment" button, which looks like two blue arrows going opposite directions. 
+In the MSA window, click on `File > Import Sequence`. Then go one directory up and load HSP90.fasta. Ensure that the loaded sequence begins with "VETFA" and ends with "TLFVE". Now, click the "Pairwise Alignment" button, which looks like two blue arrows going opposite directions. This will align the protein sequences.
 
-Do you have any dark-shaded residues extending past the beginnig or end of the reference sequence? If so, go to the sequence view at the bottom of the main Maestro window, and right-click any overhanging residues, then click "Delete"
+Do you have any dark-shaded residues extending past the beginning or end of the reference sequence? If so, go to the sequence view at the bottom of the main Maestro window, and right-click any overhanging residues, then click "Delete"
 
 6. With Chain A selected, click the "Protein Preparation" button in the top bar. This will open up the Protein Preparation workflow tab.
 
-
-   TODO: Image of protein prep window
-
    TODO: check structure for addtl ligands
-
 
 7. On the first tab, we have Import and Process. We have the option of also including the diffraction data, biological unit, and alternate positions. These are often useful for validating the quality of the structure, but here we will not be using them.
 
@@ -117,6 +113,8 @@ Finally, look at your protein structure in the main window. We're going to save 
 To save the whole system, right click the minimized entry in the Entry List and select `Export > Structures`, then save this as `<your protein name>_maestro.pdb`.
 
 To save the ligand, go to the Structure Hierarchy listing below the Entry List. Expand the object corresponding to your final prepared protein, then Expand "Ligands", and right click the ligand and select "Copy to New Entry". Now, right click on the new entry (should be called "Structure##") in the Entry List and select `Export > Structures`. Save this as `<your ligand name>_maestro.mol2`.
+
+Before leaving Maestro, you should learn your ligand's 3-character name. View just the ligand by itself. Make sure that Maestro is in residue sleecting mode (There will be a big "R" in the top left corner of the screen). Then, click on your ligand to select it. In the bottom center of the screen, there should be a 
 
 <!-- Also, this is the time to determine the net charge on your ligand. View just the ligand by itself. Make sure that Maestro is in residue sleecting mode (There will be a bit "R" in the top left corner of the screen). Then, click on your ligand to select it. The net charge should be shown at the bottom of the screen next to the word "Charge". For most of you this should be 0, but write it down just in case. -->
 
@@ -270,5 +268,3 @@ The tarball tgz or tar.gz file can be extracted using the following command. Be 
 
 You can watch the progress of the calculations by executing this command which will write out the contents of the mdinfo file every 2 seconds.
 	`watch cat mdinfo`
-
-{% include links.html %}
