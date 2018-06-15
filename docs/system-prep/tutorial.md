@@ -69,7 +69,13 @@ On the bottom center of the Maestro window, look for the info table entry for "C
 
 In the MSA window, click on `File > Import Sequence`. Then go one directory up and load HSP90.fasta. Ensure that the loaded sequence begins with "VETFA" and ends with "TLFVE". Now, click the "Pairwise Alignment" button, which looks like two blue arrows going opposite directions. This will align the protein sequences.
 
-Do you have any dark-shaded residues extending past the beginning or end of the reference sequence? If so, return to the main Maestro window and open the sequence viewer (`Window > Sequence Viewer`). Then go to the sequence view at the bottom of the window, and right-click any overhanging residues you observed and click "Delete"
+Do you have any dark-shaded residues extending past the beginning or end of the reference sequence? If so, return to the main Maestro window and open the sequence viewer (`Window > Sequence Viewer`). Then go to the sequence view at the bottom of the window, and right-click any overhanging residues you observed and click "Delete."
+
+If you have deleted any C-terminal residues, there may be an additional nitrogen that was not deleted. Right click on this nitrogen in the structure (if it exists) and delete it.
+
+Your structure should contain only Chain A, your ligand, and waters. If you have any extra solvents right click and delete them.
+
+**Have a mentor check your structure!**
 
 6. With Chain A selected, click the "Protein Preparation" button in the top bar. This will open up the Protein Preparation workflow tab.
 
@@ -103,6 +109,8 @@ Do you have any dark-shaded residues extending past the beginning or end of the 
 {% include image.html file="/system-prep/proteinRefine.png" alt="Maestro Protein Prep Refine Tab" caption="Figure 8. The Refine tab contains options for hydrogen bond assignment, pKa prediction, and minimization." %}
 
 After optimization is complete, remove all waters with fewer than 2 H-bonds to non-waters and perform a restrained minimization with the default RMSD of 0.30 A. Make sure the "Hydrogens only" box is **NOT** checked. This removes all waters which are not interacting substantially with the protein and relaxes the structure in preparation for MD. Each step will create a new entry in the Entry List. Make sure you're using the lastest entry before you move forward through each step.
+
+**Have your mentor check your structure again!**
 
 Finally, look at your protein structure in the main window. We're going to save the whole system first, then we're going to save the ligand in a separate file.
 
