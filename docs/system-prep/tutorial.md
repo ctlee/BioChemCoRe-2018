@@ -16,8 +16,14 @@ us know now.
 
 Protein structures from various structural determination methods often are not
 complete. For example, structures from x-ray crystallography typically do not
-have resolved protons. Take a second and research why this is. Write your
+have resolved protons. Take a second and research why x-ray 
+crystallography does not provide the positions of protons. Write your
 answer in your notebook.
+
+(It's normal to use "proton" and "hydrogen" interchangeably 
+in this field. If we were instead nuclear physicists, "proton" could refer to 
+either hydrogen nuclei or a component of, for example, a carbon nucleus. 
+But we aren't nuclear physicists, so here "proton" just means "hydrogen").
 
 Given the importance of hydrogen bonding, which requires proton participation,
 for protein stability and receptor-ligand interactions, X-ray crystal
