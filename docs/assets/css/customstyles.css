@@ -1164,7 +1164,7 @@ h4.panel-title {
 }
 
 /*set navbar breakpoint so that it converts to hamburger earlier */
-@media (max-width: 1200px) {
+@media (max-width: 800px) {
     .navbar-header {
         float: none;
     }

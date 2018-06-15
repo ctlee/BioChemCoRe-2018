@@ -9,8 +9,15 @@ sidebar: 'pdbs_sidebar'
 ## Files
 
 <h3>All Systems: <a href="{{ '/assets/pdbs/all.tgz' | prepend: site.baseurl }}">all.tgz</a></h3>
+This tarball contains the structures and MD setup files for all of the BioChemCoRe systems.
 
 <h3>Reference FASTA: <a href="{{ '/assets/pdbs/HSP90.fasta' | prepend: site.baseurl }}">HSP90.fasta</a></h3>
+
+This FASTA files contains the reference sequence for all of your systems. After system preparation your sequence should be the same as the one provided here!
+
+<h3>bccHelper.py: <a href="{{ '/assets/pdbs/bccHelper.py' | prepend: site.baseurl }}">bccHelper.py</a></h3>
+
+This python library contains useful list and dictionary definitions to help you automate your tasks. A version of this script is also already bundled with the 'all.tgz' and 'BCC_ID.tgz' tarballs.
 
 <br/><br/>
 

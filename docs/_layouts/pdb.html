@@ -13,8 +13,15 @@ layout: default
   {% endif %}
   <h2>Download Files:<h2>
   <h3>Tarball: <a href="{{ site.baseurl }}/assets/pdbs/{{ page.title }}.tgz">{{ page.title }}.tgz</a></h3>
+  <p>This tarball contains the structure and MD run scripts for the {{ page.title }} system.</p>
+
   <h3>PDB: <a href="{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.pdb">{{ page.title }}.pdb</a></h3>
-  <!-- <h3>FASTA: <a href="{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.fasta">{{ page.title }}.fasta</a></h3> -->
+  <p>A PDB format crystal structure of the {{ page.title }} system.</p>
+
+  <h3>Ligand ID: {{ page.ligand }}</h3>
+  <p>The ligand name of the small molecule co-crystallized with the protein. You
+  will use this name extensively in your tutorials and exercises.</p>
+
 
   <h2>Visualization:</h2>
   <div style="height: 400px; width: 400px; position: relative;" id='viewer_3Dmoljs' class='viewer_3Dmoljs' data-href='{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.pdb' data-backgroundcolor='0xffffff' data-select1='chain:A'

@@ -33,7 +33,7 @@
 
         });
     </script>
-    {% if page.toc == true %}
+    {% if page.toc == true or page.sidebar != '' %}
     <script>
         $(document).ready(function() {
             $("#tg-sb-link").click(function() {
@@ -89,10 +89,10 @@
     // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
     function stickyNav() {
         if (window.pageYOffset > sticky && window.innerWidth > 990) {
-            navbar.classList.add("sticky");
+            // navbar.classList.add("sticky");
             sidebar.classList.add("stickybar");
         } else {
-            navbar.classList.remove("sticky");
+            // navbar.classList.remove("sticky");
             sidebar.classList.remove("stickybar");
         }
     }
