@@ -12,7 +12,7 @@ us know now.
 
 ## Motivation
 
-Why do we need to go through system setup for MD?
+**Why do we need to go through system setup for MD?**
 
 Protein structures from various structural determination methods often are not
 complete. For example, structures from x-ray crystallography typically do not
@@ -27,15 +27,16 @@ tools have been developed.
 
 ## Getting the Files
 
-Download the files that the instructors show you from the BioChemCoRe website and place them in your personal /scratch/username directory.
+Download the files corresponding to your assigned system from the [BioChemCoRe Protein Data Bank]({{ '/pdbs/' | prepend: site.baseurl }}) and place them in your personal `/scratch/username` directory.
 
-The tarball tgz or tar.gz file can be extracted using the following command. Be sure to extract it to your personal scratch folder on your machine (/scratch/[username]).
-	`tar -xvf protein_name.tgz`
+The tarball tgz or tar.gz file can be extracted using the following command. Be sure to extract it to your personal scratch folder on your machine (`/scratch/[username]`).
+
+{% include note.html content="You can extract the contents of tarballs using the following command: `tar -xvf protein_name.tgz`" %}
 
 
 ## Protein Preparation Workflow
 
-1. One tool of extreme utility is Maestro (http://www.schrodinger.com/Maestro/). It acts as a molecular visualizer, and a workflow starting point for many of Schrodinger’s tools. Today we will be using the Protein Preparation workflow to clean up our structure. To load the Schrodinger toolkits, in Keck II issue the command:
+1. One tool of extreme utility is [Maestro](http://www.schrodinger.com/Maestro/). It acts as a molecular visualizer, and a workflow starting point for many of Schrodinger’s tools. Today we will be using the Protein Preparation workflow to clean up our structure. To load the Schrodinger toolkits, in Keck II issue the command and run maestro:
 
    ```
    module load schrodinger
@@ -48,7 +49,7 @@ The tarball tgz or tar.gz file can be extracted using the following command. Be 
 
    After importing, the Workspace will show a representation of our protein. Using the left mouse button allows you to select residues or areas, middle mouse rotates the view, and the right mouse button translates.
 
-1.**Take some time to examine the structure.** Can you locate the inhibitor molecule?
+3. **Take some time to examine the structure.** Can you locate the inhibitor molecule?
 Are there any crystallographic waters present?
 
 
