@@ -236,7 +236,7 @@ pdb=loadpdb protein_name_fixedCapsHises.pdb
 
 At this point, the pdb should load without any errors and tleap should add in any extra necessary atoms for you. **Have your mentor ensure that the above steps loaded the protein correctly.** If there are no issues, please proceed with the following.
 
-First, we determine if the system has a net charge, and how many ions we'll need to counterbalance it.
+First, we determine if the system has a net charge, and how many ions we'll need to counterbalance it. In tleap type:
 
 `charge pdb`
 
@@ -247,7 +247,7 @@ This command will tell you the net charge of the system. To simulate being in cy
 	addions2 pdb Na+ ##			! How many positive charges should you add? I had to add 17 (see above)
 	addions2 pdb Cl- ##			! How many negative charges should you add? I had to add 14 (see above)
 ```
-Check your ion math by making sure the resulting charge is 0.
+Check your ion math by making sure the resulting charge is 0. Again, type in tleap:
 ```
 	charge pdb
 ```
