@@ -184,7 +184,7 @@ In the tleap terminal, type `quit`.
   * Then delete all the NMA atoms except "N" and "CH3".
   * Also, FF14SB calls it NME instead of NMA, so change that too.
   * After the end of the protein, the next entry is the ligand. The residue name should correspond with the name you wrote down from Maestro. If your ligand has a "CL" atom, you will need to rename it to "Cl" (change the L to lowercase). 
-  *Save the current file with a new name, replacing "_maestro" with "_fixedCaps".
+  * Save the current file with a new name, replacing "_maestro" with "_fixedCaps".
 
 13. **Now let's take care of the histidines.** A histidine sidechain can have three protonation states. Maestro already did the calculation to figure out where the hydrogen on each histidine sidechain should be, but it didn't name them in the way that AMBER/FF14SB wants. We'll need to look at each one by eye. If you closed the window already, reopen your final structure in Maestro.
 
