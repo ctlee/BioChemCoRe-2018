@@ -25,6 +25,7 @@ This python library contains useful list and dictionary definitions to help you 
   <tr>
     <th>BCC ID:</th>
     <th>LIG ID:</th>
+    <th>IC50 (nM):</th>
     <th>Tarfile:</th>
     <th>PDB:</th>
   </tr>
@@ -32,6 +33,11 @@ This python library contains useful list and dictionary definitions to help you 
   <tr>
     <td><a href="{{ pdb.title }}">{{ pdb.title }}</a></td>
     <td>{{ pdb.ligand }}</td>
+      {% if pdb.set == 'Training' %}
+        <td>{{ pdb.IC50 }}</td>
+      {% else %}
+        <td>-</td>
+      {% endif %}
     <td><a href="{{ site.baseurl }}/assets/pdbs/{{ pdb.title }}.tgz">{{ pdb.title }}.tgz</a></td>
     <td><a href="{{ site.baseurl }}/assets/pdbs/{{ pdb.title }}/{{ pdb.title }}.pdb">{{ pdb.title }}.pdb</a></td>
   </tr>

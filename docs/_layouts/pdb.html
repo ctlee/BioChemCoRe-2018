@@ -22,6 +22,14 @@ layout: default
   <p>The ligand name of the small molecule co-crystallized with the protein. You
   will use this name extensively in your tutorials and exercises.</p>
 
+  <h3>
+      {% if page.set == 'Training' %}
+        IC50: {{ page.IC50 }} nM
+      {% else %}
+        IC50: -
+      {% endif %}
+  </h3>
+
 
   <h2>Visualization:</h2>
   <div style="height: 400px; width: 400px; position: relative;" id='viewer_3Dmoljs' class='viewer_3Dmoljs' data-href='{{ site.baseurl }}/assets/pdbs/{{ page.title }}/{{ page.title }}.pdb' data-backgroundcolor='0xffffff' data-select1='chain:A'
