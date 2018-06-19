@@ -135,7 +135,7 @@ In the entry list, right click on the ligand entry and select `Export > Structur
 
 First we must load amber into our work environment, in the terminal type:
 
-```module load amber```
+```module load amber/18```
 
 11. tleap is a utility provided by Amber for system setup. Simply type `tleap` in the terminal. A new program will pop up in the terminal. Type “help” to show lists of available commands.
 
