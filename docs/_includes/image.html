@@ -2,7 +2,7 @@
   {% if {{include.url}} %}
   <a class="no_icon" target="_blank" href="{{include.url}}">
   {% endif %}
-    <img class="docimage" src="{{ site.baseurl }}/images{{include.file}}" alt="{{include.alt}}" style="display:block; margin-left:auto; margin-right:auto;{% if {{include.max-width}} %}max-width: {{include.max-width}}px;{% endif %}" />
+    <img class="docimage" src="{{ site.baseurl }}/images{{include.file}}" alt="{{include.alt}}" style="display:block; margin-left:auto; margin-right:auto;{% if {{include.max-width}} %}max-width: {{include.max-width}}px;{% endif %}{% if {{include.width}} %}width: {{include.width}}%;{% endif %}" />
   {% if {{include.url}} %}</a>{% endif %}
   {% if {{include.caption}} %}
     <figcaption>{{include.caption}}</figcaption>

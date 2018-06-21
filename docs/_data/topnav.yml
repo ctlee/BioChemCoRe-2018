@@ -16,3 +16,5 @@ topnav_dropdowns:
       folderitems:
         - title: System Preparation
           url: /system-prep/
+        - title: POVME Analysis
+          url: /povme/
