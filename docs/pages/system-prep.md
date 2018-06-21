@@ -245,156 +245,216 @@ separate file.
 
 ## Parameterization
 
-1. First, let’s try to assign parameters to the resulting whole system pdb using
-   the Amber forcefield "FF14SB". Parameterization requires a lot of technical
-   expertise, and can be one of the most frustrating parts of setting up an MD
-   simulation.
+Let’s try to assign parameters to the resulting whole system pdb using
+the Amber forcefield "FF14SB". Parameterization requires a lot of technical
+expertise, and can be one of the most frustrating parts of setting up an MD
+simulation. With a little patience we'll be simulating in no time!
 
-   First we must load amber into our work environment, in the terminal type:
+1. First we must load Amber into our work environment, in the terminal type:
 
    `module load amber/18`
 
-2. tleap is a utility provided by Amber for system setup. Simply type `tleap` in the terminal. A new program will pop up in the terminal. Type “help” to show lists of available commands.
+2. tleap is a utility provided by Amber for system setup. Simply type `tleap` in
+   the terminal. A new program will pop up in the terminal. Type `help` in the
+   tleap prompt to show lists of available commands.
 
-Into this prompt type the following commands (Note that my protein file is called "protein_name_maestro.pdb" in this tutorial -- Yours will have a different name):
-```
-source leaprc.protein.ff14SB
-source leaprc.water.tip4pew
-pdb=loadpdb protein_name_maestro.pdb
-```
+   Into this prompt type the following commands (Note that my protein file is
+   called "protein_name_maestro.pdb" in this tutorial -- Yours will have a different name):
 
-At this point you will see a bunch of error messages pop up!
+    ```
+    source leaprc.protein.ff14SB
+    source leaprc.water.tip4pew
+    pdb=loadpdb protein_name_maestro.pdb
+    ```
 
-```
-Loading PDB file: ./protein_name_maestro.pdb
-Unknown residue: NMA   number: 209   type: Terminal/last
-..relaxing end constraints to try for a dbase match
-  -no luck
-Unknown residue: 99B   number: 210   type: Terminal/beginning
-..relaxing end constraints to try for a dbase match
-  -no luck
-Created a new atom named: H within residue: .R<ACE 16>
-Created a new atom named: H1 within residue: .R<VAL 17>
-Created a new atom named: HD1 within residue: .R<HIE 189>
-Creating new UNIT for residue: NMA sequence: 225
-One sided connection. Residue:  missing connect0 atom.
-Created a new atom named: N within residue: .R<NMA 225>
+   At this point you will see a bunch of error messages pop up!
 
-...
-```
+    ```
+    Loading PDB file: ./protein_name_maestro.pdb
+    Unknown residue: NMA   number: 209   type: Terminal/last
+    ..relaxing end constraints to try for a dbase match
+      -no luck
+    Unknown residue: 99B   number: 210   type: Terminal/beginning
+    ..relaxing end constraints to try for a dbase match
+      -no luck
+    Created a new atom named: H within residue: .R<ACE 16>
+    Created a new atom named: H1 within residue: .R<VAL 17>
+    Created a new atom named: HD1 within residue: .R<HIE 189>
+    Creating new UNIT for residue: NMA sequence: 225
+    One sided connection. Residue:  missing connect0 atom.
+    Created a new atom named: N within residue: .R<NMA 225>
 
-These errors are popping up because the force field “ff14SB” does not contain types for several of these molecules.
+    ...
+    ```
 
-There are three classes of errors here:
-1) AMBER has a built-in forcefield for proteins (and a few other molecules) called FF14SB. This expects each protein atom to have a residue and atom name which perfectly matches what it expects. However, Maestro has different names for a few of these.
-2) We capped the termini of the protein so it wouldn't have charged groups hanging out at the beginning and end of the amino acid chain. While real proteins do have these charged groups hanging out at their N- and C-termini, we're missing amino acids from the beginning and end, so there shouldn't really be a charge there. We use "caps" to add a small, neutral group to the termini of the chains to prevent there from being a charge. This is important, because +1 and -1 charges make a big difference on an atomic scale.
-3) We have this non-protein molecule (the ligand) in the mix. AMBER has never seen this thing before (it's not in FF14SB), so it has no clue how to parameterize it. We'll have to determine the charges on these atoms (because that's what will determine most of its interactions), and then we can use generic parameters for the bonds (the Generalized Amber Force Field, or GAFF).
+    There are three classes of errors here:
+      1. AMBER has a built-in forcefield for proteins (and a few other molecules)
+      called FF14SB. tleap expects each protein atom to have a residue and atom
+      name which perfectly matches what is given in FF14SB. However, Maestro has
+      different names for some residues.
+      2. We capped the termini of the protein so it wouldn't have charged groups
+      hanging out at the beginning and end of the amino acid chain. While real
+      proteins do have these charged groups hanging out at their N- and
+      C-termini, we're missing amino acids from the beginning and end, so there
+      shouldn't really be a charge there. We use "caps" to add a small, neutral
+      group to the termini of the chains to prevent there from being a charge.
+      This is important, because +1 and -1 charges make a big difference on an
+      atomic scale.
+      3. We have this non-protein molecule (the ligand) in the mix. AMBER has
+      never seen this thing before (it's not in FF14SB), so it has no clue how
+      to parameterize it. We'll have to determine the charges on these atoms
+      (because that's what will determine most of its interactions), and then we
+      can use generic parameters for the bonds (the Generalized Amber Force
+      Field, or GAFF).
 
-At this point, let's exit out of tleap to resolve these problems. We will return later to try to setup the simulation once things are resolved.
+   Let's exit out of tleap to resolve these problems. We will return later to
+   try to setup the simulation once things are resolved. In the tleap terminal,
+   type `quit`.
 
-In the tleap terminal, type `quit`.
+3.  **First, the capping groups.** Open the PDB file in a text editor. The caps
+    are the first and last "residues" in the protein. They're not really
+    residues/amino acids, just little groups that were stuck on the ends, but PDB
+    files require everything to have a residue number. It's a real pain in the
+    neck to rename all the atoms in a capping group, so let's not. tleap is
+    clever and will reconstruct any atoms that it knows should be there, so let's
+    just leave in the important atoms from each cap and let tleap do the rest.
+    * In the ACE ("acetyl") cap, delete all the atoms except the ones named "C",
+      "O", and "CH3".
+    * In Val17, delete H1 if it's there
+    * Then, scroll down to the end of the chain to NMA ("N-methyl amide").
+      Change "CA" to "CH3" (delete a space afterwards to make the columns line up.
+    * Then delete all the NMA atoms except "N" and "CH3".
+    * Also, FF14SB calls it NME instead of NMA, so change that too.
+    * After the end of the protein, the next entry is the ligand. The residue
+      name should correspond with the name you wrote down from Maestro. If your
+      ligand has a "CL" atom, you will need to rename it to "Cl" (change the L
+      to lowercase).
+    * Save the current file with a new name, replacing `_maestro.pdb` with `_fixedCaps.pdb`.
 
-12. **First, the capping groups.** Open the PDB file in a text editor. The caps are the first and last "residues" in the protein. They're not really residues/amino acids, just little groups that were stuck on the ends, but PDB files require everything to have a residue number. It's a real pain in the neck to rename all the atoms in a capping group, so let's not. Tleap is clever and will reconstruct any atoms that it knows should be there, so let's just leave in the important atoms from each cap and let tleap do the rest.
-  * In the ACE ("acetyl") cap, delete all the atoms except the ones named "C", "O", and "CH3".
-  * In Val17, delete H1 if it's there
-  * Then, scroll down to the end of the chain to NMA ("N-methyl amide"). Change "CA" to "CH3" (delete a space afterwards to make the columns line up.
-  * Then delete all the NMA atoms except "N" and "CH3".
-  * Also, FF14SB calls it NME instead of NMA, so change that too.
-  * After the end of the protein, the next entry is the ligand. The residue name should correspond with the name you wrote down from Maestro. If your ligand has a "CL" atom, you will need to rename it to "Cl" (change the L to lowercase).
-  * Save the current file with a new name, replacing "_maestro" with "_fixedCaps".
+{% include image.html file="/system-prep/hisProtNames.png" alt="HIS Protonation Names"
+caption="Scheme 1. The Amber residue naming convention for the various histidine connectivities."
+width=60 %}
 
-13. **Now let's take care of the histidines.** A histidine sidechain can have three protonation states. Maestro already did the calculation to figure out where the hydrogen on each histidine sidechain should be, but it didn't name them in the way that AMBER/FF14SB wants. We'll need to look at each one by eye. If you closed the window already, reopen your final structure in Maestro.
+{:start="4"}
+4. **Now let's take care of the histidines.** A histidine sidechain can have
+   three protonation states. Maestro already did the calculation to figure out
+   where the hydrogen on each histidine sidechain should be, but it didn't name
+   them in the way that AMBER/FF14SB wants. We'll need to look at each one by eye.
+   If you closed the window already, reopen your final structure in Maestro.
 
-{% include image.html file="/system-prep/hisProtNames.png" alt="HIS Protonation Names" caption="Scheme 1. The Amber residue naming convention for the various histidine connectivities." max-width=500 %}
-
-
-Our HSP90 system has four histidines. Visually inspect each and compare with Scheme 1 to determine what the name of each histidine should be. To center the view on a specific histidine, middle click on its one letter code in the sequence viewer pane. Then go to the appropriate atoms in your PDB text file and change the "HIS" label to what it should be ("HID", "HIE", or "HIP").
+   Our HSP90 system has four histidines. Visually inspect each and compare with
+   Scheme 1 to determine what the name of each histidine should be. To center
+   the view on a specific histidine, middle click on its one letter code in the
+   Sequence Viewer pane. Then go to the appropriate atoms in your PDB text file
+   and change the "HIS" label to what it should be ("HID", "HIE", or "HIP").
 
 {% include note.html content="How much easier would this be if you could write a script to do this automatically?!?" %}
 
+{:start="5"}
+5. When done, save the coordinates to a new PDB file with `_fixedCaps.pdb`
+   replaced by `fixedCapsHises.pdb`.
 
-When done, save the coordinates to a new PDB file with "fixedCaps" replaced by "fixedCapsHises".
+### Antechamber
+**Singling out the ligand for special treatment** The next step is to prepare
+the ligand for simulation. Here we use the AMBER utility "antechamber" to run
+an AM1-BCC semi-empirical quantum mechanics calculation to determine partial
+charges.
 
-14. **Singling out the ligand for special treatment** The next step is to prepare the ligand for simulation. Here we use the AMBER utility "antechamber" to run an AM1-BCC semi-empirical quantum mechanics calculation to determine partial charges. The ligand used in this example is "e4d.pdb", but yours will have a different name.
+{:start="6"}
+6. Going back to `${LIGID}.mol2` which we saved from Maestro. Recall, does your
+   ligand have a net charge? This is important! Change the "-nc" argument below
+   to match.
 
-Does your ligand have a net charge? This is imporant! Change the "-nc" argument below to match.
+   `antechamber -i ligand_name.mol2 -fi mol2 -o ligand_name.in -fo prepi -c bcc -nc ##`
 
+   In English, these arguments mean:
 
-With the ligand pdb, we are now ready to run the calculation
-```antechamber -i ligand_name.mol2 -fi mol2 -o ligand_name.in -fo prepi -c bcc -nc ##```
+   ```
+   -i    input file
+   -fi   input format
+   -o    output file
+   -fo   output format
+   -c    calculation type here AM1-BCC
+   -nc   net charge (the charge you wrote down for your ligand)
+   ```
 
-In english, these arguments mean:
+7. Once the program completes, execute the following command to parse the prepi
+   file to generate a frcmod.
 
-```
--i    input file
--fi   input format
--o    output file
--fo   output format
--c    calculation type here AM1-BCC
--nc   net charge (the charge you wrote down for your ligand)
-```
+   `parmchk -i ligand_name.in -o ligand_name.frcmod -f prepi -a Y`
 
-Once the program completes, execute the following command to parse the prepi file to generate a frcmod.
-
-```
-parmchk -i ligand_name.in -o ligand_name.frcmod -f prepi -a Y
-```
-
-A frcmod file is an Amber forcefield supplementary file defining the various parameters. It’s just a normal text file, try to open it with your favorite text editor (`gedit ligand_name.frcmod`). We will need the e4d.in and e4d.frcmod files in the next step.
-
-
-# Molecular Dynamics with pmemd.cuda
-
-14. At this point, we should have resolved the previously encountered issues. Let’s try running everything through tleap again.
-
-`tleap`
-
-Comments are shown after the !, do not type this.
-```
-source leaprc.protein.ff14SB
-source leaprc.gaff        ! needed for ligand parms
-source leaprc.water.tip4pew                     ! needed for water params
-loadamberprep ligand_name.in      ! from antechamber
-loadamberparams ligand_name.frcmod    ! also from antechamber
-pdb=loadpdb protein_name_fixedCapsHises.pdb
-```
-
-At this point, the pdb should load without any errors and tleap should add in any extra necessary atoms for you. **Have your mentor ensure that the above steps loaded the protein correctly.** If there are no issues, please proceed with the following.
-
-First, we determine if the system has a net charge, and how many ions we'll need to counterbalance it. In tleap type:
-
-`charge pdb`
-
-This command will tell you the net charge of the system. To simulate being in cytoplasm, we will add some ions (cells are kinda salty). These atoms will be Na+ and Cl-. Add 50 or 51 ions to neutralize your system. For example, if your system has a net charge of -3, add 27 Na ions and 24 Cl- ions.
-
-```
-  solvateBox pdb TIP4PEWBOX 10    ! solvate with 10 A buffer
-  addions2 pdb Na+ ##     ! How many positive charges should you add? I had to add 17 (see above)
-  addions2 pdb Cl- ##     ! How many negative charges should you add? I had to add 14 (see above)
-```
-Check your ion math by making sure the resulting charge is 0. Again, type in tleap:
-```
-  charge pdb
-```
-
-If it's 0, then continue on.
+   A frcmod file is an Amber forcefield supplementary file defining the various
+   parameters. It’s just a normal text file, try to open it with your favorite
+   text editor (`gedit ${LIGID}.frcmod`). We will need the `${LIGID}.in` and
+   `${LIGID}.frcmod` files in the next step.
 
 
-```
-  saveamberparm pdb protein_name.prmtop protein_name.inpcrd
-  savepdb pdb protein_name_leap.pdb
-  quit
-```
+### Parameterizing and Solvating
 
-15. We are now ready to run the MD simulation. The Amaro group has developed a set of default simulation parameters which we will be using. These can be found in the folder with your protein.
+1. At this point, we should have resolved the previously encountered issues.
+    Let’s try running everything through tleap again. Run `tleap` and execute
+    the following. Comments are shown after the '!', do not type this.
+    ```
+    source leaprc.protein.ff14SB
+    source leaprc.gaff                  ! needed for ligand params
+    source leaprc.water.tip4pew         ! needed for water params
+    loadamberprep ${BCCID}.in           ! from antechamber
+    loadamberparams ${BCCID}.frcmod     ! also from antechamber
+    pdb=loadpdb ${BCCID}_fixedCapsHises.pdb
+    ```
+
+    At this point, the pdb should load without any errors and tleap should add
+    in any extra necessary atoms for you.
+
+    **Have your mentor ensure that the above steps loaded the protein correctly.**
+
+2. First, we determine if the system has a net charge, and how many ions we'll
+   need to counterbalance it. In tleap type:
+
+   `charge pdb`
+
+   This command will tell you the net charge of the system. To simulate being in
+   the cytoplasm, we will add some ions (cells are kinda salty). These atoms
+   will be Na+ and Cl-. Add around 40 ions to neutralize your system. For
+   example, if your system has a net charge of -7, add 23 Na+ ions and 16 Cl- ions.
+
+   ```
+   solvateBox pdb TIP4PEWBOX 10    ! solvate with 10 A buffer
+   addions2 pdb Na+ ##     ! How many positive charges should you add?
+   addions2 pdb Cl- ##     ! How many negative charges should you add?
+   ```
+
+3. Check your ion math by making sure the resulting charge is 0. Again, type in
+   tleap `charge pdb`. If it's 0, or very close, then continue on.
 
 
-19. Locate the files protein_name.inpcrd and protein_name.prmtop which were previously generated by tleap and copy them into the "md" directory. **Make sure you are working in a subdirectory of /scratch/your username/.** We are now ready to run molecular dynamics. We have included a convenience script which will execute pmemd.cuda for each of the inputs.
-  `./runme.sh`
+4. Save the solvated and parameterized system by executing the following.
+   ```
+   saveamberparm pdb ${BCCID}.prmtop ${BCCID}.inpcrd
+   savepdb pdb ${BCCID}_formd.pdb
+   quit
+   ```
 
-{% include warning.html content='"CUDA" is the interface to running calculations on graphics cards. Since your machine only contains one high-performance graphics card, you will only be able to run one simulation at a time.' %}
+## Running Molecular Dynamics
+We are now ready to run the MD simulation. The Amaro group has developed a
+set of default simulation parameters which we will be using. These can be
+found in the folder with your protein.
 
-You can watch the progress of the calculations by executing this command which will write out the contents of the mdinfo file every 2 seconds.
-  `watch -n 2 cat mdinfo`
+1. Locate the files `${BCCID}.inpcrd` and `${BCCID}.prmtop` which were
+   previously generated by tleap and copy them into each `md` directory. **Make
+   sure you are working in a subdirectory of /scratch/your username/.** We are
+   now ready to run molecular dynamics. We have included a convenience script
+   which will execute `pmemd` for each of the inputs.
 
-Use `Ctrl-C` to exit out of `watch` when you are done.
+   `./runme.sh`
+
+   You can watch the progress of the calculations by executing this command
+   which will write out the contents of the mdinfo file every 2 seconds.
+
+   `watch -n 2 cat mdinfo`
+
+   Use `Ctrl-C` to exit out of `watch` when you are done.
+
+{% include warning.html content='"CUDA" is the interface to running calculations
+on graphics cards. Since your machine only contains one high-performance
+graphics card, you will only be able to run one simulation at a time.' %}
