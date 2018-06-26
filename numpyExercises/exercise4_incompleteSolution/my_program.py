@@ -5,7 +5,7 @@ my_data = numpy.genfromtxt('NBA_attendance_price.csv', delimiter = ',')
 
 print my_data
 
-#First take a moment to appreciate how irritating it would be to work with data like that all day. "nan" in computerspeak means "not a number", which is how numpy sees the team names and the column headers. Now comment out that print statement and uncomment the next one.
+#First take a moment to appreciate how tough it would be to work with data like that all day. "nan" in computerspeak means "not a number", which is how numpy sees the team names and the column headers. Now comment out that print statement and uncomment the next one.
 
 my_data = numpy.genfromtxt('NBA_attendance_price.csv', 
                            delimiter = ',', 
