@@ -16,5 +16,7 @@ topnav_dropdowns:
       folderitems:
         - title: System Preparation
           url: /system-prep/
+        - title: RMSD/RMSF Analysis
+          url: /rmsd-rmsf/
         - title: POVME Analysis
           url: /povme/
