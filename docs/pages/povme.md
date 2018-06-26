@@ -34,11 +34,11 @@ The best way to learn about POVME3.0 is to first learn about POVME2.0. Read thro
 ## Today’s projects
 
 We’ll be a bit busy, so let’s get moving. Today, we’ll
-Set up POVME and its VMD plugin
-Run POVME on the binding pocket in our toy system the old-fashioned way
-Do more complex post-analysis on these POVME results
-Analyze the same binding pocket using a ligand-based pocket-definition algorithm, and look into chemical colors
-Run an advanced POVME analysis workflow on multiple trajectories of the same protein bound to different ligands
+- Set up POVME and its VMD plugin
+- Run POVME on the binding pocket in our toy system the old-fashioned way
+- Do more complex post-analysis on these POVME results
+- Analyze the same binding pocket using a ligand-based pocket-definition algorithm, and look into chemical colors
+- Run an advanced POVME analysis workflow on multiple trajectories of the same protein bound to different ligands
 
 1. **Set up POVME and its VMD plugin
 
@@ -101,39 +101,35 @@ A Data Explorer (DX) file doesn’t contain atoms - It instead describes the den
 
 To draw an isosurface, go to Graphics -> Representations, and under Selected Molecule go to “volumetric_density.dx”. Ensure that “Drawing Method” for this molecule is set to “Isosurface”, and change the “Draw” option to “Wireframe”. In the VMD Main window, turn off the volume_trajectory.pdb depiction by double-clicking the “D” next to it. Now you should see a white wireframe drawn around the regions of space that are part of your pocket at least 50% of the time, corresponding to an isovalue of 0.5.
 
-Before you try it, try to predict the following: If you change the isovalue to 0.2, will the isosurface (pocket shape) expand or contract? 
+Before you try it, try to predict the following: If you change the isovalue to 0.2, **will the isosurface (pocket shape) expand or contract? 
 
 
-Why?
-
-
-
-Try it. Were you right?
+**Why?
 
 
 
-Once you’re comfortable with the concept of averages and isosurfaces, let’s tinker around with seed regions. We’ll do that by removing the seed region (so that the entire inclusion region becomes the seed) and re-running the analysis
+**Try it. Were you right?
 
 
-In the VMD Main window, double click the “T” column next to our original protein trajectory (not the pocket trajectory - Just the protein!) to make it “top”
+
+- Once you’re comfortable with the concept of averages and isosurfaces, let’s tinker around with seed regions. We’ll do that by removing the seed region (so that the entire inclusion region becomes the seed) and re-running the analysis
+
+- In the VMD Main window, double click the “T” column next to our original protein trajectory (not the pocket trajectory - Just the protein!) to make it “top”
  
-Delete the seed region in the POVME2 window. 
+- Delete the seed region in the POVME2 window. 
 
-To avoid overwriting our original files, go to Settings -> Output… and change “Output Filename Prefix” to “./noSeed_”, then hit OK
+- To avoid overwriting our original files, go to Settings -> Output… and change “Output Filename Prefix” to “./noSeed_”, then hit OK
 
-In the POVME2 window, press “Run POVME2”
+- In the POVME2 window, press `Run POVME2`
  
-When this is complete, load up noSeed_volume_trajectory.pdb and compare the two volume trajectories (maybe draw one of them in VDW with a sphere scale of 0.4 and the transparent material, and the other in VDW with a sphere scale of 0.3 and the Coloring Method ColorID with a value of “10 cyan”)
+- When this is complete, load up noSeed_volume_trajectory.pdb and compare the two volume trajectories (maybe draw one of them in VDW with a sphere scale of 0.4 and the transparent material, and the other in VDW with a sphere scale of 0.3 and the Coloring Method ColorID with a value of “10 cyan”)
 
-How do these two pocket trajectories differ?
-
-
+**How do these two pocket trajectories differ?
 
 
 The pocket-growing algorithm requires a certain number of “neighbors” before the pocket can grow out to a new point (default 3 neighbors). This prevents it from going way down into little crevices, and so the pocket only fills in places where a ligand atom might reasonably fit. When we don’t use a seed region, we don’t use these growing rules. 
 
-Take a screenshot of a place where the pockets differ and put it in your notes. Be sure to label which representation is which mode.
-
+**Take a screenshot of a place where the pockets differ and put it in your notes. Be sure to label which representation is which mode.
 
 
 Based on the user’s discretion and the nature of the pocket, we can forego using a seed region altogether. In essence, when we don’t define a seed region, the entire inclusion region becomes the seed. This means that we’ll occasionally capture little packing defects in the protein and little random crevices as part of the pocket. But in some cases, there can be proteins with segmented, tight pockets or other factors that make abandoning the seed region worthwhile.
@@ -144,7 +140,7 @@ In this case, I’d say that the pocket is open enough to justify using the seed
 
 There’s no GUI for this part, so hold on to your hats and work slowly and carefully. 
 
-```Exit VMD. ```
+**Exit VMD. 
 
 When POVME ran in VMD, it was actually spewing files all over the place. Most of them were stored in a mean little folder called “frameInfo”, which is packed to the gills with all sorts of information about each frame. The post-analysis tools will be interested in these.
 
