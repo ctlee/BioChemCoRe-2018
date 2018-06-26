@@ -52,7 +52,9 @@ menu main on
 vmd_install_extension povme2 povme2_tk_cb "Analysis/POVME2"
 set ::povme2::povme2_directory "$::env(POVME_PATH)/POVME/POVME3.py"
 ```
-Now open VMD and go to Extensions -> Analysis -> POVME2. **Ensure that this opens.**
+Now open VMD and go to `Extensions -> Analysis -> POVME2`.
+
+**Ensure that this opens.**
 
 **2. Run POVME on the binding pocket the old-fashioned way**
 
@@ -64,7 +66,7 @@ Load the trajectory into VMD. Be sure to open VMD in your /scratch directory.
 
 Usually, you’d have to align the trajectory, however I’ve already done it for you this time.
 
-Open the Povme2 plugin by going to Extensions -> Analysis -> POVME2
+Open the Povme2 plugin by going to `Extensions -> Analysis -> POVME2`
 
 Under “Select molecule”, choose the protein.
 
