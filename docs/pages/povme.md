@@ -40,7 +40,7 @@ We’ll be a bit busy, so let’s get moving. Today, we’ll
 - Analyze the same binding pocket using a ligand-based pocket-definition algorithm, and look into chemical colors
 - Run an advanced POVME analysis workflow on multiple trajectories of the same protein bound to different ligands
 
-1. **Set up POVME and its VMD plugin
+**1. Set up POVME and its VMD plugin**
 
 The POVME VMD plugin is best for processing small cases (< 1000 frames), but I still use it in larger cases to define the binding pocket region.  Installing VMD plugins is a pain in the neck, but thankfully I’ve prepared the important file for you.
 
@@ -52,9 +52,9 @@ menu main on
 vmd_install_extension povme2 povme2_tk_cb "Analysis/POVME2"
 set ::povme2::povme2_directory "$::env(POVME_PATH)/POVME/POVME3.py"
 ```
-Now open VMD and go to Extensions -> Analysis -> POVME2. **Ensure that this opens.
+Now open VMD and go to Extensions -> Analysis -> POVME2. **Ensure that this opens.**
 
-2. **Run POVME on the binding pocket the old-fashioned way
+**2. Run POVME on the binding pocket the old-fashioned way**
 
 We’re going to look at a drug-binding pocket on Heat Shock Protein 90 (HSP90). You can find this file at /home/sa19/2VCI_demo_clean.pdb
 
@@ -101,14 +101,14 @@ A Data Explorer (DX) file doesn’t contain atoms - It instead describes the den
 
 To draw an isosurface, go to Graphics -> Representations, and under Selected Molecule go to “volumetric_density.dx”. Ensure that “Drawing Method” for this molecule is set to “Isosurface”, and change the “Draw” option to “Wireframe”. In the VMD Main window, turn off the volume_trajectory.pdb depiction by double-clicking the “D” next to it. Now you should see a white wireframe drawn around the regions of space that are part of your pocket at least 50% of the time, corresponding to an isovalue of 0.5.
 
-Before you try it, try to predict the following: If you change the isovalue to 0.2, **will the isosurface (pocket shape) expand or contract? 
+Before you try it, try to predict the following: If you change the isovalue to 0.2, **will the isosurface (pocket shape) expand or contract?** 
 
 
-**Why?
+**Why?**
 
 
 
-**Try it. Were you right?
+**Try it. Were you right?**
 
 
 
@@ -124,23 +124,23 @@ Before you try it, try to predict the following: If you change the isovalue to 0
  
 - When this is complete, load up noSeed_volume_trajectory.pdb and compare the two volume trajectories (maybe draw one of them in VDW with a sphere scale of 0.4 and the transparent material, and the other in VDW with a sphere scale of 0.3 and the Coloring Method ColorID with a value of “10 cyan”)
 
-**How do these two pocket trajectories differ?
+**How do these two pocket trajectories differ?**
 
 
 The pocket-growing algorithm requires a certain number of “neighbors” before the pocket can grow out to a new point (default 3 neighbors). This prevents it from going way down into little crevices, and so the pocket only fills in places where a ligand atom might reasonably fit. When we don’t use a seed region, we don’t use these growing rules. 
 
-**Take a screenshot of a place where the pockets differ and put it in your notes. Be sure to label which representation is which mode.
+**Take a screenshot of a place where the pockets differ and put it in your notes. Be sure to label which representation is which mode.**
 
 
 Based on the user’s discretion and the nature of the pocket, we can forego using a seed region altogether. In essence, when we don’t define a seed region, the entire inclusion region becomes the seed. This means that we’ll occasionally capture little packing defects in the protein and little random crevices as part of the pocket. But in some cases, there can be proteins with segmented, tight pockets or other factors that make abandoning the seed region worthwhile.
 
 In this case, I’d say that the pocket is open enough to justify using the seed regions.
 
-3. **Do more complex post-analysis on these results
+3. **Do more complex post-analysis on these results**
 
 There’s no GUI for this part, so hold on to your hats and work slowly and carefully. 
 
-**Exit VMD. 
+**Exit VMD.** 
 
 When POVME ran in VMD, it was actually spewing files all over the place. Most of them were stored in a mean little folder called “frameInfo”, which is packed to the gills with all sorts of information about each frame. The post-analysis tools will be interested in these.
 
