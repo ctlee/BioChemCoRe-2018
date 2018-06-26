@@ -40,7 +40,7 @@ Do more complex post-analysis on these POVME results
 Analyze the same binding pocket using a ligand-based pocket-definition algorithm, and look into chemical colors
 Run an advanced POVME analysis workflow on multiple trajectories of the same protein bound to different ligands
 
-**1. Set up POVME and its VMD plugin
+1. **Set up POVME and its VMD plugin
 
 The POVME VMD plugin is best for processing small cases (< 1000 frames), but I still use it in larger cases to define the binding pocket region.  Installing VMD plugins is a pain in the neck, but thankfully I’ve prepared the important file for you.
 
@@ -54,7 +54,7 @@ set ::povme2::povme2_directory "$::env(POVME_PATH)/POVME/POVME3.py"
 ```
 Now open VMD and go to Extensions -> Analysis -> POVME2. **Ensure that this opens.
 
-**2. Run POVME on the binding pocket the old-fashioned way
+2. **Run POVME on the binding pocket the old-fashioned way
 
 We’re going to look at a drug-binding pocket on Heat Shock Protein 90 (HSP90). You can find this file at /home/sa19/2VCI_demo_clean.pdb
 
@@ -82,7 +82,7 @@ Because the plugin is still under development, we need to do one more technical 
 
 Also, for the sake of speed, go to Settings -> Output… and change the number of processors to however many you can spare (max 8).
 
-Now hit “Run POVME”.  This should take a few minutes. 
+Now hit `Run POVME`.  This should take a few minutes. 
 
 When it finishes (there will be a bunch of error messages in the terminal which I should fix), you can load the volume trajectory file into VMD (in the VMD Main window, go to New Molecule, and load volume_trajectory.pdb), which is a separate object showing the pocket shape through the simulation. 
 
@@ -140,7 +140,7 @@ Based on the user’s discretion and the nature of the pocket, we can forego usi
 
 In this case, I’d say that the pocket is open enough to justify using the seed regions.
 
-3. Do more complex post-analysis on these results
+3. **Do more complex post-analysis on these results
 
 There’s no GUI for this part, so hold on to your hats and work slowly and carefully. 
 
@@ -191,6 +191,7 @@ Now, let’s cluster our trajectories. Run:
 The command is big and ugly, again because POVME isn’t properly installed, so we have to be specific about where our files are.
 
 The help message reads:
+
 ```
 usage: cluster.py [-h] [-m M] [-t [T]] [-T [T]] [-i [I]] [--kmeans] [-n [N]]
                   [-N [N]] [-o [O]] [-a]
