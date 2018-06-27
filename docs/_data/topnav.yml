@@ -18,5 +18,7 @@ topnav_dropdowns:
           url: /system-prep/
         - title: RMSD/RMSF Analysis
           url: /rmsd-rmsf/
+        - title: Distance Analysis
+          url: /distance-analysis/
         - title: POVME Analysis
           url: /povme/
