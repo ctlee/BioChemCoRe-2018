@@ -138,82 +138,21 @@ Based on the user’s discretion and the nature of the pocket, we can forego usi
 
 In this case, I’d say that the pocket is open enough to justify using the seed regions.
 
-3. **Do more complex post-analysis on these results**
-
-There’s no GUI for this part, so hold on to your hats and work slowly and carefully. 
-
 **Exit VMD.** 
 
 When POVME ran in VMD, it was actually spewing files all over the place. Most of them were stored in a mean little folder called “frameInfo”, which is packed to the gills with all sorts of information about each frame. The post-analysis tools will be interested in these.
 
 Run `ls frameInfo` and appreciate how much junk is in there.
 
-We often perform clustering with a similarity matrix. How do we determine how “similar” two pockets are? In the case of POVME post-analysis, we choose to use the “Tanimoto similarity metric”. Since our pocket points are defined on a regular grid, any two frames from the same analysis will have some points in common. The “Tanimoto Similarity” between two frames is defined as the number of points they have in common (their “intersection”) divided by the number of points in either of them (their “union”). Therefore, every pair of frames can have a maximum similarity of 1 (they are identical) and a minimum similarity of 0 (they have no regions in common).
 
-To calculate this similarity matrix, we use a script called “binding_site_overlap.py”, which is in the POVME directory. You’ll find it in “/home/<your keck2 username>/POVME/clustering/binding_site_overlap.py”. The package structure in POVME is in the middle of a shakeup, so just like above, we’ll need to precede our POVME python scripts with “/home/<your keck2 username>/POVME/arun”
+## Running POVME on the command line for multiple systems
 
-Print the help message: Run 
+Using the POVME VMD plugin, we were able to calculate the pocket volume for one trajectory. However, this is not practical 
+if we want to calculate pocket volumes for many systems. Instead we will run povme from the command line.
 
-```/home/<your keck2 username>/POVME/arun python /home/<your keck2 username>/POVME/clustering/binding_site_overlap.py -h```
+There’s no GUI for this part, so hold on to your hats and work slowly and carefully. 
 
-On a better day, we’d just run `python binding_site_overlap.py -h`, but:
-We have to do the whole arun thing because POVME is downloaded, but not installed, so all of its dependencies aren’t in the normal system locations. The “arun” script fixes this for the current command.
-We put the whole path on binding_site_overlap.py because it is not in our current directory, and it’s not in a normal system location, so we have to tell linux exactly where it is.
-Now, let’s put together our actual run command:
-I need to put “-f” and then all of the pocket shape filenames. These are in frameInfo, and they look like 
-```
-frameInfo/frame_1.npy, 
-frameInfo/frame_2.npy 
-… 
-“frameInfo/frame_100.npy
-```
-So I don’t have to write out 100 filenames, I’m going to use “wildcards” to describe all of the frame files. 
-However, there are some other files that will prevent me from just saying `frameInfo/frame_*.npy` (this would, for example, also pick up “frameInfo/frame_2_aromatic.npy”, which I do not want.)
-A different wildcard is `?` - This can only match one character, as opposed to `*` which can match multiple. So a simple pattern that would only grab the files I want is 
-“frameInfo/frame_?.npy” and “frameInfo/frame_??.npy” and “frameInfo/frame_???.npy” 
-Except that, here, I don’t have to put the “and” - the commandline interpreter will just expand these in place into all of the filenames that match those patterns.
-We don’t want to run with color in this tutorial, so we’re not going to use the -c flag.
-We don’t need csv files, so I’m not going to use the --csv option
-So my final run command is 
-```
-/home/<your keck2 username>/POVME/arun python /home/<your keck2 username>/POVME/clustering/binding_site_overlap.py -f frameInfo/frame_?.npy frameInfo/frame_??.npy frameInfo/frame_???.npy
-```
-Run that
 
-Now run `ls -lrth`. You should see three new files in the directory.
-binding_site_overlap.py spat out two overlap matrices - Tanimoto (which we will use) and Tversky (which we will not use). Since these matrices are literally just squares of numbers, it also produces a file called indexMapToFrames.csv, which keeps track of which rows correspond to which frame filenames, so we can go recover our frame numbers later on.
-Now, let’s cluster our trajectories. Run: 
 
-`/home/<your keck2 username>/POVME/arun python /home/<your keck2 username>/POVME/clustering/cluster.py -h`
 
-The command is big and ugly, again because POVME isn’t properly installed, so we have to be specific about where our files are.
 
-The help message reads:
-
-```
-usage: cluster.py [-h] [-m M] [-t [T]] [-T [T]] [-i [I]] [--kmeans] [-n [N]]
-                  [-N [N]] [-o [O]] [-a]
-
-Cluster POVME pocket volumes.
-
-optional arguments:
-  -h, --help  show this help message and exit
-  -m M        The pocket overlap matrix (generated by binding_site_overlap.py)
-  -t [T]      A mapping between .npy file prefixes and their original pdb
-              file/trajectory, separated by a colon. Can be used repeatedly.
-              Ex: -t 1BYQ:./trajectories/1BYQ.pdb -t
-              1UYF:./trajectories/1UYF.pdb
-  -T [T]      A file containing a series of -t arguments
-  -i [I]      The index file mapping the pocket overlap matrix to frame
-              numbers. Required to return cluster representatives.
-  --kmeans    Use kmeans clustering instead of hierarchical.
-  -n [N]      Manually set number of clusters. Otherwise the Kelley penalty
-              will calculate the optimal number.
-  -N [N]      Set min, min:max, or min:max:skip values for number of clusters
-              that the Kelley penalty can consider.
-  -o [O]      Specify an output prefix.
-  -a          Output all frames into cluster subdirectories (not just cluster
-              reps).
-   ```
-
-As with most programs, we don’t want to use anywhere near all of the possible arguments. We’ll just do a minimal clustering run here, with the command
