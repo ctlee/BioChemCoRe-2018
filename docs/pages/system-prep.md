@@ -382,7 +382,7 @@ charges.
 7. Once the program completes, execute the following command to parse the prepi
    file to generate a frcmod.
 
-   `parmchk -i ligand_name.in -o ligand_name.frcmod -f prepi -a Y`
+   `parmchk2 -i ligand_name.in -o ligand_name.frcmod -f prepi -a Y`
 
    A frcmod file is an Amber forcefield supplementary file defining the various
    parameters. It’s just a normal text file, try to open it with your favorite
