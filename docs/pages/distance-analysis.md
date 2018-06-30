@@ -395,11 +395,13 @@ can choose which methods are simplest for your personal workflow." %}
 
 ### Create the distance_script.sh to perform the distance analysis, compute average and plot the results
 In your personal scratch directory `/scratch/${username}` create a new folder
-called “distance_analysis”, enter into this folder and use a text editor,
+called “distance_analysis”, enter into this folder and create six subfolders, one for each of the 6 HSP90 systems (name them with their BCCID). Enter into the folder of the first system you are analyzing and use a text editor,
 like `gedit`, to create the file `script_distance.sh`:
 ```
 > mkdir distance_analysis
 > cd distance_analysis
+> mkdir 6WCGO BCCID BCCID BCCID BCCID BCCID
+> cd 6WCGO/
 > gedit script_distance.sh
 ```
 
@@ -407,10 +409,10 @@ like `gedit`, to create the file `script_distance.sh`:
 
 2.  Define variables for the name of your topology, trajectory, cpptraj input files and output files:
     ```
-    TOP=/scratch/bcc2018-trajectories/6WCGO/6WCGO.prmtop            # Topology file
-    TRAJ1=/scratch/bcc2018-trajectories/6WCGO/md1/6WCGO-Pro01.nc    # Trajectory1
-    TRAJ2=/scratch/bcc2018-trajectories/6WCGO/md2/6WCGO-Pro01.nc    # Trajectory2
-    TRAJ3=/scratch/bcc2018-trajectories/6WCGO/md3/6WCGO-Pro01.nc    # Trajectory3
+    TOP=/scratch/bcc2018-trajectories/6WCGO/6WCGO.prmtop            # Topology file (put the whole path)
+    TRAJ1=/scratch/bcc2018-trajectories/6WCGO/md1/6WCGO-Pro01.nc    # Trajectory1 (puth the whole path)
+    TRAJ2=/scratch/bcc2018-trajectories/6WCGO/md2/6WCGO-Pro01.nc    # Trajectory2 (puth the whole path
+    TRAJ3=/scratch/bcc2018-trajectories/6WCGO/md3/6WCGO-Pro01.nc    # Trajectory3 (puth the whole path
     INPUT1=cpptraj.distance1.in     # Cpptraj input file for replica 1
     INPUT2=cpptraj.distance2.in     # Cpptraj input file for replica 2
     INPUT3=cpptraj.distance3.in     # Cpptraj input file for replica 3
@@ -459,7 +461,7 @@ like `gedit`, to create the file `script_distance.sh`:
     *distance_analysis1.in*, which begins by reading the trajectory file `$TRAJ`
     located in `../md1/` from frame 1 to the last:
 
-    `trajin ../md1/$TRAJ1 1 last   # Read the trajectory1`
+    `trajin $TRAJ1 1 last        # Read the trajectory1`
 
 6.  Each frame of the trajectory must be aligned to the first frame (i.e.
     RMS-fit to first frame), considering only the heavy atoms (no hydrogens) of
@@ -468,7 +470,7 @@ like `gedit`, to create the file `script_distance.sh`:
     must be specified. For example the mask `:1-210&!@H=`  says that all the
     residue atoms from 1 to 210 (`:1-210`) except for the hydrogens (`!@H=`) are considered.
 
-    `rms first :1-210&!@H=   # RMS-fit to frame 1`
+    `rms first :1-210&!@H=       # RMS-fit to frame 1`
 
 7.  The distance analysis is performed by cpptraj through the command `distance`.
     The command `distance` calculates the distance between the center of mass of
@@ -516,7 +518,7 @@ width=60 %}
     ```
     # Cpptraj input file for replica 2 #
     cat << EOF > $INPUT2
-    trajin ../md2/$TRAJ2 1 last                             # Read the trajectory2
+    trajin $TRAJ2 1 last                                    # Read the trajectory2
     rms first :1-210&!@H=                                   # RMS-fit to frame 1
     distance $DIST1_2 :169@OG1 :210@N2 out $OUTPUT2
     distance $DIST2_2 :78@OD2 :210@N5 out $OUTPUT2
@@ -532,7 +534,7 @@ width=60 %}
     ```
     # Cpptraj input file for replica 3 #
     cat << EOF > $INPUT3
-    trajin ../md3/$TRAJ3 1 last                             # Read the trajectory3
+    trajin $TRAJ3 1 last                                    # Read the trajectory3
     rms first :1-210&!@H=                                   # RMS-fit to frame 1
     distance $DIST1_3 :169@OG1 :210@N2 out $OUTPUT3
     distance $DIST2_3 :78@OD2 :210@N5 out $OUTPUT3
@@ -548,9 +550,10 @@ width=60 %}
     input files just generated, printing a log file for each analysis:
     ```
     # Execute cpptraj distance analysis #
-    cpptraj ../$TOP $INPUT1 > log1
-    cpptraj ../$TOP $INPUT2 > log2
-    cpptraj ../$TOP $INPUT3 > log3
+    module load amber/18            # load amber program (and so cpptraj)
+    cpptraj $TOP $INPUT1 > log1
+    cpptraj $TOP $INPUT2 > log2
+    cpptraj $TOP $INPUT3 > log3
     ```
 
 12. Leave a blank line. Finally, we want to **plot all the distances** of all
@@ -588,6 +591,7 @@ width=60 %}
     set ytics 0, 0.5, 8
     set border lw 2
     set lmargin 11
+    set rmargin 4
     set xlabel offset 0,-1.0 'frame #' font ", 20"
     set ylabel offset -1.0,0 'distance (Å)' font ", 20"
 
@@ -613,6 +617,7 @@ width=60 %}
     set ytics 0, 0.5, 8
     set border lw 2
     set lmargin 11
+    set rmargin 4
     set xlabel offset 0,-1.0 'frame #' font ", 20"
     set ylabel offset -1.0,0 'distance (Å)' font ", 20"
 
@@ -638,6 +643,7 @@ width=60 %}
     set ytics 0, 0.5, 8
     set border lw 2
     set lmargin 11
+    set rmargin 4
     set xlabel offset 0,-1.0 'frame #' font ", 20"
     set ylabel offset -1.0,0 'distance (Å)' font ", 20"
 
@@ -651,15 +657,15 @@ width=60 %}
 
     To launch gnuplot and plot all the distances for the 3 replicas, insert the following lines in your script:
     ```
-    gnuplot -e "set terminal png size 1920,1080" gnuplot_1.in > 1_distances.png
-    gnuplot -e "set terminal png size 1920,1080" gnuplot_2.in > 2_distances.png
-    gnuplot -e "set terminal png size 1920,1080" gnuplot_3.in > 3_distances.png
+    gnuplot -e "set terminal png size 1920,1080 font ',14' " gnuplot_1.in > 1_distances.png
+    gnuplot -e "set terminal png size 1920,1080 font ',14' " gnuplot_2.in > 2_distances.png
+    gnuplot -e "set terminal png size 1920,1080 font ',14' " gnuplot_3.in > 3_distances.png
     ```
 
 ### Launch the script_distance.sh file to perform the distance analysis and check the results
 1.  Good, you have completed your script! Now save your file `script_distance.sh`
     by clicking on SAVE button and close gedit. On the terminal, in the
-    distance_analysis folder, write the following commands to run the script:
+    distance_analysis/BCCID directory, write the following    commands to run the script:
     ```
     > chmod 777 script_distance.sh
     > ./script_distance.sh
@@ -710,20 +716,20 @@ system prepare a two-column file called ds_ic50.dat:
 
 `> gedit ds_ic50.dat`
 
-In this file, in column 1 insert the s.d. of the most stable conserved distance
-for each system. In the column 2 insert the IC50 of the ligand that has been
-given to you. The file must be in this format:
+In this file, in column 1 insert the IC50 of the ligand that has been
+given to you. In the column 2 insert the s.d. of the most stable conserved distance
+for each system. The file must be in this format:
 
 ```
-0.02  3000  # system 1
-0.01  350000  # system 2
-0.18  6900  # system 3
-0.19  81  # system 4
-0.13  110 # system 5
-0.10  92  # system 6
+3000   0.02    # system 1
+350000 0.01    # system 2
+6900   0.18    # system 3
+81     0.19    # system 4
+110    0.13    # system 5
+92     0.10    # system 6
 ```
 
-Now, with Gnuplot, plot this file to see the correlation between IC50 and the
+Now, with Gnuplot, plot this file to see the correlation between IC50 (using the log scale) and the
 most stable distances for each system. Prepare the gnuplot input file:
 
 `> gedit gnuplot_ds_ic50.in`
@@ -736,7 +742,8 @@ set mytics
 set xtics offset 0,-0.2
 set border lw 3
 set lmargin 16
-set xlabel offset 0,-1.0 'IC 50 (nM)' font ", 20"
+set logscale x
+set xlabel offset 0,-1.0 'log IC50' font ", 20"
 set ylabel offset -2.0,0 'ds of distance(Å)' font ", 20"
 
 plot 'ds_ic50.dat' u 1:2 w p pt 5 lw 10 title ""
@@ -745,7 +752,7 @@ plot 'ds_ic50.dat' u 1:2 w p pt 5 lw 10 title ""
 Save the file and run this command in terminal to plot:
 `> gnuplot -e "set terminal png size 1920,1080" gnuplot_ds_ic50.in > ds_ic50.png`
 
-Is there any correlation between the ds of the selected interaction and the ligand IC50?
+Is there any correlation between the ds of the selected interaction and the ligand IC50? Take note.
 
 
 ## The Full Distance Script
@@ -754,16 +761,16 @@ Here is the full example script for your convenience:
 #!/bin/bash
 
 # Define variables for files #
-TOP=6WCGO.prmtop    # Topology file
-TRAJ1=6WCGO-Pro01.nc  # Trajectory1
-TRAJ2=6WCGO-Pro01.nc          # Trajectory2
-TRAJ3=6WCGO-Pro01.nc          # Trajectory3
-INPUT1=cpptraj.distance1.in # Cpptraj input file for replica 1
-INPUT2=cpptraj.distance2.in # Cpptraj input file for replica 2
-INPUT3=cpptraj.distance3.in # Cpptraj input file for replica 3
-OUTPUT1=1_distances.dat   # For replica 1
-OUTPUT2=2_distances.dat # For replica 2
-OUTPUT3=3_distances.dat # For replica 3
+TOP=/scratch/bcc2018-trajectories/6WCGO/6WCGO.prmtop            # Topology file
+TRAJ1=/scratch/bcc2018-trajectories/6WCGO/md1/6WCGO-Pro01.nc    # Trajectory1
+TRAJ2=/scratch/bcc2018-trajectories/6WCGO/md2/6WCGO-Pro01.nc    # Trajectory2
+TRAJ3=/scratch/bcc2018-trajectories/6WCGO/md3/6WCGO-Pro01.nc    # Trajectory3
+INPUT1=cpptraj.distance1.in     # Cpptraj input file for replica 1
+INPUT2=cpptraj.distance2.in     # Cpptraj input file for replica 2
+INPUT3=cpptraj.distance3.in     # Cpptraj input file for replica 3
+OUTPUT1=1_distances.dat         # For replica 1
+OUTPUT2=2_distances.dat         # For replica 2
+OUTPUT3=3_distances.dat         # For replica 3
 
 # Define variables for replica 1 distances #
 DIST1_1=1-hbond-THR169-LIG
@@ -788,8 +795,8 @@ DIST5_3=3-hydrophobic-TRP147-LIG
 
 # Cpptraj input file for replica 1 #
 cat << EOF > $INPUT1
-trajin ../md1/$TRAJ1 1 last     # Read the trajectory1
-rms first :1-210&!@H=     # RMS-fit to frame 1
+trajin $TRAJ1 1 last                            # Read the trajectory1
+rms first :1-210&!@H=                           # RMS-fit to frame 1
 distance $DIST1_1 :169@OG1 :210@N2 out $OUTPUT1 # Calculate distance DIST1_1 and write it in the file OUTPUT1 (column 2)
 distance $DIST2_1 :78@OD2 :210@N5 out $OUTPUT1  # Calculate distance DIST2_1 and write it in the file OUTPUT1 (column 3)
 distance $DIST3_1 :3645@O :210@N1 out $OUTPUT1  # Calculate distance DIST3_1 and write it in the file OUTPUT1 (column 4)
@@ -800,7 +807,7 @@ EOF
 
 # Cpptraj input file for replica 2 #
 cat << EOF > $INPUT2
-trajin ../md2/$TRAJ2 1 last                             # Read the trajectory2
+trajin $TRAJ2 1 last                                    # Read the trajectory2
 rms first :1-210&!@H=                                   # RMS-fit to frame 1
 distance $DIST1_2 :169@OG1 :210@N2 out $OUTPUT2         # Calculate distance DIST1_2 and write it in the file OUTPUT2 (column 2)
 distance $DIST2_2 :78@OD2 :210@N5 out $OUTPUT2          # Calculate distance DIST2_2 and write it in the file OUTPUT2 (column 3)
@@ -812,7 +819,7 @@ EOF
 
 # Cpptraj input file for replica 3 #
 cat << EOF > $INPUT3
-trajin ../md3/$TRAJ3 1 last                             # Read the trajectory3
+trajin $TRAJ3 1 last                                    # Read the trajectory3
 rms first :1-210&!@H=                                   # RMS-fit to frame 1
 distance $DIST1_3 :169@OG1 :210@N2 out $OUTPUT3         # Calculate distance DIST1_3 and write it in the file OUTPUT3 (column 2)
 distance $DIST2_3 :78@OD2 :210@N5 out $OUTPUT3          # Calculate distance DIST2_3 and write it in the file OUTPUT3 (column 3)
@@ -823,9 +830,10 @@ avg $DIST1_3 $DIST2_3 $DIST3_3 $DIST4_3 $DIST5_3 out 3_avg.dat  # Calculate avg 
 EOF
 
 # Execute cpptraj analysis #
-cpptraj ../$TOP $INPUT1 > log1
-cpptraj ../$TOP $INPUT2 > log2
-cpptraj ../$TOP $INPUT3 > log3
+module load amber/18
+cpptraj $TOP $INPUT1 > log1
+cpptraj $TOP $INPUT2 > log2
+cpptraj $TOP $INPUT3 > log3
 
 # Plot distances replica 1#
 cat << EOF > gnuplot_1.in
