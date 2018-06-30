@@ -400,7 +400,7 @@ like `gedit`, to create the file `script_distance.sh`:
 ```
 > mkdir distance_analysis
 > cd distance_analysis
-> mkdir 6WCGO BCCID BCCID BCCID BCCID BCCID
+> mkdir 6WCGO LLCXM NEQSA OVHRZ TNRT6 VEH1I
 > cd 6WCGO/
 > gedit script_distance.sh
 ```
