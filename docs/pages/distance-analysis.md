@@ -847,6 +847,7 @@ set xtics offset 0,-0.2
 set ytics 0, 0.5, 8
 set border lw 3
 set lmargin 11
+set rmargin 4
 set xlabel offset 0,-1.0 'frame #' font ", 20"
 set ylabel offset -1.0,0 'distance (Å)' font ", 20"
 
@@ -869,6 +870,7 @@ set xtics offset 0,-0.2
 set ytics 0, 0.5, 8
 set border lw 3
 set lmargin 11
+set rmargin 4
 set xlabel offset 0,-1.0 'frame #' font ", 20"
 set ylabel offset -1.0,0 'distance (Å)' font ", 20"
 
@@ -892,6 +894,7 @@ set xtics offset 0,-0.2
 set ytics 0, 0.5, 8
 set border lw 3
 set lmargin 11
+set rmargin 4
 set xlabel offset 0,-1.0 'frame #' font ", 20"
 set ylabel offset -1.0,0 'distance (Å)' font ", 20"
 
@@ -902,7 +905,7 @@ plot '$OUTPUT3' u 1:2 w l lw 3 title '$DIST1_3', \
 '$OUTPUT3' u 1:6 w l lw 3 title '$DIST5_3'
 EOF
 
-gnuplot -e "set terminal png size 1920,1080" gnuplot_1.in > 1_distances.png
-gnuplot -e "set terminal png size 1920,1080" gnuplot_2.in > 2_distances.png
-gnuplot -e "set terminal png size 1920,1080" gnuplot_3.in > 3_distances.png
+gnuplot -e "set terminal png size 1920,1080 font ',14' " gnuplot_1.in > 1_distances.png
+gnuplot -e "set terminal png size 1920,1080 font ',14' " gnuplot_2.in > 2_distances.png
+gnuplot -e "set terminal png size 1920,1080 font ',14' " gnuplot_3.in > 3_distances.png
 ```
