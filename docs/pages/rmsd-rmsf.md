@@ -28,12 +28,12 @@ Let's set up a brand new jupyter notebook for your RMSD & RMSF calculations that
 
 ### Generate the Notebook
 
-1. Navigate to your home directory and start up a jupyter notebook by running the following commands in your terminal: 
+1. Navigate to your scratch directory and start up a jupyter notebook by running the following commands in your terminal: 
 
-```bash
-module load anaconda
-jupyter-notebook
-```
+	```bash
+	module load anaconda
+	jupyter-notebook
+	```
 
 This should launch a browser opening into the Jupyter Notebook interface. The URL will look something like: localhost:8888/tree. This is the working directory. 
 
