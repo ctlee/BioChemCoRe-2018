@@ -6,7 +6,7 @@ toc: true
 summary: "In this analysis tutorial, you will learn how to use AMBER's cpptraj module to calculate the RMSD and RMSF of a system. You will learn the definitions of these terms and when and how to use them in your data analysis. Additionally, you will hone your python skills in generating files, running scripts, extracting data from files and plotting with matplotlib."
 ---
 
-You may now have a trajectory from your protein simulations. In case you don't, you can use the training data sets we have provided for you. 
+You may now have a trajectory from your simulations. In case you don't, you can use the training data sets we have provided for you. 
 
 ## What are RMSD and RMSF? 
 
@@ -49,12 +49,14 @@ This should immediately open up a new 'Untitled' notebook in a new window or tab
 {:start="3"}
 3. To do our analysis, we will need to import some useful (and, hopefully, familar!) python libraries. In the first code block, write and run:
 
+
 	```
 	import numpy as np
 	import mdtraj as md
 	import matplotlib.pyplot as plt
 	%matplotlib inline
 	```
+
 ## Load Training Data
 
 We can't do any analysis unless we've got data to analyze! Your training set data is located in keck2's `/scratch/bcc2018_trajectories/${BCCID}`, where ${BCCID} is the name of the BCCID for your training file. 
@@ -88,7 +90,7 @@ Key in `Shift + Enter` to run this cell, load your trajectories, and define your
 
 The [documentation](http://mdtraj.org/1.6.2/api/generated/mdtraj.rmsd.html) tells you all about what arguments this function takes, and what they each mean. 
 
-You should also obtan the data for your replicate trajectories, traj2 & traj3. 
+You should also obtain the data for your replicate trajectories, traj2 & traj3. 
 
 ### Plot RMSD v Time
 
@@ -129,28 +131,30 @@ Cpptraj requires an executable script and an input file. I'll walk you through h
 
 ### Preparing the Input File
 
+{:start="10"}
 Cpptraj requires an input file that looks like this:
 
 	```
 	trajin ${your_trajectory_file}.nc 
-	atomicfluct out ${output_file_name}.dat @C,CA,N byres
+	atomicfluct out ${output_file_name}.dat byatom
 	```
 
-The variable ${your_trajectory_file} needs to be replaced with the name of your trajectory file, which is probably something like: `filedir+BCCID+'.nc'`. Your ${output_file_name} should be a name of your choice to which you'd like the program to output the data. `@C,CA,N` is the mask selection corresponding to the `protein backbone.` Finally, `byres` means that `cpptraj` will perform this calculation and output the data to the .dat file by residue number. 
+The variable ${your_trajectory_file} needs to be replaced with the name of your trajectory file, which is probably something like: `filedir+BCCID+'.nc'`. Your ${output_file_name} should be a name of your choice to which you'd like the program to output the data. The flag 'byatom' means that the data output file will give an atomic index and a corresponding RMSF value. 
 
-{:start="10"}
 10. In your jupyter notebook, you will use python to generate this input file. In a new code block: 
 
 	```
 	mydir = '/scratch/${username}/'
 	with open(mydir+BCCID+'_rmsf.in', 'w') as file:
 		file.write('trajin '+filedir+BCCID+'/md1/'+BCCID+'-Pro01.nc\n')
-		file.write('atomicfluct out '+mydir+BCCID+'.dat @C,CA,N byres')
+		file.write('atomicfluct out '+mydir+BCCID+'.dat byatom')
 	```
 
 In running this block, you create a file in your scratch directory called BCCID_rmsf.in, which is your cpptraj input file. If you look at it with your favorite text editor, you should see two lines. If you only see one line, double check your code to make sure that you have a line separator '\n' at the end of the first line.
 
 ### Preparing the Executable
+
+{:start="11"}
 
 The second thing you need to run cpptraj is the executable script. This is what acts as the command line to tell cpptraj to run. This script needs to have this structure:
 
@@ -160,7 +164,6 @@ The second thing you need to run cpptraj is the executable script. This is what 
 
 Where ${path_to_topology} indicates the filename of your prmtop file, which should be found in `filedir+BCCID`. Your input file name is the name of the input file you created in the above code block, `mydir+BCCID+'_rmsf.in'`. The `>` is what we use to specify that we'd like the output to be stored into a log file, which you name yourself. 
 
-{:start="11"}
 11. We could run all of this in the command line, but for the purposes of this tutorial and showing you how these analyses can be automated, we are going to generate a script instead. In a new code block in Jupyter Notebook:
 
 	```
@@ -196,12 +199,34 @@ If the log file has been created but not the dat file, open and look at the log 
 Your *.dat file should contain two columns, headed by "#Res" and "AtomicFlx." 
 
 {:start="14"}
-14. See if you can use the python methods you've learned so far to extract each column of this data file into a numpy array in your jupyter notebook! Be sure to give your array reasonable names. A mentor will go over this with you if you get stuck.
+14. See if you can use the python methods you've learned so far to extract each column of this data file into a numpy array in your jupyter notebook! Be sure to give your arrays reasonable names. A mentor will go over this with you if you get stuck.
 
 
 {% include warning.html content="Now is a good time to check in with a mentor. Go back through and edit your scripts to include running cpptraj for your other replicates, md2 and md3, then extract the new data into new arrays in preparation for plotting. If you've made it this far easily, challenge yourself to change your entire jupyter notebook into a function that will take ANY BCCID and output RMSD and RMSF data." %}
 
 ### Plotting the Data
 
+**RMSF vs. Residue Number**
+
+RMSF is typically plotted vs. residue number. At this point, you should have three data sets: one for each md replicate. 
+
+{:start="15"}
+15. Create a plot of RMSF on the y-axis and residue number on the x-axis. What does this plot tell you about the dynamics of your protein? Do the replicates line up? (Should they line up? Why or why not?) 
+
+**RMSF vs. IC50**
+
+{:start="16"}
+Now you will be challenged to use all of your python skills to generate a plot of RMSF vs. IC50. Recall that IC50 is a measurement of drug potency. High IC50 correlates to a low potency, and low IC50 correlates to a high potency. 
+
+Sometimes, IC50 is also expressed as pIC50. Similar to the pH scale, where pH = -log[H+], pIC50 = -log(IC50). This means a high pIC50 corresponds to a **high** potency, and vice versa. 
+
+16. In your jupyter notebook, create a function called calculateMeanRMSF. Have it take the input ${BCCID} and output list [x, y], where x = pIC50 and y = mean RMSF. 
+	
+	```
+	def calculateMeanRMSF(id):
+		#return [pIC50, mRMSF]
+	```
+
+You should be able to populate this function with everything you need to calculate the RMSF values of a given BCCID and calculate the mean RMSF value of the entire system. The pIC50 values can be found in a dictionary located in 
 
 
