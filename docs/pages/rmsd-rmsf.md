@@ -98,7 +98,7 @@ You should also obtain the data for your replicate trajectories, traj2 & traj3.
 7. To visualize this data, use a plt scatterplot. In a new code block:
 
 	```
-	plt.scatter(np.arange(0, len(rmsd1), rmsd1, marker='.', color='m', s=3, label='Rep 1'))
+	plt.scatter(np.arange(0, len(rmsd1)), rmsd1, marker='.', color='m', s=3, label='Rep 1')
 	## what does np.arange do?
 	plt.xlabel('Time (ns)')
 	plt.ylabel('RMSD ($\AA$)')
@@ -110,8 +110,8 @@ You should also obtain the data for your replicate trajectories, traj2 & traj3.
 8. You may want to overlay your data to compare your three replicates. To do this, you can add two more scatterplots to the above code, after the first call to plt:
 
 	```
-	plt.scatter(np.arange(0, len(rmsd2), rmsd2, marker='.', color='c', s=3, label='Rep 2'))
-	plt.scatter(np.arange(0, len(rmsd3), rmsd3, marker='.', color='b', s=3, label='Rep 3'))
+	plt.scatter(np.arange(0, len(rmsd2)), rmsd2, marker='.', color='c', s=3, label='Rep 2')
+	plt.scatter(np.arange(0, len(rmsd3)), rmsd3, marker='.', color='b', s=3, label='Rep 3')
 	```
 
 9. Add a legend to your plot.
