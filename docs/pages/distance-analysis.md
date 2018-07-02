@@ -463,8 +463,8 @@ like `gedit`, to create the file `script_distance.sh`:
     ```
 
 5.  From this point, all the lines will end up in the input file
-    *distance_analysis1.in*, which begins by reading the trajectory file `$TRAJ`
-    located in `$TRAJ1` from frame 1 to the last:
+    *distance_analysis1.in*, which begins by reading the trajectory file `$TRAJ1`
+    from frame 1 to the last:
 
     `trajin $TRAJ1 1 last        # Read the trajectory1`
 
