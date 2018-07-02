@@ -510,7 +510,7 @@ width=60 %}
 {:start="8"}
 8.  Calculate the average (avg command) and standard deviation for each
     distance. All the distance datasets are read and their avg and s.d. are
-    printed to the output file1 1_avg.dat (for replica 1) in column 1 and 2, respectively.
+    printed to an output file called `1_avg.dat` (for replica 1) in column 1 and 2, respectively.
 
     `avg $DIST1_1 $DIST2_1 $DIST3_1 $DIST4_1 $DIST5_1 out 1_avg.dat`
 
