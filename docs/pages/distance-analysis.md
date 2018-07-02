@@ -36,7 +36,12 @@ you are given.
 1.  Enter the folder of the first HSP90 system you are going to inspect. The
     trajectories are located at `/scratch/bcc2018_trajectories/${BCCID}`. You
     will find the topology file (`*.prmtop`) and three subfolders, each corresponding to a
-    different replica (`md1`, `md2`, `md3`). Load and open VMD from a terminal.
+    different replica (`md1`, `md2`, `md3`) containing the respective trajectories. Load and open VMD from a terminal:
+    
+    ```
+    > module load vmd
+    > vmd
+    ```
 
     When VMD starts, two windows will open: the VMD Main window and the OpenGL
     Display window. Remember which Terminal window is the one where you have
