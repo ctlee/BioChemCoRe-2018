@@ -135,10 +135,19 @@ Cpptraj requires an input file that looks like this:
 
 	```
 	trajin ${your_trajectory_file}.nc 
-	atomicfluct out ${output_file_name}.dat byatom
+	rmsd @C,CA,N first
+	atomicfluct out ${output_file_name}.dat @C,CA,N byres
 	```
 
-The variable ${your_trajectory_file} needs to be replaced with the name of your trajectory file, which is probably something like: `filedir+BCCID+'.nc'`. Your ${output_file_name} should be a name of your choice to which you'd like the program to output the data. The flag 'byatom' means that the data output file will give an atomic index and a corresponding RMSF value. 
+The variable ${your_trajectory_file} needs to be replaced with the name of your trajectory file, which is probably something like: `filedir+BCCID+'.nc'`. 
+
+The second line, 'rmsd @C,CA,N first,' is the program aligning your protein to the structure given by the first frame in the simulation. This is done to avoid the biasing of your RMSD and RMSF values by protein diffusion. 
+
+The @C, CA, N is the 'mask,' or atom selection of your alignment and calculations. This aligns the protein backbone only. 
+
+Your ${output_file_name} should be a name of your choice to which you'd like the program to output the data. The flag 'byres' means that the data output file will give an residue index and a corresponding RMSF value.
+
+ {% include note.html content="In addition to RMSF, cpptraj can also calculate RMSD, and can do it for specific residues and specific atom selections, just like mdtraj. If you'd like to learn more about cpptraj's functions, you can visit the [AmberTools](ambermd.org/doc12/Amber18.pdf) manual." %}
 
 {:start="10"}
 10. In your jupyter notebook, you will use python to generate this input file. In a new code block: 
@@ -147,7 +156,8 @@ The variable ${your_trajectory_file} needs to be replaced with the name of your 
 	mydir = '/scratch/${username}/'
 	with open(mydir+BCCID+'_rmsf.in', 'w') as file:
 		file.write('trajin '+filedir+BCCID+'/md1/'+BCCID+'-Pro01.nc\n')
-		file.write('atomicfluct out '+mydir+BCCID+'.dat byatom')
+		file.write('rmsd @C1,CA,N first\n')
+		file.write('atomicfluct out '+mydir+BCCID+'.dat @C,CA,N byres')
 	```
 
 In running this block, you create a file in your scratch directory called BCCID_rmsf.in, which is your cpptraj input file. If you look at it with your favorite text editor, you should see two lines. If you only see one line, double check your code to make sure that you have a line separator '\n' at the end of the first line.
@@ -227,6 +237,12 @@ Sometimes, IC50 is also expressed as pIC50. Similar to the pH scale, where pH = 
 		#return [pIC50, mRMSF]
 	```
 
-You should be able to populate this function with everything you need to calculate the RMSF values of a given BCCID and calculate the mean RMSF value of the entire system. The pIC50 values can be found in a dictionary located in 
+You should be able to populate this function with everything you need to calculate the RMSF values of a given BCCID and calculate the mean RMSF value of the entire system. The pIC50 values can be found in a dictionary located in the bccHelper.py located [here](https://ctlee.github.io/BioChemCoRe-2018/pdbs/).
+
+17. Once this function has been created, use it to calculate the mean RMSF value for all systems in the training set. 
+
+18. Plot this new data on a scatter plot with log(IC50) on the x-axis and meanRMSF on the y-axis. You should have 6 data points. Does mean RMSF of a system correspond to drug efficacy? Is mean RMSF a good `metric` for describing drug efficacy? 
+
+19. Think about what your data mean, and start coming up with a list of metrics you could use to correlate RMSF or RMSD to IC50 of a system. Do you want to look at one specific residue or a group of residues? Do you want to investigate the dynamics of the ligand? Talk this over with your group, and maybe play around with mdtraj and cpptraj's atom selection tools to look at different parts of the system. 
 
 
