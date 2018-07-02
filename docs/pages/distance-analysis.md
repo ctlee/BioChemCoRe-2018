@@ -212,7 +212,6 @@ width=60 %}
 
 **Q1:** Try to find an optimal visualization of the active site.
 
-{start="7"}
 7.  Save the visualization state of the system by choosing, in the VMD Main
     window, `File > Save Visualization state...` A new window will open and, in the box
     beside the word “Filename”, go at the very end of the string (it is the whole
@@ -711,26 +710,26 @@ calculate that:
 
 
 **Q2:**  Try to correlate all the information gained upon distance analysis with
-the IC50 values. You were indeed given the IC50 values for each ligand. For each
+the IC50 values. You were indeed given the IC50 values (in nM) for each ligand. A lower IC50 means higher potency and vice versa. However,  as you have done for the RMSD/RMSF analysis,  we will express IC50 as pIC50 (pIC50 = -log(IC50)). This means instead that a high pIC50 corresponds to a high potency of the ligand. To later plot the -log(IC50) please first convert the IC50 values from nM scale to M scale (1nm = 0.000 000 001 M = 1E-9 M). After you have done this, for each
 system prepare a two-column file called ds_ic50.dat:
 
 `> gedit ds_ic50.dat`
 
-In this file, in column 1 insert the IC50 of the ligand that has been
-given to you. In the column 2 insert the s.d. of the most stable conserved distance
+In this file, in column 1 insert the IC50 (in M) of the ligand that has been
+given to you.  In the column 2 insert the s.d. of the most stable conserved distance
 for each system. The file must be in this format:
 
 ```
-3000   0.02    # system 1
-350000 0.01    # system 2
-6900   0.18    # system 3
-81     0.19    # system 4
-110    0.13    # system 5
-92     0.10    # system 6
+3E-6    0.02    # system 1
+3.5E-4  0.01    # system 2
+6.9E-6  0.18    # system 3
+8.1E-8  0.19    # system 4
+1.1E-7  0.13    # system 5
+9.2E-8  0.10    # system 6
 ```
 
-Now, with Gnuplot, plot this file to see the correlation between IC50 (using the log scale) and the
-most stable distances for each system. Prepare the gnuplot input file:
+Now, with Gnuplot, plot this file to see the correlation between pIC50 and the
+most stable distances for each system. The IC50 values (in M) will be plotted as -log(IC50). Prepare the gnuplot input file:
 
 `> gedit gnuplot_ds_ic50.in`
 
@@ -742,17 +741,16 @@ set mytics
 set xtics offset 0,-0.2
 set border lw 3
 set lmargin 16
-set logscale x
-set xlabel offset 0,-1.0 'log IC50' font ", 20"
+set xlabel offset 0,-1.0 'pIC50 (M)' font ", 20"
 set ylabel offset -2.0,0 'ds of distance(Å)' font ", 20"
 
-plot 'ds_ic50.dat' u 1:2 w p pt 5 lw 10 title ""
+plot 'ds_ic50.dat' u (-log($1)):2 w p pt 5 lw 10 title ""
 ```
 
 Save the file and run this command in terminal to plot:
 `> gnuplot -e "set terminal png size 1920,1080" gnuplot_ds_ic50.in > ds_ic50.png`
 
-Is there any correlation between the ds of the selected interaction and the ligand IC50? Take note.
+Is there any correlation between the ds of the selected interaction and the ligand pIC50? Does a lower ds value go with an higher pIC50 value? Take note.
 
 
 ## The Full Distance Script
