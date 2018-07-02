@@ -551,8 +551,8 @@ width=60 %}
     ```
 
 11. Now leave a blank line and add the following lines to the script to run the
-    cpptraj program for all the replicas.  This will read the topology and the
-    input files just generated, printing a log file for each analysis:
+    cpptraj program for all the replicas.  This will read the topology `$TOP` and the
+    input files just generated `$INPUT*`, printing a log file for each analysis:
     ```
     # Execute cpptraj distance analysis #
     module load amber/18            # load amber program (and so cpptraj)
@@ -571,8 +571,8 @@ width=60 %}
         These commands must be copied as they are reported.
       * Then, always in the input, the `plot` command will plot the distances
         (`plot '$OUTPUT1'...`). In each line you have the name of the distance
-        file (`'$OUTPUT1'`), followed by the column you want to plot (`u 1:2`),
-        meaning the *x* (frame #) and *y* (distance name) axes. Since each
+        file (`'$OUTPUT1'`), followed by the columns you want to plot (`u 1:2`),
+        meaning the *x* (column 1 = frame #) and *y* (column 2 = distance name) axes. Since each
         distance has been printed to a different column in the `$OUTPUT1` file,
         the *y* column to be read must be changed in order to plot all the
         distances (1:2, 1:3, 1:4, etc.). After the columns, there are some s
@@ -676,11 +676,13 @@ width=60 %}
     > ./script_distance.sh
     ```
 
-2.  The script should run smooth and fast (10 sec). If not, try to understand
+2.  The script should run smooth and fast (5 seconds). If not, try to understand
     the error or call someone. You can open the generated png images and inspect
     the plotted distances with the following command:
 
     `> eog -f 1_distances.png 2_distances.png 3_distances.png`
+    
+    By using the cursor you can move among the 3 images.
 
 **Q1:** Comment the distance profiles. Are the distance profiles overall stable or do you notice dramatic changes?
 
