@@ -764,7 +764,7 @@ plot 'ds_ic50.dat' u (-log($1)):2 w p pt 5 lw 10 title ""
 Save the file and run this command in terminal to plot:
 
 ```
-> gnuplot -e "set terminal png size 1920,1080" gnuplot_ds_ic50.in > ds_ic50.png
+> gnuplot -e "set terminal png size 1920,1080 font ',14'" gnuplot_ds_ic50.in > ds_ic50.png
 ```
 
 Is there any correlation between the ds of the selected interaction and the ligand pIC50? Does a lower ds value go with an higher pIC50 value? Take note.
