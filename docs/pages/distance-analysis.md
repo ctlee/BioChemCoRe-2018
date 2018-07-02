@@ -413,12 +413,12 @@ like `gedit`, to create the file `script_distance.sh`:
     TRAJ1=/scratch/bcc2018-trajectories/6WCGO/md1/6WCGO-Pro01.nc    # Trajectory1 (puth the whole path)
     TRAJ2=/scratch/bcc2018-trajectories/6WCGO/md2/6WCGO-Pro01.nc    # Trajectory2 (puth the whole path
     TRAJ3=/scratch/bcc2018-trajectories/6WCGO/md3/6WCGO-Pro01.nc    # Trajectory3 (puth the whole path
-    INPUT1=cpptraj.distance1.in     # Cpptraj input file for replica 1
-    INPUT2=cpptraj.distance2.in     # Cpptraj input file for replica 2
-    INPUT3=cpptraj.distance3.in     # Cpptraj input file for replica 3
-    OUTPUT1=1_distances.dat         # For replica 1
-    OUTPUT2=2_distances.dat         # For replica 2
-    OUTPUT3=3_distances.dat         # For replica 3
+    INPUT1=cpptraj.distance1.in                                     # Cpptraj input file for replica 1
+    INPUT2=cpptraj.distance2.in                                     # Cpptraj input file for replica 2
+    INPUT3=cpptraj.distance3.in                                     # Cpptraj input file for replica 3
+    OUTPUT1=1_distances.dat                                         # For replica 1
+    OUTPUT2=2_distances.dat                                         # For replica 2
+    OUTPUT3=3_distances.dat                                         # For replica 3
     ```
 
 3.  Assign a variable the name of each selected distance (use the names reported below as models for yours):
