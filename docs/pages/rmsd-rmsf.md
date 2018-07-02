@@ -133,11 +133,11 @@ Cpptraj requires an executable script and an input file. I'll walk you through h
 
 Cpptraj requires an input file that looks like this:
 
-	```bash
-	trajin ${our_trajectory_file}.nc 
-	rmsd @C,CA,N first
-	atomicfluct out ${output_file_name}.dat @C,CA,N byres
-	```
+```
+trajin ${our_trajectory_file}.nc 
+rmsd @C,CA,N first
+atomicfluct out ${output_file_name}.dat @C,CA,N byres
+```
 
 The variable ${your_trajectory_file} needs to be replaced with the name of your trajectory file, which is probably something like: `filedir+BCCID+'.nc'`. 
 
