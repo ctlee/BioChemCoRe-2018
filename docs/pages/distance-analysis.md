@@ -723,7 +723,9 @@ calculate that:
 the IC50 values. You were indeed given the IC50 values (in nM) for each ligand. A lower IC50 means higher potency and vice versa. However,  as you have done for the RMSD/RMSF analysis,  we will express IC50 as pIC50 (pIC50 = -log(IC50)). This means instead that a high pIC50 corresponds to a high potency of the ligand. To later plot the -log(IC50) please first convert the IC50 values from nM scale to M scale (1nm = 0.000 000 001 M = 1E-9 M). After you have done this, for each
 system prepare a two-column file called ds_ic50.dat:
 
-`> gedit ds_ic50.dat`
+```
+> gedit ds_ic50.dat
+```
 
 In this file, in column 1 insert the IC50 (in M) of the ligand that has been
 given to you.  In the column 2 insert the s.d. of the most stable conserved distance
@@ -741,7 +743,9 @@ for each system. The file must be in this format:
 Now, with Gnuplot, plot this file to see the correlation between pIC50 and the
 most stable distances for each system. The IC50 values (in M) will be plotted as -log(IC50). Prepare the gnuplot input file:
 
-`> gedit gnuplot_ds_ic50.in`
+```
+> gedit gnuplot_ds_ic50.in
+```
 
 In the input file write:
 ```
