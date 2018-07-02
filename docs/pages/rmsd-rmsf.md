@@ -131,16 +131,16 @@ Cpptraj requires an executable script and an input file. I'll walk you through h
 
 ### Preparing the Input File
 
-{:start="10"}
 Cpptraj requires an input file that looks like this:
 
-	```
+	```bash
 	trajin ${your_trajectory_file}.nc 
 	atomicfluct out ${output_file_name}.dat byatom
 	```
 
 The variable ${your_trajectory_file} needs to be replaced with the name of your trajectory file, which is probably something like: `filedir+BCCID+'.nc'`. Your ${output_file_name} should be a name of your choice to which you'd like the program to output the data. The flag 'byatom' means that the data output file will give an atomic index and a corresponding RMSF value. 
 
+{:start="10"}
 10. In your jupyter notebook, you will use python to generate this input file. In a new code block: 
 
 	```
@@ -154,16 +154,16 @@ In running this block, you create a file in your scratch directory called BCCID_
 
 ### Preparing the Executable
 
-{:start="11"}
-
 The second thing you need to run cpptraj is the executable script. This is what acts as the command line to tell cpptraj to run. This script needs to have this structure:
 
-	```
+	```bash
 	cpptraj ${path_to_topology}.prmtop ${your_input_file_name}.in > ${your_log_file_name}.log
 	```
 
 Where ${path_to_topology} indicates the filename of your prmtop file, which should be found in `filedir+BCCID`. Your input file name is the name of the input file you created in the above code block, `mydir+BCCID+'_rmsf.in'`. The `>` is what we use to specify that we'd like the output to be stored into a log file, which you name yourself. 
 
+
+{:start="11"}
 11. We could run all of this in the command line, but for the purposes of this tutorial and showing you how these analyses can be automated, we are going to generate a script instead. In a new code block in Jupyter Notebook:
 
 	```
