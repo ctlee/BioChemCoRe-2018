@@ -415,9 +415,9 @@ like `gedit`, to create the file `script_distance.sh`:
 2.  Define variables for the name of your topology, trajectory, cpptraj input files and output files:
     ```
     TOP=/scratch/bcc2018-trajectories/6WCGO/6WCGO.prmtop            # Topology file (put the whole path)
-    TRAJ1=/scratch/bcc2018-trajectories/6WCGO/md1/6WCGO-Pro01.nc    # Trajectory1 (puth the whole path)
-    TRAJ2=/scratch/bcc2018-trajectories/6WCGO/md2/6WCGO-Pro01.nc    # Trajectory2 (puth the whole path
-    TRAJ3=/scratch/bcc2018-trajectories/6WCGO/md3/6WCGO-Pro01.nc    # Trajectory3 (puth the whole path
+    TRAJ1=/scratch/bcc2018-trajectories/6WCGO/md1/6WCGO-Pro01.nc    # Trajectory1 (put the whole path)
+    TRAJ2=/scratch/bcc2018-trajectories/6WCGO/md2/6WCGO-Pro01.nc    # Trajectory2 (put the whole path
+    TRAJ3=/scratch/bcc2018-trajectories/6WCGO/md3/6WCGO-Pro01.nc    # Trajectory3 (put the whole path
     INPUT1=cpptraj.distance1.in                                     # Cpptraj input file for replica 1
     INPUT2=cpptraj.distance2.in                                     # Cpptraj input file for replica 2
     INPUT3=cpptraj.distance3.in                                     # Cpptraj input file for replica 3
