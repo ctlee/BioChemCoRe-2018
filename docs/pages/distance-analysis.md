@@ -680,7 +680,9 @@ width=60 %}
     the error or call someone. You can open the generated png images and inspect
     the plotted distances with the following command:
 
-    `> eog -f 1_distances.png 2_distances.png 3_distances.png`
+    ```
+    > eog -f 1_distances.png 2_distances.png 3_distances.png
+    ```
     
     By using the cursor you can move among the 3 images.
 
