@@ -49,7 +49,8 @@ This should immediately open up a new 'Untitled' notebook in a new window or tab
 {:start="3"}
 3. To do our analysis, we will need to import some useful (and, hopefully, familar!) python libraries. In the first code block, write and run:
 
-	```import numpy as np
+	```
+	import numpy as np
 	import mdtraj as md
 	import matplotlib.pyplot as plt
 	%matplotlib inline
@@ -65,7 +66,7 @@ We can't do any analysis unless we've got data to analyze! Your training set dat
 
 	```
 	BCCID = #your BCCID
-	filedir = '/scratch/bcc2018_trajectories/BCCID}/'
+	filedir = '/scratch/bcc2018_trajectories/'+BCCID+'/'
 	traj1 = md.load(top=filedir+BCCID+'.prmtop', filedir+'md1/'+BCCID+'-Pro01.nc')
 	traj2 = md.load(top=filedir+BCCID+'.prmtop', filedir+'md2/'+BCCID+'-Pro01.nc')
 	traj3 = md.load(top=filedir+BCCID+'.prmtop', filedir+'md3/'+BCCID+'-Pro01.nc')
@@ -93,6 +94,7 @@ You should also obtan the data for your replicate trajectories, traj2 & traj3.
 
 {:start="7"}
 7. To visualize this data, use a plt scatterplot. In a new code block:
+
 	```
 	plt.scatter(np.arange(0, len(rmsd1), rmsd1, marker='.', color='m', s=3, label='Rep 1'))
 	## what does np.arange do?
@@ -126,9 +128,79 @@ To calculate RMSF, we will need to invoke `cpptraj`, which is part of the AmberT
 Cpptraj requires an executable script and an input file. I'll walk you through how to make them, and what needs to go in each.
 
 ### Preparing the Input File
+
+Cpptraj requires an input file that looks like this:
+
+	```
+	trajin ${your_trajectory_file}.nc 
+	atomicfluct out ${output_file_name}.dat @C,CA,N byres
+	```
+
+The variable ${your_trajectory_file} needs to be replaced with the name of your trajectory file, which is probably something like: `filedir+BCCID+'.nc'`. Your ${output_file_name} should be a name of your choice to which you'd like the program to output the data. `@C,CA,N` is the mask selection corresponding to the `protein backbone.` Finally, `byres` means that `cpptraj` will perform this calculation and output the data to the .dat file by residue number. 
+
+{:start="10"}
+10. In your jupyter notebook, you will use python to generate this input file. In a new code block: 
+
+	```
+	mydir = '/scratch/${username}/'
+	with open(mydir+BCCID+'_rmsf.in', 'w') as file:
+		file.write('trajin '+filedir+BCCID+'/md1/'+BCCID+'-Pro01.nc\n')
+		file.write('atomicfluct out '+mydir+BCCID+'.dat @C,CA,N byres')
+	```
+
+In running this block, you create a file in your scratch directory called BCCID_rmsf.in, which is your cpptraj input file. If you look at it with your favorite text editor, you should see two lines. If you only see one line, double check your code to make sure that you have a line separator '\n' at the end of the first line.
+
 ### Preparing the Executable
+
+The second thing you need to run cpptraj is the executable script. This is what acts as the command line to tell cpptraj to run. This script needs to have this structure:
+
+	```
+	cpptraj ${path_to_topology}.prmtop ${your_input_file_name}.in > ${your_log_file_name}.log
+	```
+
+Where ${path_to_topology} indicates the filename of your prmtop file, which should be found in `filedir+BCCID`. Your input file name is the name of the input file you created in the above code block, `mydir+BCCID+'_rmsf.in'`. The `>` is what we use to specify that we'd like the output to be stored into a log file, which you name yourself. 
+
+{:start="11"}
+11. We could run all of this in the command line, but for the purposes of this tutorial and showing you how these analyses can be automated, we are going to generate a script instead. In a new code block in Jupyter Notebook:
+
+	```
+	with open(mydir+BCCID+'_rmsf.sh', 'w') as file:
+		file.write('cpptraj '+filedir+BCCID+'.prmtop '+mydir+BCCID+'_rmsf.in > '+mydir+BCCID+'_rmsf.log\n')
+	```
+
+Double check to make sure that the input file name in your *.sh matches the input file name *.in, and that all your other file names and file paths are correct. If you need to make a change, it is okay to rerun the code block in Jupyter Notebook. 
+
 ### Running the Script
+
+Now that your cpptraj files have been generated, you can now run the program by running the executable shell script (*.sh) in your command line. 
+
+{:start="12"}
+12. Give permissions to run the file:
+
+	```
+	chmod 744 ${your_shell_script_name}.sh 
+	```
+
+13. Execute:
+	
+	```
+	./${your_shell_script_name}.sh
+	```
+
+Once you run this in the command line, you should wait for it to complete. When $bash pops up again, you can `ls` in your scratch directory, where you will hopefully see two new files: the *.dat and *.log files which cpptraj should have created. 
+
+If the log file has been created but not the dat file, open and look at the log file to see what errors came up. Double check all your input scripts and file paths, and if you still cannot isolate the source of error, check with a mentor. 
+
 ### Extracting .dat Data
+
+Your *.dat file should contain two columns, headed by "#Res" and "AtomicFlx." 
+
+{:start="14"}
+14. See if you can use the python methods you've learned so far to extract each column of this data file into a numpy array in your jupyter notebook! Be sure to give your array reasonable names. A mentor will go over this with you if you get stuck.
+
+
+{% include warning.html content="Now is a good time to check in with a mentor. Go back through and edit your scripts to include running cpptraj for your other replicates, md2 and md3, then extract the new data into new arrays in preparation for plotting. If you've made it this far easily, challenge yourself to change your entire jupyter notebook into a function that will take ANY BCCID and output RMSD and RMSF data." %}
+
 ### Plotting the Data
 
 
