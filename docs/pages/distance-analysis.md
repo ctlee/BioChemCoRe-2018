@@ -212,6 +212,7 @@ width=60 %}
 
 **Q1:** Try to find an optimal visualization of the active site.
 
+{:start="7"}
 7.  Save the visualization state of the system by choosing, in the VMD Main
     window, `File > Save Visualization state...` A new window will open and, in the box
     beside the word “Filename”, go at the very end of the string (it is the whole
