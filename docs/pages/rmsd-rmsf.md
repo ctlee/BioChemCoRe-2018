@@ -215,11 +215,11 @@ RMSF is typically plotted vs. residue number. At this point, you should have thr
 
 **RMSF vs. IC50**
 
-{:start="16"}
 Now you will be challenged to use all of your python skills to generate a plot of RMSF vs. IC50. Recall that IC50 is a measurement of drug potency. High IC50 correlates to a low potency, and low IC50 correlates to a high potency. 
 
 Sometimes, IC50 is also expressed as pIC50. Similar to the pH scale, where pH = -log[H+], pIC50 = -log(IC50). This means a high pIC50 corresponds to a **high** potency, and vice versa. 
 
+{:start="16"}
 16. In your jupyter notebook, create a function called calculateMeanRMSF. Have it take the input ${BCCID} and output list [x, y], where x = pIC50 and y = mean RMSF. 
 	
 	```
