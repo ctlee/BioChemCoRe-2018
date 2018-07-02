@@ -133,7 +133,7 @@ Cpptraj requires an executable script and an input file. I'll walk you through h
 
 Cpptraj requires an input file that looks like this:
 
-	```bash
+	```
 	trajin ${your_trajectory_file}.nc 
 	atomicfluct out ${output_file_name}.dat byatom
 	```
@@ -156,7 +156,7 @@ In running this block, you create a file in your scratch directory called BCCID_
 
 The second thing you need to run cpptraj is the executable script. This is what acts as the command line to tell cpptraj to run. This script needs to have this structure:
 
-	```bash
+	```
 	cpptraj ${path_to_topology}.prmtop ${your_input_file_name}.in > ${your_log_file_name}.log
 	```
 
