@@ -152,13 +152,13 @@ Your ${output_file_name} should be a name of your choice to which you'd like the
 {:start="10"}
 10. In your jupyter notebook, you will use python to generate this input file. In a new code block: 
 
-	```
-	mydir = '/scratch/${username}/'
-	with open(mydir+BCCID+'_rmsf.in', 'w') as file:
-		file.write('trajin '+filedir+BCCID+'/md1/'+BCCID+'-Pro01.nc\n')
-		file.write('rmsd @C1,CA,N first\n')
-		file.write('atomicfluct out '+mydir+BCCID+'.dat @C,CA,N byres')
-	```
+```
+mydir = '/scratch/${username}/'
+with open(mydir+BCCID+'_rmsf.in', 'w') as file:
+	file.write('trajin '+filedir+BCCID+'/md1/'+BCCID+'-Pro01.nc\n')
+	file.write('rmsd @C1,CA,N first\n')
+	file.write('atomicfluct out '+mydir+BCCID+'.dat @C,CA,N byres')
+```
 
 In running this block, you create a file in your scratch directory called BCCID_rmsf.in, which is your cpptraj input file. If you look at it with your favorite text editor, you should see two lines. If you only see one line, double check your code to make sure that you have a line separator '\n' at the end of the first line.
 
@@ -166,9 +166,9 @@ In running this block, you create a file in your scratch directory called BCCID_
 
 The second thing you need to run cpptraj is the executable script. This is what acts as the command line to tell cpptraj to run. This script needs to have this structure:
 
-	```
-	cpptraj ${path_to_topology}.prmtop ${your_input_file_name}.in > ${your_log_file_name}.log
-	```
+```
+cpptraj ${path_to_topology}.prmtop ${your_input_file_name}.in > ${your_log_file_name}.log
+```
 
 Where ${path_to_topology} indicates the filename of your prmtop file, which should be found in `filedir+BCCID`. Your input file name is the name of the input file you created in the above code block, `mydir+BCCID+'_rmsf.in'`. The `>` is what we use to specify that we'd like the output to be stored into a log file, which you name yourself. 
 
