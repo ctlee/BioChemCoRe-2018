@@ -416,9 +416,9 @@ like `gedit`, to create the file `script_distance.sh`:
     INPUT1=cpptraj.distance1.in                                     # Cpptraj input file for replica 1
     INPUT2=cpptraj.distance2.in                                     # Cpptraj input file for replica 2
     INPUT3=cpptraj.distance3.in                                     # Cpptraj input file for replica 3
-    OUTPUT1=1_distances.dat                                         # For replica 1
-    OUTPUT2=2_distances.dat                                         # For replica 2
-    OUTPUT3=3_distances.dat                                         # For replica 3
+    OUTPUT1=1_distances.dat                                         # Output for replica 1
+    OUTPUT2=2_distances.dat                                         # Output for replica 2
+    OUTPUT3=3_distances.dat                                         # Output for replica 3
     ```
 
 3.  Assign a variable the name of each selected distance (use the names reported below as models for yours):
@@ -459,7 +459,7 @@ like `gedit`, to create the file `script_distance.sh`:
 
 5.  From this point, all the lines will end up in the input file
     *distance_analysis1.in*, which begins by reading the trajectory file `$TRAJ`
-    located in `../md1/` from frame 1 to the last:
+    located in `$TRAJ1` from frame 1 to the last:
 
     `trajin $TRAJ1 1 last        # Read the trajectory1`
 
