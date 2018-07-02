@@ -389,7 +389,7 @@ the topology file and the trajectory file of each replica, plus your notes from
 the previous visual inspection with VMD.
 
 {% include note.html content="Cpptraj and gnuplot are just tools which can be used to measure
-distances. [raj](http://mdtraj.org/1.9.0/analysis.html)
+distances. [mdtraj](http://mdtraj.org/1.9.0/analysis.html)
 and MatPlotLib can also be used to similar effect. For your personal projects you
 can choose which methods are simplest for your personal workflow." %}
 
