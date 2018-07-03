@@ -707,7 +707,7 @@ width=60 %}
     to the new system, adding or deleting distances, changing their name, tuning
     the atom selection masks (ligand name...) and so on.
 
-**Q1:** Compare now the 6 HSP90 systems and thus the 6 different ligands. Which
+**Q5:** Compare now the 6 HSP90 systems and thus the 6 different ligands. Which
 of these ligands appear to establish more stable contacts (conserved among the
 three replicas)? In this analysis consider both the number of conserved contacts,
 their s.d. and their nature (h-bonds, salt-bridge, hydrophobic, stacking).
@@ -719,7 +719,7 @@ calculate that:
 * a hydrophobic contact yields a 3.5-fold increase in the binding constant
 
 
-**Q2:**  Try to correlate all the information gained upon distance analysis with
+**Q6:**  Try to correlate all the information gained upon distance analysis with
 the IC50 values. You were indeed given the IC50 values (in nM) for each ligand. A lower IC50 means higher potency and vice versa. However,  as you have done for the RMSD/RMSF analysis,  we will express IC50 as pIC50 (pIC50 = -log(IC50)). This means instead that a high pIC50 corresponds to a high potency of the ligand. To later plot the -log(IC50) please first convert the IC50 values from nM scale to M scale (1nm = 0.000 000 001 M = 1E-9 M). After you have done this, for each
 system prepare a two-column file called ds_ic50.dat by using a text editor like gedit. In the terminal type:
 
@@ -767,7 +767,7 @@ Save the file and run this command in terminal to plot:
 > gnuplot -e "set terminal png size 1920,1080 font ',14'" gnuplot_ds_ic50.in > ds_ic50.png
 ```
 
-Is there any correlation between the ds of the selected interaction and the ligand pIC50? Does a lower ds value go with an higher pIC50 value? Take note.
+**Q7:** Is there any correlation between the ds of the selected interaction and the ligand pIC50? Does a lower ds value go with an higher pIC50 value? Take note.
 
 
 ## The Full Distance Script
