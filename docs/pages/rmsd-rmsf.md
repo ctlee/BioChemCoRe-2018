@@ -69,9 +69,9 @@ We can't do any analysis unless we've got data to analyze! Your training set dat
 	```
 	BCCID = #your BCCID
 	filedir = '/scratch/bcc2018_trajectories/'+BCCID+'/'
-	traj1 = md.load(top=filedir+BCCID+'.prmtop', filedir+'md1/'+BCCID+'-Pro01.nc')
-	traj2 = md.load(top=filedir+BCCID+'.prmtop', filedir+'md2/'+BCCID+'-Pro01.nc')
-	traj3 = md.load(top=filedir+BCCID+'.prmtop', filedir+'md3/'+BCCID+'-Pro01.nc')
+	traj1 = md.load(filedir+'md1/'+BCCID+'-Pro01.nc', top=filedir+BCCID+'.prmtop')
+	traj2 = md.load(filedir+'md2/'+BCCID+'-Pro01.nc', top=filedir+BCCID+'.prmtop')
+	traj3 = md.load(filedir+'md3/'+BCCID+'-Pro01.nc', top=filedir+BCCID+'.prmtop')
 	```
 
 Key in `Shift + Enter` to run this cell, load your trajectories, and define your variables!
@@ -84,7 +84,9 @@ Key in `Shift + Enter` to run this cell, load your trajectories, and define your
 6. Use the built-in MDTraj (`md`) trajectory function to generate RMSD data from your trajectories. In a new code block:
 
 	```
-	rmsd1 = md.rmsd(traj1, traj1, 0)
+	protein_sel1 = traj1.topology.select('protein')
+	protein_traj1 = traj1.atom_slice(protein_sel)
+	rmsd1 = md.rmsd(protein_traj1, protein_traj1, 0)
 	print(rmsd1)
 	```
 
@@ -155,9 +157,9 @@ Your ${output_file_name} should be a name of your choice to which you'd like the
 ```
 mydir = '/scratch/${username}/'
 with open(mydir+BCCID+'_rmsf.in', 'w') as file:
-	file.write('trajin '+filedir+BCCID+'/md1/'+BCCID+'-Pro01.nc\n')
-	file.write('rmsd @C1,CA,N first\n')
-	file.write('atomicfluct out '+mydir+BCCID+'.dat @C,CA,N byres')
+	file.write('trajin '+filedir+'/md1/'+BCCID+'-Pro01.nc\n')
+	file.write('rmsd @C,CA,N first\n')
+	file.write('atomicfluct out '+mydir+BCCID+'.dat @C,CA,N byres\n')
 ```
 
 In running this block, you create a file in your scratch directory called BCCID_rmsf.in, which is your cpptraj input file. If you look at it with your favorite text editor, you should see two lines. If you only see one line, double check your code to make sure that you have a line separator '\n' at the end of the first line.
@@ -167,6 +169,7 @@ In running this block, you create a file in your scratch directory called BCCID_
 The second thing you need to run cpptraj is the executable script. This is what acts as the command line to tell cpptraj to run. This script needs to have this structure:
 
 ```
+module load amber/18
 cpptraj ${path_to_topology}.prmtop ${your_input_file_name}.in > ${your_log_file_name}.log
 ```
 
@@ -178,6 +181,7 @@ Where ${path_to_topology} indicates the filename of your prmtop file, which shou
 
 	```
 	with open(mydir+BCCID+'_rmsf.sh', 'w') as file:
+		file.write('module load amber/18\n')
 		file.write('cpptraj '+filedir+BCCID+'.prmtop '+mydir+BCCID+'_rmsf.in > '+mydir+BCCID+'_rmsf.log\n')
 	```
 
@@ -188,16 +192,12 @@ Double check to make sure that the input file name in your *.sh matches the inpu
 Now that your cpptraj files have been generated, you can now run the program by running the executable shell script (*.sh) in your command line. 
 
 {:start="12"}
-12. Give permissions to run the file:
 
-	```
-	chmod 744 ${your_shell_script_name}.sh 
-	```
 
-13. Execute:
+12. Execute:
 	
 	```
-	./${your_shell_script_name}.sh
+	source ./${your_shell_script_name}.sh
 	```
 
 Once you run this in the command line, you should wait for it to complete. When $bash pops up again, you can `ls` in your scratch directory, where you will hopefully see two new files: the *.dat and *.log files which cpptraj should have created. 
@@ -208,8 +208,8 @@ If the log file has been created but not the dat file, open and look at the log 
 
 Your *.dat file should contain two columns, headed by "#Res" and "AtomicFlx." 
 
-{:start="14"}
-14. See if you can use the python methods you've learned so far to extract each column of this data file into a numpy array in your jupyter notebook! Be sure to give your arrays reasonable names. A mentor will go over this with you if you get stuck.
+{:start="13"}
+13. See if you can use the python methods you've learned so far to extract each column of this data file into a numpy array in your jupyter notebook! Be sure to give your arrays reasonable names. A mentor will go over this with you if you get stuck.
 
 
 {% include warning.html content="Now is a good time to check in with a mentor. Go back through and edit your scripts to include running cpptraj for your other replicates, md2 and md3, then extract the new data into new arrays in preparation for plotting. If you've made it this far easily, challenge yourself to change your entire jupyter notebook into a function that will take ANY BCCID and output RMSD and RMSF data." %}
@@ -220,8 +220,8 @@ Your *.dat file should contain two columns, headed by "#Res" and "AtomicFlx."
 
 RMSF is typically plotted vs. residue number. At this point, you should have three data sets: one for each md replicate. 
 
-{:start="15"}
-15. Create a plot of RMSF on the y-axis and residue number on the x-axis. What does this plot tell you about the dynamics of your protein? Do the replicates line up? (Should they line up? Why or why not?) 
+{:start="14"}
+14. Create a plot of RMSF on the y-axis and residue number on the x-axis. What does this plot tell you about the dynamics of your protein? Do the replicates line up? (Should they line up? Why or why not?) 
 
 **RMSF vs. IC50**
 
@@ -229,8 +229,8 @@ Now you will be challenged to use all of your python skills to generate a plot o
 
 Sometimes, IC50 is also expressed as pIC50. Similar to the pH scale, where pH = -log[H+], pIC50 = -log(IC50). This means a high pIC50 corresponds to a **high** potency, and vice versa. 
 
-{:start="16"}
-16. In your jupyter notebook, create a function called calculateMeanRMSF. Have it take the input ${BCCID} and output list [x, y], where x = pIC50 and y = mean RMSF. 
+{:start="15"}
+15. In your jupyter notebook, create a function called calculateMeanRMSF. Have it take the input ${BCCID} and output list [x, y], where x = pIC50 and y = mean RMSF. 
 	
 	```
 	def calculateMeanRMSF(id):
@@ -239,10 +239,10 @@ Sometimes, IC50 is also expressed as pIC50. Similar to the pH scale, where pH = 
 
 You should be able to populate this function with everything you need to calculate the RMSF values of a given BCCID and calculate the mean RMSF value of the entire system. The pIC50 values can be found in a dictionary located in the bccHelper.py located [here](https://ctlee.github.io/BioChemCoRe-2018/pdbs/).
 
-17. Once this function has been created, use it to calculate the mean RMSF value for all systems in the training set. 
+16. Once this function has been created, use it to calculate the mean RMSF value for all systems in the training set. 
 
-18. Plot this new data on a scatter plot with log(IC50) on the x-axis and meanRMSF on the y-axis. You should have 6 data points. Does mean RMSF of a system correspond to drug efficacy? Is mean RMSF a good `metric` for describing drug efficacy? 
+17. Plot this new data on a scatter plot with log(IC50) on the x-axis and meanRMSF on the y-axis. You should have 6 data points. Does mean RMSF of a system correspond to drug efficacy? Is mean RMSF a good `metric` for describing drug efficacy? 
 
-19. Think about what your data mean, and start coming up with a list of metrics you could use to correlate RMSF or RMSD to IC50 of a system. Do you want to look at one specific residue or a group of residues? Do you want to investigate the dynamics of the ligand? Talk this over with your group, and maybe play around with mdtraj and cpptraj's atom selection tools to look at different parts of the system. 
+18. Think about what your data mean, and start coming up with a list of metrics you could use to correlate RMSF or RMSD to IC50 of a system. Do you want to look at one specific residue or a group of residues? Do you want to investigate the dynamics of the ligand? Talk this over with your group, and maybe play around with mdtraj and cpptraj's atom selection tools to look at different parts of the system. 
 
 
