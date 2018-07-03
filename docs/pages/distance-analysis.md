@@ -249,8 +249,8 @@ width=60 %}
 alt="" caption="Figure 10. Atom label displayed in the Terminal window"
 width=40 %}
 
-**Q1:** Are there any relevant changes in the overall structure between the first frame and the last frame?
-**Q2:** Are there any water molecules interacting with the ligands or bridging the ligand and the protein?
+**Q2:** Are there any relevant changes in the overall structure between the first frame and the last frame?
+**Q3:** Are there any water molecules interacting with the ligands or bridging the ligand and the protein?
 
 
 ### Identification of relevant distances
