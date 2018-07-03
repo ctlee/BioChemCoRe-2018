@@ -720,7 +720,7 @@ calculate that:
 
 
 **Q6:**  Try to correlate all the information gained upon distance analysis with
-the IC50 values. You were indeed given the IC50 values (in nM) for each ligand. A lower IC50 means higher potency and vice versa. However,  as you have done for the RMSD/RMSF analysis,  we will express IC50 as pIC50 (pIC50 = -log(IC50)). This means instead that a high pIC50 corresponds to a high potency of the ligand. To later plot the -log(IC50) please first convert the IC50 values from nM scale to M scale (1nm = 0.000 000 001 M = 1E-9 M). After you have done this, for each
+the IC50 values. You were indeed given the IC50 values (in nM) for each ligand. A lower IC50 means higher potency and vice versa. However,  as you have done for the RMSD/RMSF analysis,  we will express IC50 as pIC50 (pIC50 = -log(IC50)). This means, instead, that a ligand with a higher pIC50 is more potent. To plot the -log(IC50) please first convert the IC50 values from nM scale to M scale (1nm = 0.000 000 001 M = 1E-9 M). After you have done this, for each
 system prepare a two-column file called ds_ic50.dat by using a text editor like gedit. In the terminal type:
 
 ```
