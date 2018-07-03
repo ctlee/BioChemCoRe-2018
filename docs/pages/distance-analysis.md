@@ -336,7 +336,7 @@ the parallel-displaced stacking arrangement predominate.
 alt="" caption="Figure 15. 𝝅-𝝅 stacking interactions."
 width=60 %}
 
-**Q1:** Using the distance selection shortcut (“2”), try to dissect how the
+**Q4:** Using the distance selection shortcut (“2”), try to dissect how the
 ligand is interacting (H-bonds, salt bridge, hydrophobic interactions, stacking)
 with the protein residues (or water molecules). Take advantage of the
 representations you have drawn before, and possibly draw new ones.
@@ -375,7 +375,7 @@ At the end, on your notebook you should have a list like this:
 |4  |       |         | 83@C3 (MET) --- 210@Cl (LIG) |  Hydroph.   |
 |5  |       |         | 147@CZ2 (TRP) --- 210@C20 (LIG)|  Hydroph. |
 
-**Q2:** Repeat the same VMD inspection also for the second (md2) and third (md3)
+**Q5:** Repeat the same VMD inspection also for the second (md2) and third (md3)
 replicas. Remember that you have already uploaded the trajectories, aligned them
 to the first frame and cloned the representations from md1. In the `Main VMD`
 window double click on the “D” on the left of the md2 molecule to display it
