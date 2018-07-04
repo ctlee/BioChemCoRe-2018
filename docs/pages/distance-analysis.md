@@ -455,7 +455,7 @@ like `gedit`, to create the file `script_distance.sh`:
     line containing the delimiter `EOF`) to a file called `$INPUT1`, which is
     *distance_analysis1.in* (i.e. for the first replica) i.e. the input file read
     by cpptraj. The file *distance_analysis1.in* will contain all the instructions
-    that the program cpptraj needs to perform the analysis.
+    that the program cpptraj needs to perform the analysis:
 
     ```
     # Cpptraj input file for replica 1 #
@@ -475,7 +475,7 @@ like `gedit`, to create the file `script_distance.sh`:
     the solute. In this way we capture only the internal motion, thus removing
     the global rotation and translation of the system. An atom selection mask
     must be specified. For example the mask `:1-210&!@H=`  says that all the
-    residue atoms from 1 to 210 (`:1-210`) except for the hydrogens (`!@H=`) are considered.
+    residue atoms from 1 to 210 (`:1-210`) except for the hydrogens (`!@H=`) are considered:
     
     ```
     rms first :1-210&!@H=            # RMS-fit to frame 1
@@ -514,7 +514,7 @@ width=60 %}
 {:start="8"}
 8.  Calculate the average (avg command) and standard deviation for each
     distance. All the distance datasets are read and their avg and s.d. are
-    printed to an output file called `1_avg.dat` (for replica 1) in column 1 and 2, respectively.
+    printed to an output file called `1_avg.dat` (for replica 1) in column 1 and 2, respectively:
     ```
     avg $DIST1_1 $DIST2_1 $DIST3_1 $DIST4_1 $DIST5_1 out 1_avg.dat
     ```
