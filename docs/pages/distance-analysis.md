@@ -762,7 +762,7 @@ set xtics offset 0,-0.2
 set border lw 3
 set lmargin 16
 set xlabel offset 0,-1.0 'pIC50 (M)' font ", 20"
-set ylabel offset -2.0,0 'ds of distance(Å)' font ", 20"
+set ylabel offset -2.0,0 'distance s.d. (Å)' font ", 20"
 
 plot 'ds_ic50.dat' u (-log($1)):2 w p pt 5 lw 10 title ""
 ```
