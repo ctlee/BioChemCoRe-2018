@@ -465,8 +465,10 @@ like `gedit`, to create the file `script_distance.sh`:
 5.  From this point, all the lines will end up in the input file
     *distance_analysis1.in*, which begins by reading the trajectory file `$TRAJ1`
     from frame 1 to the last:
-
-    `trajin $TRAJ1 1 last             # Read the trajectory1`
+    
+    ```
+    trajin $TRAJ1 1 last             # Read the trajectory1
+    ```
 
 6.  Each frame of the trajectory must be aligned to the first frame (i.e.
     RMS-fit to first frame), considering only the heavy atoms (no hydrogens) of
@@ -474,9 +476,11 @@ like `gedit`, to create the file `script_distance.sh`:
     the global rotation and translation of the system. An atom selection mask
     must be specified. For example the mask `:1-210&!@H=`  says that all the
     residue atoms from 1 to 210 (`:1-210`) except for the hydrogens (`!@H=`) are considered.
-
-    `rms first :1-210&!@H=            # RMS-fit to frame 1`
-
+    
+    ```
+    rms first :1-210&!@H=            # RMS-fit to frame 1
+    ```
+    
 7.  The distance analysis is performed by cpptraj through the command `distance`.
     The command `distance` calculates the distance between the center of mass of
     two atoms and it is defined in this way:
@@ -516,8 +520,9 @@ width=60 %}
     ```
 
 9.  Finish the generation of the input file for replica 1 with EOF marker:
-
-    `EOF`
+    ```
+    EOF
+    ```
 
 9.  Now leave a blank line and prepare the **cpptraj input file for replica 2** (`$INPUT2`).
     Remember to change all the number “1” to “2”, when it is the case.
