@@ -294,8 +294,8 @@ between two groups of opposite charge in which at least one pair of heavy atoms
 is within hydrogen bonding distance. A **salt bridge** is a combination of two
 non-covalent interactions: hydrogen bonding and electrostatic interaction. Salt
 bridges can contribute to protein stability, molecular recognition and catalysis.
-Salt bridges usually involve charged amino acids like Asp or Glu (negative) and
-His, Arg, or Lys (positive) and display extremely well-defined geometric preferences.
+Salt bridges usually involve charged amino acids like **Asp** or **Glu** (negative) and
+**His**, **Arg**, or **Lys** (positive) and display extremely well-defined geometric preferences.
 
 {% include image.html file="/distance-analysis/Figure_13.png"
 alt="" caption="Figure 13. Salt bridge"
