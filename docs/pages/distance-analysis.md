@@ -5,6 +5,8 @@ toc: true
 
 summary: "This tutorial will walk you through the theory and process of using
 distance analysis in your work."
+
+Written by: Lorenzo Casalino
 ---
 
 ## Motivation
