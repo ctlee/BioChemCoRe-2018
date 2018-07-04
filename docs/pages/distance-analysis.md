@@ -414,10 +414,10 @@ like `gedit`, to create the file `script_distance.sh`:
 
 2.  Define variables for the name of your topology, trajectory, cpptraj input files and output files:
     ```
-    TOP=/scratch/bcc2018-trajectories/6WCGO/6WCGO.prmtop            # Topology file (put the whole path)
-    TRAJ1=/scratch/bcc2018-trajectories/6WCGO/md1/6WCGO-Pro01.nc    # Trajectory1 (put the whole path)
-    TRAJ2=/scratch/bcc2018-trajectories/6WCGO/md2/6WCGO-Pro01.nc    # Trajectory2 (put the whole path
-    TRAJ3=/scratch/bcc2018-trajectories/6WCGO/md3/6WCGO-Pro01.nc    # Trajectory3 (put the whole path
+    TOP=/scratch/bcc2018_trajectories/6WCGO/6WCGO.prmtop            # Topology file (put the whole path)
+    TRAJ1=/scratch/bcc2018_trajectories/6WCGO/md1/6WCGO-Pro01.nc    # Trajectory1 (put the whole path)
+    TRAJ2=/scratch/bcc2018_trajectories/6WCGO/md2/6WCGO-Pro01.nc    # Trajectory2 (put the whole path
+    TRAJ3=/scratch/bcc2018_trajectories/6WCGO/md3/6WCGO-Pro01.nc    # Trajectory3 (put the whole path
     INPUT1=cpptraj.distance1.in                                     # Cpptraj input file for replica 1
     INPUT2=cpptraj.distance2.in                                     # Cpptraj input file for replica 2
     INPUT3=cpptraj.distance3.in                                     # Cpptraj input file for replica 3
@@ -511,8 +511,9 @@ width=60 %}
 8.  Calculate the average (avg command) and standard deviation for each
     distance. All the distance datasets are read and their avg and s.d. are
     printed to an output file called `1_avg.dat` (for replica 1) in column 1 and 2, respectively.
-
-    `avg $DIST1_1 $DIST2_1 $DIST3_1 $DIST4_1 $DIST5_1 out 1_avg.dat`
+    ```
+    avg $DIST1_1 $DIST2_1 $DIST3_1 $DIST4_1 $DIST5_1 out 1_avg.dat
+    ```
 
 9.  Finish the generation of the input file for replica 1 with EOF marker:
 
@@ -776,10 +777,10 @@ Here is the full example script for your convenience:
 #!/bin/bash
 
 # Define variables for files #
-TOP=/scratch/bcc2018-trajectories/6WCGO/6WCGO.prmtop            # Topology file
-TRAJ1=/scratch/bcc2018-trajectories/6WCGO/md1/6WCGO-Pro01.nc    # Trajectory1
-TRAJ2=/scratch/bcc2018-trajectories/6WCGO/md2/6WCGO-Pro01.nc    # Trajectory2
-TRAJ3=/scratch/bcc2018-trajectories/6WCGO/md3/6WCGO-Pro01.nc    # Trajectory3
+TOP=/scratch/bcc2018_trajectories/6WCGO/6WCGO.prmtop            # Topology file
+TRAJ1=/scratch/bcc2018_trajectories/6WCGO/md1/6WCGO-Pro01.nc    # Trajectory1
+TRAJ2=/scratch/bcc2018_trajectories/6WCGO/md2/6WCGO-Pro01.nc    # Trajectory2
+TRAJ3=/scratch/bcc2018_trajectories/6WCGO/md3/6WCGO-Pro01.nc    # Trajectory3
 INPUT1=cpptraj.distance1.in     # Cpptraj input file for replica 1
 INPUT2=cpptraj.distance2.in     # Cpptraj input file for replica 2
 INPUT3=cpptraj.distance3.in     # Cpptraj input file for replica 3
