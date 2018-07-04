@@ -816,11 +816,11 @@ DIST5_3=3-hydrophobic-TRP147-LIG
 
 # Cpptraj input file for replica 1 #
 cat << EOF > $INPUT1
-trajin $TRAJ1 1 last                            # Read the trajectory1
-rms first :1-210&!@H=                           # RMS-fit to frame 1
-distance $DIST1_1 :169@OG1 :210@N2 out $OUTPUT1 # Calculate distance DIST1_1 and write it in the file OUTPUT1 (column 2)
-distance $DIST2_1 :78@OD2 :210@N5 out $OUTPUT1  # Calculate distance DIST2_1 and write it in the file OUTPUT1 (column 3)
-distance $DIST3_1 :3645@O :210@N1 out $OUTPUT1  # Calculate distance DIST3_1 and write it in the file OUTPUT1 (column 4)
+trajin $TRAJ1 1 last                                # Read the trajectory1
+rms first :1-210&!@H=                               # RMS-fit to frame 1
+distance $DIST1_1 :169@OG1 :210@N2 out $OUTPUT1     # Calculate distance DIST1_1 and write it in the file OUTPUT1 (column 2)
+distance $DIST2_1 :78@OD2 :210@N5 out $OUTPUT1      # Calculate distance DIST2_1 and write it in the file OUTPUT1 (column 3)
+distance $DIST3_1 :3645@O :210@N1 out $OUTPUT1      # Calculate distance DIST3_1 and write it in the file OUTPUT1 (column 4)
 distance $DIST4_1 :83@CE :210@Cl out $OUTPUT1
 distance $DIST5_1 :147@CZ2 :210@C20 out $OUTPUT1
 avg $DIST1_1 $DIST2_1 $DIST3_1 $DIST4_1 $DIST5_1 out 1_avg.dat  # Calculate avg and ds for each distance of replica 1
@@ -828,11 +828,11 @@ EOF
 
 # Cpptraj input file for replica 2 #
 cat << EOF > $INPUT2
-trajin $TRAJ2 1 last                                    # Read the trajectory2
-rms first :1-210&!@H=                                   # RMS-fit to frame 1
-distance $DIST1_2 :169@OG1 :210@N2 out $OUTPUT2         # Calculate distance DIST1_2 and write it in the file OUTPUT2 (column 2)
-distance $DIST2_2 :78@OD2 :210@N5 out $OUTPUT2          # Calculate distance DIST2_2 and write it in the file OUTPUT2 (column 3)
-distance $DIST3_2 :3645@O :210@N1 out $OUTPUT2          # Calculate distance DIST3_2 and write it in the file OUTPUT2 (column 4)
+trajin $TRAJ2 1 last                                 # Read the trajectory2
+rms first :1-210&!@H=                                # RMS-fit to frame 1
+distance $DIST1_2 :169@OG1 :210@N2 out $OUTPUT2      # Calculate distance DIST1_2 and write it in the file OUTPUT2 (column 2)
+distance $DIST2_2 :78@OD2 :210@N5 out $OUTPUT2       # Calculate distance DIST2_2 and write it in the file OUTPUT2 (column 3)
+distance $DIST3_2 :3645@O :210@N1 out $OUTPUT2       # Calculate distance DIST3_2 and write it in the file OUTPUT2 (column 4)
 distance $DIST4_2 :83@CE :210@Cl out $OUTPUT2
 distance $DIST5_2 :147@CZ2 :210@C20 out $OUTPUT2
 avg $DIST1_2 $DIST2_2 $DIST3_2 $DIST4_2 $DIST5_2 out 2_avg.dat  # Calculate avg and ds for each distance of replica 2
@@ -840,11 +840,11 @@ EOF
 
 # Cpptraj input file for replica 3 #
 cat << EOF > $INPUT3
-trajin $TRAJ3 1 last                                    # Read the trajectory3
-rms first :1-210&!@H=                                   # RMS-fit to frame 1
-distance $DIST1_3 :169@OG1 :210@N2 out $OUTPUT3         # Calculate distance DIST1_3 and write it in the file OUTPUT3 (column 2)
-distance $DIST2_3 :78@OD2 :210@N5 out $OUTPUT3          # Calculate distance DIST2_3 and write it in the file OUTPUT3 (column 3)
-distance $DIST3_3 :3645@O :210@N1 out $OUTPUT3          # Calculate distance DIST3_3 and write it in the file OUTPUT3 (column 4)
+trajin $TRAJ3 1 last                                 # Read the trajectory3
+rms first :1-210&!@H=                                # RMS-fit to frame 1
+distance $DIST1_3 :169@OG1 :210@N2 out $OUTPUT3      # Calculate distance DIST1_3 and write it in the file OUTPUT3 (column 2)
+distance $DIST2_3 :78@OD2 :210@N5 out $OUTPUT3       # Calculate distance DIST2_3 and write it in the file OUTPUT3 (column 3)
+distance $DIST3_3 :3645@O :210@N1 out $OUTPUT3       # Calculate distance DIST3_3 and write it in the file OUTPUT3 (column 4)
 distance $DIST4_3 :83@CE :210@Cl out $OUTPUT3
 distance $DIST5_3 :147@CZ2 :210@C20 out $OUTPUT3
 avg $DIST1_3 $DIST2_3 $DIST3_3 $DIST4_3 $DIST5_3 out 3_avg.dat  # Calculate avg and ds for each distance of replica 3
