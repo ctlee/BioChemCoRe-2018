@@ -774,7 +774,7 @@ Save the file and run this command in terminal to plot:
 > gnuplot -e "set terminal png size 1920,1080 font ',14'" gnuplot_ds_ic50.in > ds_ic50.png
 ```
 
-**Q7:** You should have 6 data points in your graph. Is there any correlation between the s.d of the selected distance and the ligand pIC50? Is the s.d a good parameter to llook at for describing drug efficacy (e.g. does a lower s.d. value go together with an high pIC50 value)? Comment.
+**Q7:** You should have 6 data points in your graph. Is there any correlation between the s.d of the selected distance and the ligand pIC50? Is the s.d a good parameter to look at for describing drug efficacy (e.g. does a lower s.d. value go together with an high pIC50 value)? Comment.
 
 
 ## The Full Distance Script
