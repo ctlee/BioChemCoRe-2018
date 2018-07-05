@@ -712,7 +712,7 @@ width=60 %}
     to the new system, adding or deleting distances, changing their name, tuning
     the atom selection masks (ligand name...) and so on.
     
-    *** !!! Before continuing with the next Questions, you need the distance analyses done for all the 6 systems ***
+    ** !!! Before continuing with the next Questions, you need the distance analyses done for all the 6 systems **
 
 **Q5:** Compare now the 6 HSP90 systems and thus the 6 different ligands. Which
 of these ligands appear to establish more stable contacts (conserved among the
@@ -727,8 +727,8 @@ calculate that:
 
 
 **Q6:**  Try to correlate all the information gained upon distance analysis with
-the IC50 values. You were indeed given the IC50 values (in nM) for each ligand. A lower IC50 means higher potency and vice versa. However,  as you have done for the RMSD/RMSF analysis,  we will express IC50 as pIC50 (pIC50 = -log(IC50)). This means, instead, that a ligand with a higher pIC50 is more potent. To plot the -log(IC50) please first convert the IC50 values from nM scale to M scale (1nm = 0.000 000 001 M = 1E-9 M). After you have done this, for each
-system prepare a two-column file called ds_ic50.dat by using a text editor like gedit. In the terminal type:
+the IC50 values. You were indeed given the IC50 values (in nM) for each ligand. A lower IC50 means higher potency and vice versa. However,  as you have done for the RMSD/RMSF analysis,  we will express IC50 as pIC50 (pIC50 = -log(IC50)). This means, instead, that a ligand with a higher pIC50 is more potent. To plot the -log(IC50) please first convert the IC50 values from nM scale to M scale (1nm = 0.000 000 001 M = 1E-9 M). 
+After you have done this, in the distance_analysis directory prepare a two-column file called ds_ic50.dat by using a text editor like gedit. In the terminal type:
 
 ```
 > gedit ds_ic50.dat
@@ -736,7 +736,7 @@ system prepare a two-column file called ds_ic50.dat by using a text editor like 
 
 In this file, in column 1 insert the IC50 (in M) of the ligand that has been
 given to you.  In the column 2 insert the s.d. of the most stable conserved distance
-for each system. The file must be in this format:
+for that system. So you will have 6 rows, one for each system. The file must be in this format:
 
 ```
 3E-6    0.02    # system 1
