@@ -349,7 +349,7 @@ thickness of the H-bonds that are drawn from 1 to 2. This will show the H-bonds
 in the `Display` window and will help you to better determine which are the possible H-bonds.' %}
 
 Take note on your notebook of the distances you consider to be relevant for the
-ligand interacting with protein, especially h-bonds, reporting the **resid, atom
+ligand interacting with protein (at least 5), especially h-bonds, reporting the **resid, atom
 name and the resname** of the involved atoms (as in the example below). Report a
 few of hydrophobic contacts if you can find them. Pay attention to halogen atoms
 of the ligand that might be involved in such interactions. Importantly, in doing
