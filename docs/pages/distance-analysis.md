@@ -711,6 +711,8 @@ width=60 %}
     you have generated for system 1. Don’t forget to modify the script according
     to the new system, adding or deleting distances, changing their name, tuning
     the atom selection masks (ligand name...) and so on.
+    
+    *** !!! Before continuing with the next Questions, you need the distance analyses done for all the 6 systems ***
 
 **Q5:** Compare now the 6 HSP90 systems and thus the 6 different ligands. Which
 of these ligands appear to establish more stable contacts (conserved among the
