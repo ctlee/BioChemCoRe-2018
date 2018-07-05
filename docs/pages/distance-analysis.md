@@ -94,7 +94,7 @@ width=60 %}
 
 {:start="4"}
 4. In the VMD Main choose `Graphics > Colors`. A new window called `Color Controls`
-will open (**Figure 3**). In the “Categories” left panel select “Element”, then in
+will open (**Figure 3**). In the “Categories” left panel select “Type”, then in
 the central “Name” panel select “C” and finally in the “Colors” right panel
 select “6 Silver”. Close the `Color Controls` window.
 
@@ -141,7 +141,7 @@ width=60 %}
     representation and change the Selected atoms to “resname LIG”. **Note that each
     system will have a different resname for the ligand, so in place of “LIG” write
     the actual residue name (“resname”) of the ligand of the system under analysis.**
-    Press return. Change the drawing method to “CPK” and the *Coloring Method* to “Element”.
+    Press return. Change the drawing method to “CPK” and the *Coloring Method* to “Type”.
     At this point you should have your protein in cyan new cartoon and the ligands
     represented as C-silver CPK.
 
