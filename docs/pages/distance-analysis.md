@@ -221,9 +221,7 @@ width=60 %}
 {:start="7"}
 7.  Save the visualization state of the system by choosing, in the VMD Main
     window, `File > Save Visualization state...` A new window will open and, in the box
-    beside the word “Filename”, go at the very end of the string (it is the whole
-    path of the current directory in which you are working) and write “state.vmd”
-    (where 1 stays for system). This will be the name of your state. Press OK button.
+    beside the word “Filename”, find your own folder where you have permission to write and save it as `state_BCCID.vmd`. This will be the name of your state. Press OK button.
     You can recover this state at a later time from the VMD Main window,
     `File > Load Visualization state...`. It's good practice to save as you go
     in case VMD crashes while you are working.
