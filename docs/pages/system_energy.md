@@ -37,6 +37,7 @@ This is a really useful tool if we only want to look at these properties for a s
 
 ## Running the Automated Energy Analysis Script ##
 
+1. Download the necessary scripts  <a href="{{ '/assets/pdbs/make_directories.py' | prepend: site.baseurl }}">make_directories.py</a> and <a href="{{ '/assets/pdbs/run_Energy_Analysis.py' | prepend: site.baseurl }}">run_Energy_Analysis.py</a>
 1. In your personal scratch directory, we will create a new filetree for energy analysis bu running `python make_directories.py`
 2. In this new directory, place the files: `run_Energy_Analysis.py` and `BCCHelper.py`
 3. Take a look at this script with your favorite text editor. What does the `subprocess` command do?
