@@ -27,6 +27,7 @@ As a first pass, let's look at the energy of a single MD run.
 3. Move into your new directory and run the amber perl script with the command, remember to change the path and name of the file to match your chosen system!
 
 ``` $AMBERHOME/bin/process_mdout.perl path/to/$your_production_output_file$ ```
+
 4. After this completes, you should see many summary files for different properties in the directory.
 5. Lets explore these files by opening them with your favorite text editor. **What information is inside?**
 6. Lets quickly plot one of these time series with xmgrace
