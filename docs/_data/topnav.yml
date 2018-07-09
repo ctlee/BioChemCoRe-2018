@@ -20,5 +20,7 @@ topnav_dropdowns:
           url: /rmsd-rmsf/
         - title: Distance Analysis
           url: /distance-analysis/
+        - title: System Energy Analysis
+          url: /system-energy/
         - title: POVME Analysis
           url: /povme/
