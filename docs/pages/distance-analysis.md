@@ -602,8 +602,8 @@ width=60 %}
     set border lw 2
     set lmargin 11
     set rmargin 4
-    set xlabel offset 0,-1.0 'frame #' font ", 20"
-    set ylabel offset -1.0,0 'distance (Å)' font ", 20"
+    set xlabel offset 0,-1.0 'frame #' font ", 22"
+    set ylabel offset -1.0,0 'distance (Å)' font ", 22"
 
     plot '$OUTPUT1' u 1:2 w l lw 3 title '$DIST1_1', \
     '$OUTPUT1' u 1:3 w l lw 3 title '$DIST2_1', \
@@ -628,8 +628,8 @@ width=60 %}
     set border lw 2
     set lmargin 11
     set rmargin 4
-    set xlabel offset 0,-1.0 'frame #' font ", 20"
-    set ylabel offset -1.0,0 'distance (Å)' font ", 20"
+    set xlabel offset 0,-1.0 'frame #' font ", 22"
+    set ylabel offset -1.0,0 'distance (Å)' font ", 22"
 
     plot '$OUTPUT2' u 1:2 w l lw 3 title '$DIST1_2', \
     '$OUTPUT2' u 1:3 w l lw 3 title '$DIST2_2', \
@@ -654,8 +654,8 @@ width=60 %}
     set border lw 2
     set lmargin 11
     set rmargin 4
-    set xlabel offset 0,-1.0 'frame #' font ", 20"
-    set ylabel offset -1.0,0 'distance (Å)' font ", 20"
+    set xlabel offset 0,-1.0 'frame #' font ", 22"
+    set ylabel offset -1.0,0 'distance (Å)' font ", 22"
 
     plot '$OUTPUT3' u 1:2 w l lw 3 title '$DIST1_3', \
     '$OUTPUT3' u 1:3 w l lw 3 title '$DIST2_3', \
@@ -667,10 +667,11 @@ width=60 %}
 
     To launch gnuplot and plot all the distances for the 3 replicas, insert the following lines in your script:
     ```
-    gnuplot -e "set terminal png size 1920,1080 font ',14' " gnuplot_1.in > 1_distances.png
-    gnuplot -e "set terminal png size 1920,1080 font ',14' " gnuplot_2.in > 2_distances.png
-    gnuplot -e "set terminal png size 1920,1080 font ',14' " gnuplot_3.in > 3_distances.png
+    gnuplot -e "set terminal png size 1920,1080 font ',16' " gnuplot_1.in > 1_distances.png
+    gnuplot -e "set terminal png size 1920,1080 font ',16' " gnuplot_2.in > 2_distances.png
+    gnuplot -e "set terminal png size 1920,1080 font ',16' " gnuplot_3.in > 3_distances.png
     ```
+    Note that you can change the font size of the legend by increasing the number from ',16' to ',18' or ',20'.
 
 ### Launch the script_distance.sh file to perform the distance analysis and check the results
 1.  Good, you have completed your script! Now save your file `script_distance.sh`
@@ -762,8 +763,8 @@ set mytics
 set xtics offset 0,-0.2
 set border lw 3
 set lmargin 16
-set xlabel offset 0,-1.0 'pIC50 (M)' font ", 20"
-set ylabel offset -2.0,0 'distance s.d. (Å)' font ", 20"
+set xlabel offset 0,-1.0 'pIC50 (M)' font ", 22"
+set ylabel offset -2.0,0 'distance s.d. (Å)' font ", 22"
 
 plot 'ds_ic50.dat' u (-log($1)):2 w p pt 5 lw 10 title ""
 ```
@@ -771,7 +772,7 @@ plot 'ds_ic50.dat' u (-log($1)):2 w p pt 5 lw 10 title ""
 Save the file and run this command in terminal to plot:
 
 ```
-> gnuplot -e "set terminal png size 1920,1080 font ',14'" gnuplot_ds_ic50.in > ds_ic50.png
+> gnuplot -e "set terminal png size 1920,1080 font ',16'" gnuplot_ds_ic50.in > ds_ic50.png
 ```
 
 **Q7:** You should have 6 data points in your graph. Is there any correlation between the s.d of the selected distance and the ligand pIC50? Is the s.d a good parameter to look at for describing drug efficacy (e.g. does a lower s.d. value go together with an high pIC50 value)? Comment.
