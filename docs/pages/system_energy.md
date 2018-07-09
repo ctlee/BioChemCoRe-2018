@@ -34,7 +34,7 @@ if we had many different systems. This is where automation can be a huge time sa
 ## Running the Automated Energy Analysis Script ##
 
 1. In the top level directory that contains all of the systems, create a new directory called "energy_analysis" 
-2. In this new directory, place the files: `run_Energy_Analysis.py` and `BCCHelper.py'
+2. In this new directory, place the files: `run_Energy_Analysis.py` and `BCCHelper.py`
 3. Take a look at this script with your favorite text editor. What does the `subprocess` command do?
 4. Run the script ` python run_Energy_Analysis.py 1` **What is the number "1" doing here?**
 5. At this point, take some time to discuss your results with your fellow students and the BCC mentors.
