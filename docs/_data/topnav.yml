@@ -22,5 +22,7 @@ topnav_dropdowns:
           url: /distance-analysis/
         - title: System Energy Analysis
           url: /system-energy/
+        - title: Principal Component Analysis
+          url: /PCA/
         - title: POVME Analysis
           url: /povme/
