@@ -40,7 +40,7 @@ This is a really useful tool if we only want to look at these properties for a s
 ## Running the Automated Energy Analysis Script ##
 
 1. Download the necessary scripts  <a href="{{ '/assets/pdbs/make_directories.py' | prepend: site.baseurl }}">make_directories.py</a> and <a href="{{ '/assets/pdbs/run_Energy_Analysis.py' | prepend: site.baseurl }}">run_Energy_Analysis.py</a>
-1. In your personal scratch directory, we will create a new filetree for energy analysis bu running `python make_directories.py`
+1. In your personal scratch directory, we will create a new filetree for energy analysis by running `python make_directories.py`
 2. In this new directory, place the files: `run_Energy_Analysis.py` and `BCCHelper.py`
 3. Take a look at this script with your favorite text editor. What does the `subprocess` command do?
 4. Run the script ` python run_Energy_Analysis.py 1` **What is the number "1" doing here?**
@@ -57,9 +57,10 @@ This is a really useful tool if we only want to look at these properties for a s
 1. Can you modify the script to plot pIC50 vs predicted ic50? Hint: pIC50 = -log(IC50)
 2. Can you quantify the **correlation** between measured and predicted ic50s, in your produced plots?
 Include the correlation and a regression line on your figure.
-3. Plot other properties produced by the perl script (kinetic energy, potential energy, etc.). Consider using multiple series on the same plot.
+2. Plot the number of atoms in each system vs. the system energy. **What trends do you notice?** 
+3. Plot other properties produced by the perl script (kinetic energy, potential energy, etc.). Consider using multiple series on the same plot. **Do any of these show better correlation?**
 4. Can you calculate the standard deviation of the values in addition to the averages? **How could you
-include this in the plot?** Use the calculated standard deviation ans an error bar on the average energies.
+include this in the plot?** Use the calculated standard deviation as an error bar on the average energies.
 5. Take some time to polish the figure you are creating. Try to change the colors and shapes of data points. Consider adding additional lables.
 6. What other things might it be useful to automate with the `subprocess` command
 
