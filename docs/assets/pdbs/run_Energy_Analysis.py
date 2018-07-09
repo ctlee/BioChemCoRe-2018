@@ -6,7 +6,7 @@ import numpy as np
 import sys
 
 
-path2data='/scratch/bcc2018_trajectories/'
+path2data='/scratch/bcc2018_trajectories'
 #===========================================================
 # if this flag is set to 1, energy plots will be prodcued
 plt_flag = int( sys.argv[1] )
@@ -24,7 +24,7 @@ for k in range(0, len(bcc.bccids) ):
         continue
     
     #====move to path of corresponding ligand MD folder
-    path0= '../' + bcc.bccids[k]
+    path0= bcc.bccids[k]
     os.chdir(path0)
     
 
@@ -48,9 +48,12 @@ for k in range(0, len(bcc.bccids) ):
         subprocess.getoutput('mkdir DATA_ANALYSIS')
         os.chdir('DATA_ANALYSIS/')
 
+        #====variable storing the name of the AMBER production .out file
+        trajectory_output= path2data + '/'+ bcc.bccids[k]+ '/' +path1 + bcc.bccids[k] + '-Pro01.out'
 
+        print(trajectory_output)
         #====run amaber analysis script to conver output file into time vs. energy file
-        subprocess.getoutput('$AMBERHOME/bin/process_mdout.perl ../%s'%(trajectory_output) )
+        subprocess.getoutput('$AMBERHOME/bin/process_mdout.perl %s'%(trajectory_output) )
         
         #===load data into numpy array for averaging
         #===time is stored in first column
@@ -59,7 +62,7 @@ for k in range(0, len(bcc.bccids) ):
 
         #===check if energy is equilibrated
         if( plt_flag == 1):
-            plt.scatter( data[:,0], data[:,1] )
+            plt.plot( data[:,0], data[:,1], '-' )
             plt.xlabel('time (ps) ')
             plt.ylabel('energy (kcal/mol) ' )
             plt.show()
@@ -74,12 +77,12 @@ for k in range(0, len(bcc.bccids) ):
         os.chdir('..')
         os.chdir('..')
 
-
     #====calculate the average ic50 over md1,md2,md3 folders
     average_energy_triplicate = average_energy_triplicate/3.0
     #====stored calculated energy in dictionary
     predicted_ic50[ bcc.bccids[k] ] = average_energy_triplicate
-
+    #====move up one more directory for the next system
+    os.chdir('..')
 
 
 
@@ -103,7 +106,7 @@ for key, value in bcc.training_IC50.items() :
 #===make scatter plots!
 plt.scatter( measured_val, predicted_val )
 plt.xlabel('measured ic50' )
-plt.ylabel('predicted ic50' )
+plt.ylabel('Total System Energy (kcal/mol)' )
 plt.show()
 
     
