@@ -3,7 +3,7 @@ title: "System Energy Tutorial"
 permalink: /system-energy/
 toc: true
 
-summary: ""
+summary: "In this tutorial we will analyze the correlation of system energy with measured ic50 values. We will also lwearn more about automation through the subprocess python command"
 ---
 
 In this tutorial, you will postprocess an amber output file obtained through a production MD simulation
@@ -22,23 +22,25 @@ Fortunately, we do not need to do this since Amber already has a script for this
 
 As a first pass, let's look at the energy of a single MD run.
 
-1. Inside the "md1" directory of your chosen system, create a new directory called "energy_analysis_test"
-2. load the amber module if you have not done so already
-3. move into your new directory and run the amber perl script with the command, remember to change the name of the file to match your system!
-``` $AMBERHOME/bin/process_mdout.perl ../$your_production_output_file$ ```
+1. Create a new directory called "energy_analysis_test" in your scratch directory.
+2. Load the amber module if you have not done so already
+3. Move into your new directory and run the amber perl script with the command, remember to change the path and name of the file to match your chosen system!
+
+``` $AMBERHOME/bin/process_mdout.perl path/to/$your_production_output_file$ ```
+
 4. After this completes, you should see many summary files for different properties in the directory.
 5. Lets explore these files by opening them with your favorite text editor. **What information is inside?**
 6. Lets quickly plot one of these time series with xmgrace
-``` xmgrace summary.EPTOT ```
+``` xmgrace summary.ETOT ```
 **What is this plot showing us?**
 
 
-This is a really useful tool if we only want to look at these properties for a single system, but it would quickly become tedious
-if we had many different systems. This is where automation can be a huge time saver!
+This is a really useful tool if we only want to look at these properties for a single system, but it would quickly become tediousif we had many different systems. This is where automation can be a huge time saver!
 
 ## Running the Automated Energy Analysis Script ##
 
-1. In the top level directory that contains all of the systems, create a new directory called "energy_analysis"
+1. Download the necessary scripts  <a href="{{ '/assets/pdbs/make_directories.py' | prepend: site.baseurl }}">make_directories.py</a> and <a href="{{ '/assets/pdbs/run_Energy_Analysis.py' | prepend: site.baseurl }}">run_Energy_Analysis.py</a>
+1. In your personal scratch directory, we will create a new filetree for energy analysis by running `python make_directories.py`
 2. In this new directory, place the files: `run_Energy_Analysis.py` and `BCCHelper.py`
 3. Take a look at this script with your favorite text editor. What does the `subprocess` command do?
 4. Run the script ` python run_Energy_Analysis.py 1` **What is the number "1" doing here?**
@@ -54,10 +56,13 @@ if we had many different systems. This is where automation can be a huge time sa
 
 1. Can you modify the script to plot pIC50 vs predicted ic50? Hint: pIC50 = -log(IC50)
 2. Can you quantify the **correlation** between measured and predicted ic50s, in your produced plots?
-3. Plot other properties produced by the perl script. Consider using another series on the same plot.
-4. Can you calculate the standard deviation of the values in addition to the average? How could you
-include this in the plot?
-5. What other things might it be useful to automate with the `subprocess` command
+Include the correlation and a regression line on your figure.
+2. Plot the number of atoms in each system vs. the system energy. **What trends do you notice?** 
+3. Plot other properties produced by the perl script (kinetic energy, potential energy, etc.). Consider using multiple series on the same plot. **Do any of these show better correlation?**
+4. Can you calculate the standard deviation of the values in addition to the averages? **How could you
+include this in the plot?** Use the calculated standard deviation as an error bar on the average energies.
+5. Take some time to polish the figure you are creating. Try to change the colors and shapes of data points. Consider adding additional lables.
+6. What other things might it be useful to automate with the `subprocess` command
 
 
 
