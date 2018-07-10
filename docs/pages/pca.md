@@ -6,6 +6,8 @@ toc: true
 summary: "Summary goes here"
 ---
 
+ BioChemCoRe-2018/docs/assets/pdbs/PCA_tutorial.py 
+
 Principal Component Analysis (PCA)
 
 Summary: This tutorial will help you see how to analyze and visualize multi-dimensional data in an easily understandable way. We will use PCA to analyze and visualize MD trajectories.
