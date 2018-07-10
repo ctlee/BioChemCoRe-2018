@@ -137,3 +137,5 @@ Now, to run the script, you can type in the terminal:
 ```
 python PCA_analysis.py
 ```
+
+Again, you will run this script for each of three replicates of your six HSP90 systems (18 times total). For each of those, you will create graphs of principal components and how well those explain the variance. With each graph you create, take a screenshot of it and save it in a folder specific for that replicate. To take a screenshot, go to the `applications` tab in the top left of your screen, scroll down to `graphics`, then click 'KSnapshot'. When you take a screenshot, it will be saved in your `Downloads` folder. From there, just move it to the directory you created to hold the analysis of each of your replicates. Voilà!
