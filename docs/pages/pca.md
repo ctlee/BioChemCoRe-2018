@@ -8,7 +8,6 @@ summary: "Summary goes here"
 
 Principal Component Analysis (PCA)
 
-Here is where you can find the script in question: BioChemCoRe-2018/docs/assets/pdbs/PCA_tutorial.py
 Summary: This tutorial will help you analyze and visualize multi-dimensional data in an easily understandable way using principal component analysis (PCA). We will use PCA to analyze and visualize molecular dynamics (MD) simulation trajectories.
 Written by Christian Seitz and Zied Gaieb
 Motivation
