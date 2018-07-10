@@ -14,7 +14,7 @@ Written by Christian Seitz and Zied Gaieb
 
 Principal component analysis (PCA) is a method of taking multi-dimensional data and transforming it into an easily-understandable, 2D or 3D plot. This is much easier to analyze and visualize than multi-dimensional data, which can have dozens of dimensions. You will take the six HSP90 system trajectories, extract their principal components, and see which components best explains the variance of the system. Overall, you will need to check out this potential correlation for each of your six systems, each of which has three trajectories, for a total of 18 PCA analyses. You could do each step for each of your 18 PCA analyses as you go about the tutorial. However, a famous professor once said that it is a much better idea to pick system, and take it from start to finish, before starting on any others. That way, you will fix any bugs on the one system, and if you mess up a step, you will only have to redo one system, instead of 18.
 
-## Part 1 Write a script to analyze PCA of an MD trajectory
+## Write a script to analyze PCA of an MD trajectory
 ### A.	Set up a python script to do PCA of your trajectories
 
 A script is simply a collection of commands that can be executable at once. This automates your work. Considering automation makes work easier, more reproducible and easier to follow and remember, it is a good idea to automate your work whenever possible. 
