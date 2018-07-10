@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-# Author: Christian Seitz
-# copyright (c): me
+# Author: Christian Seitz and Zied Gaieb
+# copyright (c): us
 # Script follows here
 
 #start up the programs we will use, after importing the full name, you can rename it whatever you want
