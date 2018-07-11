@@ -13,9 +13,9 @@ Hydrogen bond analysis identifies the number and/or duration of hydrogen bonds i
 
 Hydrogen bonds facilitate molecular interactions and are ubiquitous in nature. The bond between a H on a water molecule and an O on another water molecule is resposible for the cohesive property of water. H-bonds are also important for the secondary structure of proteins: depending on the spacing of the amino acids, H-bonds formed between these residues create alpha helices or beta sheets. In this tutorial, we're interested in H-bonds formed between ligands and proteins. 
 
-#### Q1: What role do you think H-bonds play in the interaction between a ligand and a protein? 
+Make sure to do this tutorial for each HSP90 system. 
 
-You are expected to do this tutorial for each HSP90 system. 
+#### Q1: What role do you think H-bonds play in the interaction between a ligand and a protein? 
 
 ## Step 1: Visual inspection of H-bonds in protein-ligand system. 
 
@@ -35,3 +35,29 @@ Next, examine the trajectory files in VMD. In the Distance Analysis tutorial (ht
 alt="h-bond table" caption="Table 1: Example table"
 width=100 %}
 
+Repeat this for each trajectory (md1, md2, md3) of the three replicates for each HSP90 system. You may have already done some of this work; save time by repurposing and/or adding to it! 
+
+#### Q3. For each system and replicate, make a clear and informative figure that shows the hydrogen bonds you identified in Q2. Don't forget labels! 
+
+#### Q4. Do the number of H-bonds differ much between md1, md2, md3 replicates? What about between HSP90 systems? 
+
+## Step 2: Finding and plotting all protein-ligand H-bonds
+
+Now that you're familiar with the types and number of H-bonds at the beginning and end of the simulations, we're going to take a look at the number of H-bonds over time. Counting these on a frame-by-frame basis in VMD would take forever, so we're going to write a script that will do it for us. 
+
+### 1. Launch a jupyter notebook. 
+
+```
+> cd hbond_analysis
+
+> jupyter notebook 
+```
+Create a new notebook by clicking new python 3 notebook in the upper right corner of the page. Name this notebook "hbond_analysis.ipynb". The next steps will be done in your notebook.
+
+### 2. Load Modules 
+
+import mdtraj as md
+import pytraj as pt # we need to make sure this is installed on the Keck II computers
+import numpy as np
+import matplotlib.pyplot as plt
+% matplotlib inline # this makes your plot print in the jupyter notebook
