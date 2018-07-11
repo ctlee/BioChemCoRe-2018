@@ -55,9 +55,87 @@ Now that you're familiar with the types and number of H-bonds at the beginning a
 Create a new notebook by clicking new python 3 notebook in the upper right corner of the page. Name this notebook "hbond_analysis.ipynb". The next steps will be done in your notebook.
 
 ### 2. Load Modules 
-
+```
 import mdtraj as md
 import pytraj as pt # we need to make sure this is installed on the Keck II computers
 import numpy as np
 import matplotlib.pyplot as plt
 % matplotlib inline # this makes your plot print in the jupyter notebook
+```
+
+### 3. Load Trajectories
+```
+traj = md.load('/scratch/bcc2018_trajectories/${BCCID}/md1/${BCCID}-Pro01.nc', 
+              top = '/scratch/bcc2018_trajectories/${BCCID}/${BCCID}.prmtop', 
+              stride = 1) # you can change this so it only reads every 'nth' frame. Useful for very long trajs.
+print(traj)
+```
+
+### 4. Define a function for labeling hydrogen bonds
+The mdtraj hbond function, which we'll use today, returns atom numbers. Let's make it easier for us to interpret by defining hbond_label. The output is three coulums of the format: hbond donor, proton, hbond acceptor.
+```
+def label(hbond):
+    hbond_label = '%s -%s- %s' % (traj.topology.atom(hbond[0]), traj.topology.atom(hbond[1]), traj.topology.atom(hbond[2]))
+    return hbond_label
+```
+
+### 5. Specify the ligand and protein
+```
+ligand = traj.topology.select('resid LIG') # instead of 'resname 99B' for 0YDD5, use 'resid 210'. For all others use the ligand name.
+protein = traj.topology.select("protein")
+```
+
+### 6. Find all ligand-protein hydrogen bonds
+```
+# figure out how many frames you loaded, this is how many frames we will look for hbonds in 
+n_frames = len(traj)
+print(n_frames)
+
+# This set will give us all of the unique hbonds that are made with the ligand, without repeats
+# We will want to have this later so we make it not to avoid repeating hbond calculation 
+all_hbonds_set = set()
+# This list will store all of the hbonds made per frame
+hbonds_each_frame = []
+# We want to create a dictionary containing every frame and the ligand hbonds which occur in that frame
+Frame2hbond = {}
+for frame in range(n_frames):
+    # The dictionary "words" are the frame number
+    Frame2hbond[frame] = [] 
+    # We are doing the hbond analysis frame by frame
+    hbonds = md.baker_hubbard(traj[frame]) 
+    hbonds_each_frame.append(hbonds)
+    # We only care about the hbonds if they involve the ligand 
+    for hbond in hbonds:
+        if ((hbond[0] in ligand) and (hbond[2] in protein) or #This is when the ligand is donating 
+            (hbond[2] in ligand) and (hbond[0] in protein)): #This is when the ligand is accepting             
+            all_hbonds_set.add(tuple(hbond))
+            # The dictionary "definitions" are all the hbonds in that frame
+            Frame2hbond[frame].append(tuple(hbond))  
+```
+
+### 7. Plot the total number of hydrogen bonds per frame
+```
+x = [] # these are all the frames
+y = [] # this is the total number of hbonds in that frame 
+for frame in Frame2hbond:
+    x.append(frame)
+    y.append((len(Frame2hbond[frame])))
+
+## Make your own pretty plot based on the matplotlib skills you've learned.
+## Change the size, resolution, color, and make sure to label axes and give the plot a title! 
+plt.plot(x,y)
+plt.savefig('figure_name.png')
+plt.show()
+```
+
+#### Q5. Plot the total number of H-bonds per frame for each replicate (md1, md2, md3) for each HSP90 system. 
+That's 18 plots! Find a way to put this information all together in one image or plot -- make it as clear and readable as possible.  
+
+#### Q6. Now let's compare the systems and try to correlate the H-bond information with IC50 values. 
+You were given the IC50 values (in nM) for each ligand. As you have done for the previous analyses, we will express IC50 as pIC50 (pIC50 = -log(IC50)). Think back to the Distance Analysis tutorial, where you plotted the standard deviation of the most stable conserved distance for each system against the pIC50. How would do the same thing in terms of H-bonds? Brainstorm a few ideas and find a way to turn this into an informative figure. Remember to account for the three replicates for each system. 
+
+#### Q7. Which H-bonds persist throughout the entire simulation? 
+Use your knowledge from the water residency tutorial and combine it with what you've learned today to figure out which H-bonds remain constant over time. 
+
+#### Q8. Summary figure. 
+Prepare a slide with the most important results you have from this tutorial. Make sure to include an informative VMD figure and a plot correlating H-bonds and IC50s. Be ready to clearly explain what you found to someone who doesn't know anything about what you're doing! 
