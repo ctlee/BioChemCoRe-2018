@@ -33,7 +33,7 @@ Next, examine the trajectory files in VMD. In the Distance Analysis tutorial (ht
 
 #### Q2.  In your notebook, list ligand-protein or ligand-water hydrogen bonds that are in the first or last frame. For example: 
 
-{% include image.html file="/h-bond/table.png" alt="h-bond table" caption="Table 1: Example table" width=50 %}
+{% include image.html file="/h-bond/table.png" alt="h-bond table" caption="Table 1: Example table" width=100 %}
 
 Repeat this for each trajectory (md1, md2, md3) of the three replicates for each HSP90 system. You may have already done some of this work; save time by repurposing and/or adding to it! 
 
@@ -99,6 +99,7 @@ all_hbonds_set = set()
 # This list will store all of the hbonds made per frame
 hbonds_each_frame = []
 ```
+
 ```
 # We want to create a dictionary containing every frame and the ligand hbonds which occur in that frame
 Frame2hbond = {}
