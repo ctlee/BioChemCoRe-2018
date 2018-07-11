@@ -25,20 +25,16 @@ In the above situation, POVME can perform two useful tasks:
 
 1. Pocket shape-based clustering: POVME will analyze the whole simulation from the perspective of the binding pocket, and find unique families of conformations that were visited. This way, a scientist can dock to just a few, unique snapshots of the protein binding pocket (the cluster representatives), under the assumption that the drugs revealed by docking to these few conformations are the same as the drugs that you'd discover by docking to every single frame.
 
-2. PCA and simulation summary: POVME can generate a 3D model overlaid on the binding pocket, showing what kinds of subpockets, motions and/or conformational changes were observed in the simulation. Actual drug designers will find this output far more useful than the clustering, since drug design is present(2016)ly more of an art than a science, and this information is more readily visualized. 
+2. Simulation summary: POVME can generate a 3D model overlaid on the binding pocket, showing what kinds of subpockets, motions and/or conformational changes were observed in the simulation. Actual drug designers will find this output far more useful than the clustering, since drug design is present(2016)ly more of an art than a science, and this information is more readily visualized. 
 
-## What is POVME3.0?
-
-The best way to learn about POVME3.0 is to first learn about POVME2.0. Read through Jacob’s original (beautiful) documentation here to understand what POVME’s all about. The core of POVME remains the same, but I’ve made it leaner, meaner, and greener (among other colors). Confused? Let’s learn by doing.
 
 ## Today’s projects
 
 We’ll be a bit busy, so let’s get moving. Today, we’ll
 - Set up POVME and its VMD plugin
-- Run POVME on the binding pocket in our toy system the old-fashioned way
-- Do more complex post-analysis on these POVME results
-- Analyze the same binding pocket using a ligand-based pocket-definition algorithm, and look into chemical colors
+- Run POVME on the binding pocket in our system the old-fashioned way
 - Run an advanced POVME analysis workflow on multiple trajectories of the same protein bound to different ligands
+- Do more complex post-analysis on these POVME results
 
 **1. Set up POVME and its VMD plugin**
 
@@ -52,19 +48,24 @@ menu main on
 vmd_install_extension povme2 povme2_tk_cb "Analysis/POVME2"
 set ::povme2::povme2_directory "$::env(POVME_PATH)/POVME/POVME3.py"
 ```
+
+execute `module load povme`
+
 Now open VMD and go to `Extensions -> Analysis -> POVME2`.
 
 **Ensure that this opens.**
 
 **2. Run POVME on the binding pocket the old-fashioned way**
 
-We’re going to look at a drug-binding pocket on Heat Shock Protein 90 (HSP90). You can find this file at /home/sa19/2VCI_demo_clean.pdb
+We will first look at a single trajectory from our HSP90 simulations. Select your favorite BCCID.
 
-Make a new directory in your /scratch for the analysis, and copy this trajectory into there
+Make a new directory in your /scratch for the analysis, 
 
-Load the trajectory into VMD. Be sure to open VMD in your /scratch directory.
+cd to this directory. We want all output to be written there.
 
-Usually, you’d have to align the trajectory, however I’ve already done it for you this time.
+Load the trajectory into VMD by specifying the correct file paths. Be sure to open VMD in your new /scratch directory.
+
+Align the trajectory using the `RMSD Trajectory Tool`
 
 Open the Povme2 plugin by going to `Extensions -> Analysis -> POVME2`
 
@@ -80,38 +81,28 @@ We solve this problem using “seed” regions. These are regions that we are de
 
 Add a “Contiguous Pocked Seed” sphere as well (in the third box) with the same center as the original, but only half the radius.
 
-Because the plugin is still under development, we need to do one more technical fix. Go to Settings -> Files… and change the python executable box from “python” to “/home/<your keck2 username>/POVME/arun python”. 
-
 Also, for the sake of speed, go to Settings -> Output… and change the number of processors to however many you can spare (max 8).
 
 Now hit `Run POVME`.  This should take a few minutes. 
 
-When it finishes (there will be a bunch of error messages in the terminal which I should fix), you can load the volume trajectory file into VMD (in the VMD Main window, go to New Molecule, and load volume_trajectory.pdb), which is a separate object showing the pocket shape through the simulation. 
-
-VMD is going to have trouble understanding what’s going on with the binding pocket, which is a bunch of dummy atoms that pop around on a grid. In the VMD Main window, go to Graphics -> Representations and change volume_trajectory’s drawing style to “VDW”. 
+When it finishes, it should load the volume trajectory file as well as a bunch of other files into VMD. 
 
 For complicated reasons, loading the volume trajectory will un-center your camera. To fix that, go to the VMD Main window and double-click the “T” column next to the protein to make that the “Top” molecule, then go to the 3D window and hit “=” to re-center the visualization on the “Top” molecule. 
 
+VMD is going to have trouble understanding what’s going on with the binding pocket, which is a bunch of dummy atoms that pop around on a grid. In the VMD Main window, go to Graphics -> Representations and change volume_trajectory’s drawing style to “VDW”. 
 
-Now hit play and watch the binding site change with each frame!
+
+**Now hit play and watch the binding site change with each frame!**
 
 Here is a short digression on the meaning of “average” in the context of a pocket: We have seen what binding pocket look like in each frame. What does it look like on average? In the volume_trajectory file, each frame shows a single snapshot of the pocket. Each point is either a 1 (part of the pocket) or a 0 (not part of the pocket - Maybe it was blocked by the protein or outside the inclusion region). Since the grid that these 0’s and 1’s are on is always in the same location in space, we can take the average value of each grid point over all of the frames, to see what fraction of the time a certain region is part of the binding pocket. So maybe a certain grid point was part of the pocket in 10 frames, and not part of the pocket in 90 frames. Then it would have an average value of 10%, or 0.1.
 
-We will visualize this “average pocket” by loading ./frameInfo/volumetric_density.dx as a new molecule. 
+We can visualize this “average pocket” by looking at volumetric_density.dx. 
 
 A Data Explorer (DX) file doesn’t contain atoms - It instead describes the density of some phenomenon in a 3D region. In this case, our phenomenon is “volumes that are part of the binding pocket”. We visualize dx files by giving VMD a cutoff (eg. “I want to see everything that’s part of the binding pocket at least 50% of the time”), and then VMD draws an “isosurface” around all of the points that satisfy our condition.
 
-To draw an isosurface, go to Graphics -> Representations, and under Selected Molecule go to “volumetric_density.dx”. Ensure that “Drawing Method” for this molecule is set to “Isosurface”, and change the “Draw” option to “Wireframe”. In the VMD Main window, turn off the volume_trajectory.pdb depiction by double-clicking the “D” next to it. Now you should see a white wireframe drawn around the regions of space that are part of your pocket at least 50% of the time, corresponding to an isovalue of 0.5.
-
-Before you try it, try to predict the following: If you change the isovalue to 0.2, **will the isosurface (pocket shape) expand or contract?** 
-
-
-**Why?**
-
-
-
-**Try it. Were you right?**
-
+Take a look at the other files VMD has loaded. 
+**What do they show?**
+**Do they agree with what you have seen with other analysis techniques?**
 
 
 - Once you’re comfortable with the concept of averages and isosurfaces, let’s tinker around with seed regions. We’ll do that by removing the seed region (so that the entire inclusion region becomes the seed) and re-running the analysis
@@ -124,7 +115,7 @@ Before you try it, try to predict the following: If you change the isovalue to 0
 
 - In the POVME2 window, press `Run POVME2`
  
-- When this is complete, load up noSeed_volume_trajectory.pdb and compare the two volume trajectories (maybe draw one of them in VDW with a sphere scale of 0.4 and the transparent material, and the other in VDW with a sphere scale of 0.3 and the Coloring Method ColorID with a value of “10 cyan”)
+- When this is complete, look at noSeed_volume_trajectory.pdb and compare the two volume trajectories (maybe draw one of them in VDW with a sphere scale of 0.4 and the transparent material, and the other in VDW with a sphere scale of 0.3 and the Coloring Method ColorID with a value of “10 cyan”)
 
 **How do these two pocket trajectories differ?**
 
@@ -149,8 +140,35 @@ Run `ls frameInfo` and appreciate how much junk is in there.
 
 Using the POVME VMD plugin, we were able to calculate the pocket volume for one trajectory. However, this is not practical 
 if we want to calculate pocket volumes for many systems. Instead we will run POVME from the command line.
+Using the skills you have learned from previous exercises, you will automate the POVME analysis for all of the HSP90 systems
 
-There’s no GUI for this part, so hold on to your hats and work slowly and carefully. 
+Here is an outline for what you will need to do:
+
+1. Remove all waters and align each trajectory to the reference .pdb file provided (use MDtraj)
+2. Save each trajectory out in **.pdb format!** (use MDtraj)
+3. Create POVME input files that contain the correct path to your new trajectories.
+4. Each POVME input file needs to define the exact same inclusion and seed regions, so that we can compare between systems.
+5. Run POVME for each trajectory 
+```python /software/repo/moleculardynamics/povme/2018.6.21-git/POVME/POVME3.py ${myfile}.ini```
+
+Running POVME for each system will take some time (a few hours), so make sure you are happy with the parameters you have 
+chosen etc. before running.
+**It is a good idea to try everything on just one trajectory first!** 
+
+## Analysing the POVME results##
+While your calculations are running, you can start to think about how you can present the results.
+**Remember we are trying to correlate to IC50 values!**
+
+Here are some ideas:
+1. Average volume vs. IC50
+2. Max/Min volume vs. IC50
+3. Volume fluctuations vs. IC50
+4. Average surface area vs. IC50
+
+Also, create an image or two that shows an interesting observation about a system's pocket.
+
+
+
 
 
 
