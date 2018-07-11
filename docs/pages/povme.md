@@ -155,7 +155,7 @@ Running POVME for each system will take some time (a few hours), so make sure yo
 chosen etc. before running.
 **It is a good idea to try everything on just one trajectory first!** 
 
-## Analysing the POVME results##
+## Analysing the POVME results
 While your calculations are running, you can start to think about how you can present the results.
 **Remember we are trying to correlate to IC50 values!**
 
