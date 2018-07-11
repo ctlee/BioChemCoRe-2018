@@ -1,5 +1,5 @@
 ---
-title: "H-Bond Tutorial"
+title: "Hydrogen Bond Analysis Tutorial"
 permalink: /h-bond/
 toc: true
 
