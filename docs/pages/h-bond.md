@@ -9,16 +9,13 @@ Written by Bryn Taylor and Terra Sztain-Pedone
 
 ## Motivation
 
-Hydrogen bond analysis identifies the number and/or duration of hydrogen bonds in a system of interest. A hydrogen bond is formed when a single hydrogen (H) is shared between the heavy atom it is covalently bonded to (the "donor") and another heavy atom (the "acceptor"). This hydgrogen bond (which is really a "weak interaction") is usually with electronegative atoms such as fluorine (F), oxygen (O), or nitrogen (N). Remember, H-bonding is FON!  
+Hydrogen bond analysis identifies the number and/or duration of hydrogen bonds in a system of interest. A hydrogen bond is formed when a single hydrogen (H) is shared between the heavy atom it is covalently bonded to (the "donor") and another heavy atom (the "acceptor") (see Figure 1). This hydgrogen bond (which is really a "weak interaction") is usually with electronegative atoms such as fluorine (F), oxygen (O), or nitrogen (N). Remember, H-bonding is FON!  
 
-{% include image.html file="/h-bond/laksjdf.png" alt="laksjdf" caption="Figure 1: lajfsdlksg" width=100 %}
+{% include image.html file="/distance-analysis/Figure_12.png" alt="" caption="Figure 1. Hydrogen bonds approximate distances" width=60 %}
 
-Hydrogen bonds facilitate molecular interactions and are ubiquitous in nature. The bond between a H on a water molecule and an O on another water molecule is resposible for the cohesive property of water. H-bonds are also important for the secondary structure of proteins: depending on the spacing of the amino acids, H-bonds formed between these residues create alpha helices or beta sheets. In this tutorial, we're interested in H-bonds formed between ligands and proteins. 
+Hydrogen bonds facilitate molecular interactions and are ubiquitous in nature. The bond between a H on a water molecule and an O on another water molecule is resposible for the cohesive property of water. H-bonds are also important for the secondary structure of proteins: depending on the spacing of the amino acids, H-bonds formed between these residues create alpha helices or beta sheets. H-bonds also play a big role in the interaction of ligands and proteins (see Figure 2), which is what we'll be covering in this tutorial.  Make sure to answer all the questions and do this tutorial for each HSP90 system. 
 
-Make sure to answer all the questions and do this tutorial for each HSP90 system. 
-
-{% include image.html file="/h-bond/askdflj.png" alt="lsdkfa" caption="Figure 2: salkdjf" width=100 %}
-
+{% include image.html file="/distance-analysis/Figure_11.png" alt="" caption="Figure 2. Frequency distribution of the most common non-covalent interactions in protein–ligands extracted from the PDBs REF: (R. F. de Freitasa and M. Schapira, Med. Chem. Commun., 2017, 8, 1970-1981)." width=60 %}
 
 #### Q1: What role do you think H-bonds play in the interaction between a ligand and a protein? 
 
@@ -36,7 +33,7 @@ Next, examine the trajectory files in VMD. In the Distance Analysis tutorial (ht
 
 #### Q2.  In your notebook, list ligand-protein or ligand-water hydrogen bonds that are in the first or last frame. For example: 
 
-{% include image.html file="/h-bond/table.png" alt="h-bond table" caption="Table 1: Example table" width=100 %}
+{% include image.html file="/h-bond/table.png" alt="h-bond table" caption="Table 1: Example table" width=50 %}
 
 Repeat this for each trajectory (md1, md2, md3) of the three replicates for each HSP90 system. You may have already done some of this work; save time by repurposing and/or adding to it! 
 
