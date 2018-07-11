@@ -3,7 +3,7 @@ title: "H-Bond Tutorial"
 permalink: /h-bond/
 toc: true
 
-summary: "This tutorial will walk you through the theory and process of using hydrogen bond analysis to predict the IC50 rank ordering of ligands."
+summary: "This tutorial will walk you through the theory and process of using hydrogen bond analysis to investigate your system of interest."
 ---
 Written by Bryn Taylor and Terra Sztain-Pedone
 
@@ -11,9 +11,14 @@ Written by Bryn Taylor and Terra Sztain-Pedone
 
 Hydrogen bond analysis identifies the number and/or duration of hydrogen bonds in a system of interest. A hydrogen bond is formed when a single hydrogen (H) is shared between the heavy atom it is covalently bonded to (the "donor") and another heavy atom (the "acceptor"). This hydgrogen bond (which is really a "weak interaction") is usually with electronegative atoms such as fluorine (F), oxygen (O), or nitrogen (N). Remember, H-bonding is FON!  
 
+{% include image.html file="/h-bond/laksjdf.png" alt="laksjdf" caption="Figure 1: lajfsdlksg" width=100 %}
+
 Hydrogen bonds facilitate molecular interactions and are ubiquitous in nature. The bond between a H on a water molecule and an O on another water molecule is resposible for the cohesive property of water. H-bonds are also important for the secondary structure of proteins: depending on the spacing of the amino acids, H-bonds formed between these residues create alpha helices or beta sheets. In this tutorial, we're interested in H-bonds formed between ligands and proteins. 
 
-Make sure to do this tutorial for each HSP90 system. 
+Make sure to answer all the questions and do this tutorial for each HSP90 system. 
+
+{% include image.html file="/h-bond/askdflj.png" alt="lsdkfa" caption="Figure 2: salkdjf" width=100 %}
+
 
 #### Q1: What role do you think H-bonds play in the interaction between a ligand and a protein? 
 
@@ -31,9 +36,7 @@ Next, examine the trajectory files in VMD. In the Distance Analysis tutorial (ht
 
 #### Q2.  In your notebook, list ligand-protein or ligand-water hydrogen bonds that are in the first or last frame. For example: 
 
-{% include image.html file="/h-bond/table.png"
-alt="h-bond table" caption="Table 1: Example table"
-width=100 %}
+{% include image.html file="/h-bond/table.png" alt="h-bond table" caption="Table 1: Example table" width=100 %}
 
 Repeat this for each trajectory (md1, md2, md3) of the three replicates for each HSP90 system. You may have already done some of this work; save time by repurposing and/or adding to it! 
 
@@ -57,7 +60,7 @@ Create a new notebook by clicking new python 3 notebook in the upper right corne
 ### 2. Load Modules 
 ```
 import mdtraj as md
-import pytraj as pt # we need to make sure this is installed on the Keck II computers
+import pytraj as pt
 import numpy as np
 import matplotlib.pyplot as plt
 % matplotlib inline # this makes your plot print in the jupyter notebook
@@ -67,7 +70,7 @@ import matplotlib.pyplot as plt
 ```
 traj = md.load('/scratch/bcc2018_trajectories/${BCCID}/md1/${BCCID}-Pro01.nc', 
               top = '/scratch/bcc2018_trajectories/${BCCID}/${BCCID}.prmtop', 
-              stride = 1) # you can change this so it only reads every 'nth' frame. Useful for very long trajs.
+              stride = 1)
 print(traj)
 ```
 
@@ -81,7 +84,7 @@ def label(hbond):
 
 ### 5. Specify the ligand and protein
 ```
-ligand = traj.topology.select('resid LIG') # instead of 'resname 99B' for 0YDD5, use 'resid 210'. For all others use the ligand name.
+ligand = traj.topology.select('resname LIG') 
 protein = traj.topology.select("protein")
 ```
 
@@ -90,7 +93,9 @@ protein = traj.topology.select("protein")
 # figure out how many frames you loaded, this is how many frames we will look for hbonds in 
 n_frames = len(traj)
 print(n_frames)
+```
 
+```
 # This set will give us all of the unique hbonds that are made with the ligand, without repeats
 # We will want to have this later so we make it not to avoid repeating hbond calculation 
 all_hbonds_set = set()
