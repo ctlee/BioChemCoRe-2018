@@ -148,7 +148,7 @@ Run `ls frameInfo` and appreciate how much junk is in there.
 ## Running POVME on the command line for multiple systems
 
 Using the POVME VMD plugin, we were able to calculate the pocket volume for one trajectory. However, this is not practical 
-if we want to calculate pocket volumes for many systems. Instead we will run povme from the command line.
+if we want to calculate pocket volumes for many systems. Instead we will run POVME from the command line.
 
 There’s no GUI for this part, so hold on to your hats and work slowly and carefully. 
 
