@@ -15,7 +15,7 @@ Hydrogen bond analysis identifies the number and/or duration of hydrogen bonds i
 
 Hydrogen bonds facilitate molecular interactions and are ubiquitous in nature. The bond between a H on a water molecule and an O on another water molecule is resposible for the cohesive property of water. H-bonds are also important for the secondary structure of proteins: depending on the spacing of the amino acids, H-bonds formed between these residues create alpha helices or beta sheets. H-bonds also play a big role in the interaction of ligands and proteins (see Figure 2), which is what we'll be covering in this tutorial.  Make sure to answer all the questions and do this tutorial for each HSP90 system. 
 
-{% include image.html file="/distance-analysis/Figure_11.png" alt="" caption="Figure 2. Frequency distribution of the most common non-covalent interactions in protein–ligands extracted from the PDBs REF: (R. F. de Freitasa and M. Schapira, Med. Chem. Commun., 2017, 8, 1970-1981)." width=60 %}
+{% include image.html file="/h-bond/Figure_2.png" alt="" caption="Figure 2. Frequency distribution of the most common non-covalent interactions in protein–ligands extracted from the PDBs REF: (R. F. de Freitasa and M. Schapira, Med. Chem. Commun., 2017, 8, 1970-1981)." width=60 %}
 
 #### Q1: What role do you think H-bonds play in the interaction between a ligand and a protein? 
 
@@ -98,6 +98,8 @@ print(n_frames)
 all_hbonds_set = set()
 # This list will store all of the hbonds made per frame
 hbonds_each_frame = []
+```
+```
 # We want to create a dictionary containing every frame and the ligand hbonds which occur in that frame
 Frame2hbond = {}
 for frame in range(n_frames):
