@@ -24,5 +24,9 @@ topnav_dropdowns:
           url: /system-energy/
         - title: Principal Component Analysis
           url: /PCA/
+        - title: Clustering Analysis
+          url: /Clustering/
+        - title: Hydrogen Bond Analysis
+          url: /h-bond/
         - title: POVME Analysis
           url: /povme/
