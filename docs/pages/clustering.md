@@ -223,7 +223,7 @@ Select a group:
 
 Again, type "1" and press enter. Output will only be written for the active site alpha carbons. (You'll be obtaining all-atom information another way, as described below.)
 
-g_cluster now runs and generates an output file called "cluster.log". Here's what that file looks like:
+g_cluster now runs and generates an output file called `cluster.log`. Here's what the first couple of lines of that file looks like:
 
 ```
 Using gromos method for clustering
@@ -249,7 +249,7 @@ cl. | #st rmsd | middle rmsd | cluster members
   5 |  78 .134 |     50 .115 |     21     22     23     24     25
   ```
   
-  This file shows the results of the clustering. For example, notice that cluster 1 (the most-populated cluster) has 805 members (not all shown). The central member of the cluster (i.e. the most representative frame or the cluster centroid) is the 1356 frame of the trajectory. Note that, Gromacs starts numbering the frames with -1 while VMD starts numbering frames with 0. So if you want to extract cluster representative frames from your trajectory file, you  must convert the Gromacs frame index to a VMD frame index by just adding 1.
+  The cluster.log file shows the results of the clustering. For example, notice that cluster 1 (the most-populated cluster) has 805 members (not all shown). The central member of the cluster (i.e. the most representative frame or the cluster centroid) is the 1356 frame of the trajectory. Note that, Gromacs starts numbering the frames with -1 while VMD starts numbering frames with 0. So if you want to extract cluster representative frames from your trajectory file, you  must convert the Gromacs frame index to a VMD frame index by just adding 1.
 
 ## Step 6: How to Identify the Best Cutoff
 
