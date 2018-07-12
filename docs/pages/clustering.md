@@ -158,7 +158,7 @@ XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 ```
-where the "XXXX" represent the indices of the atoms of that atom selection. If any index has fewer than four digits, it has to be right-justified by adding extra spaces (not tabs). We need to create two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.dat), and one containing the indices of all the active-site C-alpha atoms (contained in the file active_site_atoms_indices.dat). An example file looks like:
+where the "XXXX" represent the indices of the atoms of that atom selection. If any index has fewer than four digits, it has to be right-justified by adding extra spaces (not tabs). We need to create a file that has two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.ndx), and one containing the indices of all the active-site C-alpha atoms (contained in the file active_site.ndx). An example file looks like:
 
 ```
 [ C-alpha ]
@@ -186,7 +186,7 @@ Save your selection file as "selections.ndx"
 cat alpha_carbons_indices.ndx active_site.ndx > selections.ndx
 ```
 
-And edit your selections.ndx file to get the format seen in the above example.
+And edit your selections.ndx file to get the format seen in the above example file.
 
 ## Step 5: How to Run Gromacs to do Gromos Clustering
 
