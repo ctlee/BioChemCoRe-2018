@@ -3,7 +3,7 @@ title: "RMSD-based Clustering Tutorial"
 permalink: /clustering/
 toc: true
 
-summary: "In this tutorial you will learn how to cluster your trajectories with RMSD-based clustering"
+summary: "In this tutorial you will learn how to cluster your trajectories with RMSD-based clustering. Specificly, gromos clustering algorithm in Gromacs program will be used."
 ---
 
 Written by Özlem Demir (by modifying & updating an older tutorial).
@@ -11,6 +11,10 @@ Written by Özlem Demir (by modifying & updating an older tutorial).
 ## Why Cluster?
 
 We cluster our trajectories to reduce the large number of frames in a typical trajectory file to a representative set of distinct frames.
+
+## Gromos Clustering Algorithm in brief
+
+Algorithm as described in Daura et al. (Angew. Chem. Int. Ed. 1999, 38, pp 236-240). Count number of neighbors using cut-off, take structure with largest number of neighbors with all its neighbors as cluster and eliminate it from the pool of clusters. Repeat for remaining structures in pool.
 
 ## Step 1: Generate Gromacs-compatible trajectory
 
