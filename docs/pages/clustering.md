@@ -128,9 +128,10 @@ XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 `
 
-where the "XXXX" represent the indices of the atoms of that selection. If any index has fewer than four digits, right justify by adding extra spaces (not tabs). We need to create two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.dat), and one containing the indices of all the active-site atoms (contained in the file active_site_atoms_indices.dat). An example file looks something like this:
+where the "XXXX" represent the indices of the atoms of that atom selection. If any index has fewer than four digits, it has to be right-justified by adding extra spaces (not tabs). We need to create two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.dat), and one containing the indices of all the active-site atoms (contained in the file active_site_atoms_indices.dat). An example file looks something like this:
 
 `
+
 [ C-alpha ]
 
    5   30   36   53   70   87  107  124  141  157  178  190  205  224  241
@@ -148,6 +149,7 @@ where the "XXXX" represent the indices of the atoms of that selection. If any in
 1725 1739 1750 1766 1780 1804 1871 1906 2078 2123 2130 2187 2628 2652 2668
 
 4335 4349 4361 4397 4419 4441 4452 4463 5759 5800
+
 `
 
 Note that numbers are separated with spaces, not tabs.
