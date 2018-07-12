@@ -78,7 +78,7 @@ Now, your first frame is also ready for our clustering exercise.
 
 Typically when clustering protein trajectories for drug design purposes, you want to know about the various conformations of the protein active site. Thus, we must identify the residues that line the active site.
 
-While there are various methods to identify active-site residues, you can start with the first frame of your trajectory (first_frame.pdb) and use VMD to identify all protein residues within 10 Angstroms of the ligand.
+While there are various methods to identify active-site residues, you can start with the first frame of your trajectory (from the NETCDF file) and use VMD to identify all protein residues within 10 Angstroms of the ligand.
 
 Example of VMD Selection:
 
