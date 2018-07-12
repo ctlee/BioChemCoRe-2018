@@ -106,30 +106,47 @@ and
 Gromacs has a very specific file format (the ndx file) that it uses to read in atom selections. Here's the general format of this file:
 
 
-`[ SELECTION NAME 1 ]
+`
+[ SELECTION NAME 1 ]
+
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 
 [ SELECTION NAME 2]
+
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 `
 
 where the "XXXX" represent the indices of the atoms of that selection. If any index has fewer than four digits, right justify by adding extra spaces (not tabs). We need to create two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.dat), and one containing the indices of all the active-site atoms (contained in the file active_site_atoms_indices.dat). An example file looks something like this:
 
-`[ C-alpha ]
+`
+[ C-alpha ]
+
    5   30   36   53   70   87  107  124  141  157  178  190  205  224  241
+   
  258  278  297  316  331  346  365  380  399  421  441  453  470  490  496
+ 
  510  534  550  574  595  614  638  660  677  694  706  720  734  745  764
+ 
  771  778  800  821  835  859  866  885  899  915  934  946  962  972  987
 
 [ active_site ]
+
  835 1465 1519 1538 1555 1565 1582 1603 1622 1638 1653 1665 1677 1696 1713
+ 
 1725 1739 1750 1766 1780 1804 1871 1906 2078 2123 2130 2187 2628 2652 2668
+
 4335 4349 4361 4397 4419 4441 4452 4463 5759 5800
 `
 
