@@ -22,6 +22,7 @@ mkdir clustering
 
 #### Gromacs does not read NETCDF (.NC) files, but can read multi-frame PDB files. Thus, we start by converting our trajectory into PDB format so that Gromacs can read.
 
+
 1.	Load the parameter file (the .prmtop file) and the coordinates file (.NC file) in VMD.
 2.	Align the trajectory: It is typical to align the trajectory by certain atoms and then to do the clustering by another atom set. For example, one might choose to first align the trajectory by the protein alpha carbons, and then to cluster based on the positions of the residue atoms lining the active site.
     In VMD, click on Extensions => Analysis => RMSD Trajectory Tool.
@@ -54,6 +55,7 @@ Now, your Gromacs-compatible trajectory file is ready.
 
 
 #### You also will need to prepare a separate PDB file for the first frame of your trajectory.
+
 
 1.  Open the trajectory.pdb file in VMD.
 2.  Right click on the trajectory name in the VMD main menu.
