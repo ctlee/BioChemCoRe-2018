@@ -26,7 +26,7 @@ First, we prepare the trajectory file. Gromacs does not read NETCDF (.NC) files,
 Note: If you have too many frames, you might choose a Stride larger than the default value of 1 (which means including all frames). And if you do, make sure you take note of your Stride value.
 
 6.  Click on the "Save..." button and save the PDB file trajectory.pdb
-7.  Now we need to edit the trajectory.pdb file to be Gromacs-compatible. First, we need to delete the VMD-generated header. Second, we need to replace the `END` delimiters used by VMD to separate frames by the `ENDMDL` delimiters that Gromacs uses. These two things could be done by any text editor, but it will be faster to do with command lines like below.
+7.  Now we need to edit the trajectory.pdb file to be Gromacs-compatible. First, we need to delete the VMD-generated header. Second, we need to replace the `END` delimiters used by VMD to separate frames by the `ENDMDL` delimiters that Gromacs uses. These two things could be done by any text editor, but it will be faster to do by running command lines like below in your terminal.
 
 To remove the VMD-generated header:
 
@@ -47,7 +47,7 @@ You also will need to prepare a separate PDB file for the first frame of your tr
 3.  Select "Save Coordinates..."
 4.  In the Frames section, set First and Last to 0, and Stride to 1.
 5.  Click on the "Save..." button and save the PDB file first_frame.pdb
-6.  Edit the PDB file in an editor like vi or gedit to remove the VMD-generated header.
+6.  Edit the PDB file in an editor like vi, gedit, etc to remove the VMD-generated header. (Or you can use the command lines shown above).
 Now, your first frame is also ready for our clustering exercise.
 
 
@@ -86,6 +86,20 @@ Note that you may get the following error:
 This error can be corrected if a blank line is removed from the resid_activesite.dat file.
 
 ## Identify Key Atom Indices
+
+Now we will identify the indices of all active-site atoms. This is because we want to cluster by all the atoms of the active site.
+
+To get the indices of all active-site atoms:
+
+`cat active_site_correct_residues.pdb  | awk '{printf $2 " "}' > active_site_atoms_indices.dat`
+
+To get the indices in the ndx format:
+
+`cat active_site_correct_residues.pdb | grep " CA " | awk '{ if ( NR%15 == 0){ {printf "%4i", $2} {printf "\n"} } else {printf "%4i ", $2} }' > active_site.ndx`
+
+and
+
+`cat first_frame.pdb | grep " CA " | awk '{ if ( NR%15 == 0){ {printf "%4i", $2} {printf "\n"} } else {printf "%4i ", $2} }' > alpha_carbons_indices.ndx`
 
 
 {% include image.html file="/clustering/science.png" alt="" caption="Figure 1. This is a test!" width=10 %}
