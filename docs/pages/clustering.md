@@ -80,6 +80,7 @@ So now you have a file containing all the residue indices of the active-site res
 Note that you may get the following error:
 
 `awk: {if ($6==) print $0 }`
+
 `awk:          ^ syntax error`
 
 This error can be corrected if a blank line is removed from the resid_activesite.dat file.
