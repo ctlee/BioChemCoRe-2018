@@ -121,7 +121,7 @@ This error can be corrected if a blank line is removed from the resid_activesite
 
 ## Step 3: Identify Key Atom Indices
 
-Now we will identify the indices of all active-site atoms. This is because we want to cluster by all the atoms of the active site.
+Now we will identify the indices of all active-site atoms. This is because we want to cluster by all the C-alpha atoms of the active site.
 
 To get the indices of all active-site atoms:
 
@@ -129,13 +129,13 @@ To get the indices of all active-site atoms:
 cat active_site_correct_residues.pdb  | awk '{printf $2 " "}' > active_site_atoms_indices.dat
 ```
 
-To get the indices in the ndx format:
+To write the indices of the active site C-alpha atoms in the ndx format:
 
 ```
 cat active_site_correct_residues.pdb | grep " CA " | awk '{ if ( NR%15 == 0){ {printf "%4i", $2} {printf "\n"} } else {printf "%4i ", $2} }' > active_site.ndx
 ```
 
-and
+and to write the indices of all C-alpha atoms of the protein in ndx format:
 
 ```
 cat first_frame.pdb | grep " CA " | awk '{ if ( NR%15 == 0){ {printf "%4i", $2} {printf "\n"} } else {printf "%4i ", $2} }' > alpha_carbons_indices.ndx
