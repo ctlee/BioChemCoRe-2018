@@ -10,7 +10,7 @@ summary: "In this tutorial you will learn how to cluster your trajectories with 
 
 We cluster our trajectories to reduce the large number of frames in a typical trajectory file to a representative set of distinct frames.
 
-## Generate Gromacs-compatible trajectory
+## Step 1: Generate Gromacs-compatible trajectory
 
 First, we prepare the trajectory file. Gromacs does not read NETCDF (.NC) files, but can read multi-frame PDB files. Thus, we start by converting our trajectory into the appropriate PDB format.
 1.	Load the parameter file (the .prmtop file) and the coordinates file (.NC file) in VMD.
@@ -51,7 +51,7 @@ You also will need to prepare a separate PDB file for the first frame of your tr
 Now, your first frame is also ready for our clustering exercise.
 
 
-## Identify the Protein Residues that Line the Active Site
+## Step 2: Identify the Protein Residues that Line the Active Site
 
 Typically when clustering protein trajectories for drug design purposes, you want to know about the various conformations of the protein active site. Thus, we must identify the residues that line the active site.
 
@@ -85,7 +85,7 @@ Note that you may get the following error:
 
 This error can be corrected if a blank line is removed from the resid_activesite.dat file.
 
-## Identify Key Atom Indices
+## Step 3: Identify Key Atom Indices
 
 Now we will identify the indices of all active-site atoms. This is because we want to cluster by all the atoms of the active site.
 
@@ -101,7 +101,7 @@ and
 
 `cat first_frame.pdb | grep " CA " | awk '{ if ( NR%15 == 0){ {printf "%4i", $2} {printf "\n"} } else {printf "%4i ", $2} }' > alpha_carbons_indices.ndx`
 
-## Create Gromacs-Compatible Atom-Selection File
+## Step 4: Create Gromacs-Compatible Atom-Selection File
 
 Gromacs has a very specific file format (the ndx file) that it uses to read in atom selections. Here's the general format of this file:
 
@@ -147,7 +147,8 @@ Note: For a very large system, a five digit format also works. Edit the awk line
 
 Save your selection file as "selections.ndx"
 
-## How to Run Gromacs to do Gromos Clustering
+
+## Step 5: How to Run Gromacs to do Gromos Clustering
 
 
 
