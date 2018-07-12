@@ -182,6 +182,11 @@ Note that numbers are separated with spaces, not tabs.
 
 Save your selection file as "selections.ndx"
 
+```
+cat alpha_carbons_indices.ndx active_site.ndx > selections.ndx
+```
+
+And edit your selections.ndx file to get the format seen in the above example.
 
 ## Step 5: How to Run Gromacs to do Gromos Clustering
 
@@ -192,7 +197,7 @@ module load gromacs
 module load cuda
 ```
 
-With all files above prepared correctly, you are now ready to cluster your trajectory.
+With all files in the previous steps prepared correctly, you are now ready to cluster your trajectory.
 
 ```
 gmx cluster -n selection.ndx -cutoff 0.125 -f trajectory.pdb -s first_frame.pdb -method gromos -o -g -dist -ev -sz -tr -ntr -clid -cl
