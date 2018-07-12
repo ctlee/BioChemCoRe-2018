@@ -206,7 +206,7 @@ Group     1 (active_site_CA) has    85 elements
 Select a group: 
 ```
 
-The labeling text is misleading, apparently. You need to first select the atom group by which you wish to cluster. Type "1" and press enter. You're interested in the active-site configurations for drug-design purposes. (Note that the trajectory has already been aligned previously in VMD.)
+The labeling text is misleading, apparently. You need to first select the atom group by which you wish to cluster. Type "1" and press enter. You're interested in the active site conformations for drug design purposes. (Note that the trajectory has already been aligned previously in VMD.)
 
 The following additional text appears:
 
@@ -217,9 +217,9 @@ Group     1 (active_site_CA) has    85 elements
 Select a group:
 ```
 
-Again, type "1" and press enter. Output will only be written for the active-site alpha carbons. (You'll be obtaining all-atom information another way, as described below.)
+Again, type "1" and press enter. Output will only be written for the active site alpha carbons. (You'll be obtaining all-atom information another way, as described below.)
 
-g_cluster now runs and generates a useful output file called "cluster.log". Here's what that file looks like:
+g_cluster now runs and generates an output file called "cluster.log". Here's what that file looks like:
 
 ```
 Using gromos method for clustering
@@ -262,3 +262,4 @@ A RMSD cutoff should be chosen to satisfy the below conditions:
 
 In the example of the picture above, a cutoff of 0.14 was ultimately chosen.
 
+{% include tip.html content="You can generate `Number of clusters` versus `RMSD cutoff` for all your systems and try to choose an RMSD cutoff that works well for all. At the end of the day, it is a good idea to plot `Number of clusters` (at the same RMSD cutoff for all your systems) versus `IC50`." %}
