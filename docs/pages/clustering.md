@@ -38,9 +38,10 @@ Now, your Gromacs-compatible trajectory file is ready.
 
 You also will need to prepare a separate PDB file for the first frame of your trajectory.
 1.  Open the trajectory.pdb file in VMD.
-2.  In the Frames section, set First and Last to 0, and Stride to 1.
-3.  Click on the "Save..." button and save the PDB file first_frame.pdb
-4.  Edit the PDB file in an editor like vi or gedit to remove the VMD-generated header.
+2.  Select "Save Coordinates..."
+3.  In the Frames section, set First and Last to 0, and Stride to 1.
+4.  Click on the "Save..." button and save the PDB file first_frame.pdb
+5.  Edit the PDB file in an editor like vi or gedit to remove the VMD-generated header.
 Now, your first frame is also ready for our clustering exercise.
 
 
