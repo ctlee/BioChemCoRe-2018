@@ -26,8 +26,8 @@ First, we prepare the trajectory file. Gromacs does not read NETCDF (.NC) files,
 7.  Now we need to edit the trajectory.pdb file to be Gromacs-compatible. First, we need to delete the VMD-generated header. Second, we need to replace the "END" delimiters used by VMD to separate frames by the "ENDMDL" delimiters that can be read by Gromacs. These two things could be done by any text editor, but it will be faster to do with the below command lines.
 To remove the VMD-generated header:
 
-`cat trajectory.pdb | grep -v CRYST1 > temp.pdb
-mv -f temp.pdb trajectory.pdb`
+`cat trajectory.pdb | grep -v CRYST1 > temp.pdb`
+`mv -f temp.pdb trajectory.pdb`
 
 To replace END delimiters between frames by ENDMDL delimiters:
 
