@@ -121,7 +121,7 @@ This error can be corrected if a blank line is removed from the resid_activesite
 
 ## Step 3: Identify Key Atom Indices
 
-Now we will identify the indices of all active-site atoms. This is because we want to cluster by all the C-alpha atoms of the active site.
+Now we will identify the indices of all active-site C-alpha atoms. This is because we want to cluster our trajectory based on the conformations of active site C-alpha atoms.
 
 To get the indices of all active-site atoms:
 
