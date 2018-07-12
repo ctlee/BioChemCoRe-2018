@@ -24,7 +24,7 @@ First, create a new directory for this analysis and work in this directory.
 mkdir clustering
 ```
 
-#### Gromacs does not read NETCDF (.NC) files, but can read multi-frame PDB files. Thus, we start by converting our trajectory into PDB format so that Gromacs can read.
+Gromacs does not read NETCDF (.NC) files, but can read multi-frame PDB files. Thus, we start by converting our trajectory into PDB format so that Gromacs can read.
 
 
 1.	Load the parameter file (the .prmtop file) and the coordinates file (.NC file) in VMD.
@@ -59,7 +59,7 @@ Now, your Gromacs-compatible trajectory file is ready.
 
 {% include tip.html content="Instead of generating multi-frame PDB files of the trajectories in VMD gui, you can alternatively use a cpptraj script to get the same output." %}
 
-#### You also will need to prepare a separate PDB file for the first frame of your trajectory.
+You also will need to prepare a separate PDB file for the first frame of your trajectory.
 
 
 1.  Open the trajectory.pdb file in VMD.
