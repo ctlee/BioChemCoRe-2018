@@ -258,6 +258,10 @@ cl. | #st rmsd | middle rmsd | cluster members
   
   `cluster.log` file shows the detailed results of the clustering. For example, notice that cluster 1 (the most-populated cluster) has 805 members (not all shown). The central member of the cluster (i.e. the most representative frame or the cluster centroid) is the 1356 frame of the trajectory. Note that, Gromacs starts numbering the frames with -1 while VMD starts numbering frames with 0. So if you want to extract cluster representative frames from your trajectory file, you  must convert the Gromacs frame index to a VMD frame index by just adding 1.
 
+`cluster.log` is not the only file that is generated as output. There is a pdb file that contains the pdb files of all the cluster centroids. Also make sure to check out the several .xmg files generated as output files. You can open them and see the plots by typing:
+`xmgrace FILENAME.xmg`
+
+
 ## Step 6: How to Identify the Best Cutoff
 
 Notice above that the command line parameter "cutoff" was set to 0.125 (in nanometers as Gromacs uses nanometers, not angstroms). This is not necessarily the best RMSD cutoff for the clustering. In reality, various cutoff parameters must be tried to find an optimal cutoff. A good way is to run clustering with multiple cutoff values and make a plot of `Number of clusters` versus `RMSD cutoff`.
