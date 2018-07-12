@@ -188,12 +188,13 @@ First, load Gromacs module.
 
 ```
 module load gromacs
+module load cuda
 ```
 
 With all files above prepared correctly, you are now ready to cluster your trajectory.
 
 ```
-gromacs-5.0.3/bin/g_cluster -n selection.ndx -cutoff 0.125 -f trajectory.pdb -s first_frame.pdb -method gromos -o -g -dist -ev -sz -tr -ntr -clid -cl
+gmx cluster -n selection.ndx -cutoff 0.125 -f trajectory.pdb -s first_frame.pdb -method gromos -o -g -dist -ev -sz -tr -ntr -clid -cl
 ```
 For information on each of these g_cluster parameters, see http://manual.gromacs.org/archive/4.6.1/online/g_cluster.html
 
