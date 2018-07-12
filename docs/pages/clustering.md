@@ -158,7 +158,7 @@ XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 ```
-where the "XXXX" represent the indices of the atoms of that atom selection. If any index has fewer than four digits, it has to be right-justified by adding extra spaces (not tabs). We need to create two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.dat), and one containing the indices of all the active-site atoms (contained in the file active_site_atoms_indices.dat). An example file looks like:
+where the "XXXX" represent the indices of the atoms of that atom selection. If any index has fewer than four digits, it has to be right-justified by adding extra spaces (not tabs). We need to create two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.dat), and one containing the indices of all the active-site C-alpha atoms (contained in the file active_site_atoms_indices.dat). An example file looks like:
 
 ```
 [ C-alpha ]
@@ -177,6 +177,7 @@ Note that numbers are separated with spaces, not tabs.
 
 {% include tip.html content="For a very large system, a five digit format also works. Edit the awk lines above from %4i to %5i to create your .ndx files." %}
 
+{% include tip.html content="Instead of using active site C-alpha atoms, another possibility is to use all active site atoms. You need to modify your scripts to generate the correct index file for that." %}
 
 
 Save your selection file as "selections.ndx"
