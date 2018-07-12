@@ -245,6 +245,9 @@ cl. | #st rmsd | middle rmsd | cluster members
 
 Notice above that the command line parameter "cutoff" was set to 0.125 (in nanometers as Gromacs uses nanometers, not angstroms). This is not necessarily the best RMSD cutoff for the clustering. In reality, various cutoff parameters must be tried to find an optimal cutoff. A good way is to run clustering with multiple cutoff values and make a plot of `Number of clusters` versus `RMSD cutoff`.
 
+{% include image.html file="/clustering/NoClust_vs_Cutoff_plot.png" alt="" caption="Figure 1. Number of Clusters versus RMSD Cutoff" width=10 %}
+
+
 A RMSD cutoff should be chosen to satisfy the below conditions:
 1. The total number of clusters is reasonable (perhaps 40 or fewer), 
 2. 90% of the trajectory is contained in even fewer clusters (less than 7ish),
