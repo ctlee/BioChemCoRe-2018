@@ -23,7 +23,7 @@ First, we prepare the trajectory file. Gromacs does not read NETCDF (.NC) files,
 4.	Select "Save Coordinates..."
 5.	In the "Selected Atoms" field, type `protein` or whatever selection of atoms you want to cluster.
 
-Note: If you have too many frames, you might choose a Stride larger than the default value of 1 (which means including all frames). And if you do, make sure you take note of your Stride value.
+Note: If you have too many frames, you might choose a Stride larger than the default value 1 (which means including all frames). And if you do, make sure you take note of your Stride value.
 
 6.  Click on the "Save..." button and save the PDB file trajectory.pdb
 7.  Now we need to edit the trajectory.pdb file to be Gromacs-compatible. First, we need to delete the VMD-generated header. Second, we need to replace the `END` delimiters used by VMD to separate frames by the `ENDMDL` delimiters that Gromacs uses. These two things could be done by any text editor, but it will be faster to do by running command lines like below in your terminal.
@@ -106,7 +106,7 @@ and
 Gromacs has a very specific file format (the ndx file) that it uses to read in atom selections. Here's the general format of this file:
 
 
-[ SELECTION NAME 1 ]
+`[ SELECTION NAME 1 ]
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
@@ -117,11 +117,11 @@ Gromacs has a very specific file format (the ndx file) that it uses to read in a
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
 #### #### #### #### #### #### #### #### #### #### ####
-
+`
 
 where the "####" represent the indices of the atoms of that selection. If any index has fewer than four digits, right justify by adding extra spaces (not tabs). We need to create two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.dat), and one containing the indices of all the active-site atoms (contained in the file active_site_atoms_indices.dat). An example file looks something like this:
 
-[ C-alpha ]
+`[ C-alpha ]
    5   30   36   53   70   87  107  124  141  157  178  190  205  224  241
  258  278  297  316  331  346  365  380  399  421  441  453  470  490  496
  510  534  550  574  595  614  638  660  677  694  706  720  734  745  764
@@ -131,6 +131,7 @@ where the "####" represent the indices of the atoms of that selection. If any in
  835 1465 1519 1538 1555 1565 1582 1603 1622 1638 1653 1665 1677 1696 1713
 1725 1739 1750 1766 1780 1804 1871 1906 2078 2123 2130 2187 2628 2652 2668
 4335 4349 4361 4397 4419 4441 4452 4463 5759 5800
+`
 
 Note that numbers are separated with spaces, not tabs.
 
@@ -139,6 +140,7 @@ Note: For a very large system, a five digit format also works. Edit the awk line
 Save your selection file as "selections.ndx"
 
 ## How to Run Gromacs to do Gromos Clustering
+
 
 
 
