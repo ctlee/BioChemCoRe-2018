@@ -63,6 +63,7 @@ Typically when clustering protein trajectories for drug design purposes, you wan
 While there are various methods to identify active-site residues, you can start with the first frame of your trajectory (first_frame.pdb) and use VMD to identify all protein residues within 10 Angstroms of the ligand.
 
 Example of VMD Selection:
+
 ```
 same residue as protein within 10 of resname LIG
 ```
@@ -72,6 +73,7 @@ To get the indices of the atoms of the active-site residues, save a PDB file con
 Right click on the protein name in the VMD main menu.
 Select "Save Coordinates..."
 In the "Selected Atoms" field, type something like:
+
 ````
 same residue as protein within 10 of resname LIG
 ```
@@ -94,7 +96,6 @@ Note that you may get the following error:
 
 ```
 awk: {if ($6==) print $0 }
-
 awk:          ^ syntax error
 ```
 
@@ -132,6 +133,7 @@ XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+
 [ SELECTION NAME 2]
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
