@@ -16,10 +16,10 @@ First, we prepare the trajectory file. Gromacs does not read NETCDF (.NC) files,
 1.	Load the parameter file (the .prmtop file) and the coordinates file (.NC file) in VMD.
 2.	Align the trajectory: It is typical to align the trajectory by certain atoms and then to do the clustering by another atom set. For example, one might choose to first align the trajectory by the protein alpha carbons, and then to cluster based on the positions of the residue atoms lining the active site.
     In VMD, click on Extensions => Analysis => RMSD Trajectory Tool.
-    The large text box initially contains the selection `protein`. Change this to whatever atom selection you wish to use to align the  trajectory. To align by all alpha carbons, for example, replace `protein` with `name CA`. Or to align by all backbone atoms, replace `protein` with `backbone`.
+    In the new window that popped up, the large text box initially contains the selection `protein`. Change this to whatever atom selection you wish to use to align the  trajectory. To align by all alpha carbons, for example, replace `protein` with `name CA`. Or to align by all backbone atoms, replace `protein` with `backbone`.
     Now click on the "Align" button.
-    Your trajectory has now been aligned.
-3.	Right click on the trajectory name in the VMD main menu.
+    Your trajectory has now been aligned. You can close this window.
+3.	Now right click on the trajectory name in the VMD main menu.
 4.	Select "Save Coordinates..."
 5.	In the "Selected Atoms" field, type `protein` or whatever selection of atoms you want to cluster.
 6.  Click on the "Save..." button and save the PDB file trajectory.pdb
