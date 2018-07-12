@@ -171,6 +171,17 @@ Save your selection file as "selections.ndx"
 
 ## Step 5: How to Run Gromacs to do Gromos Clustering
 
+First, load Gromacs module.
+
+```
+module load gromacs
+```
+
+With all files above prepared correctly, you are now ready to cluster your trajectory.
+
+```
+gromacs-3.3.1/src/tools/g_cluster -n selection.ndx -cutoff 0.125 -f trajectory.pdb -s first_frame.pdb -method gromos -o -g -dist -ev -sz -tr -ntr -clid -cl
+```
 
 
 
