@@ -247,6 +247,7 @@ Notice above that the command line parameter "cutoff" was set to 0.125 (in nanom
 
 {% include image.html file="/clustering/NoClust_vs_Cutoff_plot.png" alt="" caption="Figure 1. Number of Clusters versus RMSD Cutoff" width=10 %}
 
+{% include tip.html content="It would be best to make separate directories for each clustering with a different cutoff. This is necessary to prevent overwriting the output filesof the previous clustering." %}
 
 A RMSD cutoff should be chosen to satisfy the below conditions:
 1. The total number of clusters is reasonable (perhaps 40 or fewer), 
