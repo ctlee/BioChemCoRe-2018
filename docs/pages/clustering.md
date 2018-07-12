@@ -26,8 +26,6 @@ Gromacs does not read NETCDF (.NC) files, but can read multi-frame PDB files. Th
 
 {% include tip.html content="If you have too many frames, you might choose a Stride larger than the default value 1 (which means including all frames). And if you do, make sure you take note of your Stride value." %}
 
-Note: If you have too many frames, you might choose a Stride larger than the default value 1 (which means including all frames). And if you do, make sure you take note of your Stride value.
-
 6.  Click on the "Save..." button and save the PDB file trajectory.pdb
 7.  Now we need to edit the trajectory.pdb file to be Gromacs-compatible. First, we need to delete the VMD-generated header. Second, we need to replace the `END` delimiters used by VMD to separate frames by the `ENDMDL` delimiters that Gromacs uses. These two things could be done by any text editor, but it will be faster to do by running command lines like below in your terminal.
 
@@ -159,7 +157,9 @@ where the "XXXX" represent the indices of the atoms of that atom selection. If a
 
 Note that numbers are separated with spaces, not tabs.
 
-Note: For a very large system, a five digit format also works. Edit the awk lines above from %4i to %5i to create your .ndx files.
+{% include tip.html content="For a very large system, a five digit format also works. Edit the awk lines above from %4i to %5i to create your .ndx files." %}
+
+
 
 Save your selection file as "selections.ndx"
 
