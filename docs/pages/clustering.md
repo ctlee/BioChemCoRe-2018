@@ -107,19 +107,19 @@ Gromacs has a very specific file format (the ndx file) that it uses to read in a
 
 
 `[ SELECTION NAME 1 ]
-#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
-#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
-#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
-#### #### #### #### #### #### #### #### #### #### ####
+XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 
 [ SELECTION NAME 2]
-#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
-#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
-#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
-#### #### #### #### #### #### #### #### #### #### ####
+XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 `
 
-where the "####" represent the indices of the atoms of that selection. If any index has fewer than four digits, right justify by adding extra spaces (not tabs). We need to create two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.dat), and one containing the indices of all the active-site atoms (contained in the file active_site_atoms_indices.dat). An example file looks something like this:
+where the "XXXX" represent the indices of the atoms of that selection. If any index has fewer than four digits, right justify by adding extra spaces (not tabs). We need to create two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.dat), and one containing the indices of all the active-site atoms (contained in the file active_site_atoms_indices.dat). An example file looks something like this:
 
 `[ C-alpha ]
    5   30   36   53   70   87  107  124  141  157  178  190  205  224  241
