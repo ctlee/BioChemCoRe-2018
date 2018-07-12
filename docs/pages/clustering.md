@@ -22,7 +22,7 @@ Gromacs does not read NETCDF (.NC) files, but can read multi-frame PDB files. Th
     Your trajectory has now been aligned. You can close this window.
 3.	Now right click on the trajectory name in the VMD main menu.
 4.	Select "Save Coordinates..."
-5.	In the "Selected Atoms" field, type `protein` or whatever selection of atoms you want to cluster.
+5.  In the "Selected Atoms" field, type `protein` or whatever selection of atoms you want to cluster.
 
 {% include tip.html content="If you have too many frames, you might choose a Stride larger than the default value 1 (which means including all frames). And if you do, make sure you take note of your Stride value." %}
 
