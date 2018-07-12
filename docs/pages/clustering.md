@@ -277,4 +277,4 @@ A RMSD cutoff should be chosen to satisfy the below conditions:
 
 In the example of the picture above, a cutoff of 0.14 was ultimately chosen.
 
-{% include tip.html content="You can generate plots of Number of clusters versus RMSD cutoff for all your systems and try to choose an RMSD cutoff that works well for all. At the end of the day, it is a good idea to plot `Number of clusters` (at the same RMSD cutoff for all your systems) versus `IC50`." %}
+{% include tip.html content="You can generate a Number of clusters versus RMSD cutoff plot for each protein, and try to choose an RMSD cutoff that works well for all by looking at all the plots you generated for your proteins. At the end of the day, it is a good idea to plot `Number of clusters` (at the same RMSD cutoff for all your proteins) versus `IC50`." %}
