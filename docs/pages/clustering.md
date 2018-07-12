@@ -262,4 +262,3 @@ A RMSD cutoff should be chosen to satisfy the below conditions:
 
 In the example of the picture above, a cutoff of 0.14 was ultimately chosen.
 
-{% include image.html file="/clustering/science.png" alt="" caption="Figure 1. This is a test!" width=10 %}
