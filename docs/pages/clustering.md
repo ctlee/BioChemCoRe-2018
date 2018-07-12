@@ -38,7 +38,7 @@ Gromacs does not read NETCDF (.NC) files, but can read multi-frame PDB files. Th
     Your trajectory has now been aligned. You can close this window.
 3.	Now right click on the trajectory name in the VMD main menu.
 4.	Select "Save Coordinates..."
-5.  In the "Selected Atoms" field, type `protein` or whatever selection of atoms you want to cluster.
+5.  In the "Selected Atoms" field, type `protein`.
 6.  Click on the "Save..." button and save the PDB file trajectory.pdb
 7.  Now we need to edit the trajectory.pdb file to be Gromacs-compatible. First, we need to delete the VMD-generated header. Second, we need to replace the `END` delimiters used by VMD to separate frames by the `ENDMDL` delimiters that Gromacs uses. These two things could be done by any text editor, but it will be faster to do by running command lines like below in your terminal.
 
