@@ -95,7 +95,7 @@ In the "Selected Atoms" field, type something like:
 ````
 same residue as protein within 10 of resname LIG
 ```
-
+Make sure you are saving only one frame (First = 0 and Last =0 ) in this window.
 Click on the "Save..." button to save the PDB file. Name your file active_site.pdb.
 Edit the PDB file in an editor to remove all lines but the coordinate data. (Remove all HEADER lines and END line).
 Unfortunately, VMD re-indexes all the atoms when you save a new pdb file, so atom indices in your new file (active_site.pdb) do not match the indices in the original PDB containing the entire protein (trajectory.pdb or first_frame.pdb). Fortunately, the residue indices are not changed, so let's just save those. From the command line, extract just the residue index numbers like this:
