@@ -31,13 +31,17 @@ Note: If you have too many frames, you might choose a Stride larger than the def
 
 To remove the VMD-generated header:
 
-`cat trajectory.pdb | grep -v CRYST1 > temp.pdb`
+```
+cat trajectory.pdb | grep -v CRYST1 > temp.pdb
 
-`mv -f temp.pdb trajectory.pdb`
+mv -f temp.pdb trajectory.pdb
+```
 
 To replace `END` delimiters between frames by `ENDMDL` delimiters:
 
-`perl -pi -e 's/END/ENDMDL/g' trajectory.pdb`
+```
+perl -pi -e 's/END/ENDMDL/g' trajectory.pdb
+```
 
 Now, your Gromacs-compatible trajectory file is ready.
 
@@ -59,30 +63,40 @@ Typically when clustering protein trajectories for drug design purposes, you wan
 While there are various methods to identify active-site residues, you can start with the first frame of your trajectory (first_frame.pdb) and use VMD to identify all protein residues within 10 Angstroms of the ligand.
 
 Example of VMD Selection:
-`same residue as protein within 10 of resname LIG`
+```
+same residue as protein within 10 of resname LIG
+```
 
 To get the indices of the atoms of the active-site residues, save a PDB file containing only the relevant active-site residues.
 
 Right click on the protein name in the VMD main menu.
 Select "Save Coordinates..."
 In the "Selected Atoms" field, type something like:
-`same residue as protein within 10 of resname LIG`
+````
+same residue as protein within 10 of resname LIG
+```
 
 Click on the "Save..." button to save the PDB file. Name your file active_site.pdb.
 Edit the PDB file in an editor to remove all lines but the coordinate data. (Remove all HEADER lines and END line).
 Unfortunately, VMD re-indexes all the atoms when you save a new pdb file, so atom indices in your new file (active_site.pdb) do not match the indices in the original PDB containing the entire protein (trajectory.pdb or first_frame.pdb). Fortunately, the residue indices are not changed, so let's just save those. From the command line, extract just the residue index numbers like this:
 
-`cat active_site.pdb | awk '{print $6}' | sort -n | uniq > resid_activesite.dat`
+```
+cat active_site.pdb | awk '{print $6}' | sort -n | uniq > resid_activesite.dat
+```
 
 So now you have a file containing all the residue indices of the active-site residues. Let's pick out the lines of the original PDB file (first_frame.pdb) the have those same residue indices.
 
-`cat resid_activesite.dat | awk '{print "cat first_frame.pdb | awk STARTif ($6==" $1  ") print $0 END" }' | sed "s/START/'{/g" | sed "s/END/}'/g"  | csh > active_site_correct_residues.pdb`
+```
+cat resid_activesite.dat | awk '{print "cat first_frame.pdb | awk STARTif ($6==" $1  ") print $0 END" }' | sed "s/START/'{/g" | sed "s/END/}'/g"  | csh > active_site_correct_residues.pdb
+```
 
 Note that you may get the following error:
 
-`awk: {if ($6==) print $0 }`
+```
+awk: {if ($6==) print $0 }
 
-`awk:          ^ syntax error`
+awk:          ^ syntax error
+```
 
 This error can be corrected if a blank line is removed from the resid_activesite.dat file.
 
@@ -92,15 +106,21 @@ Now we will identify the indices of all active-site atoms. This is because we wa
 
 To get the indices of all active-site atoms:
 
-`cat active_site_correct_residues.pdb  | awk '{printf $2 " "}' > active_site_atoms_indices.dat`
+```
+cat active_site_correct_residues.pdb  | awk '{printf $2 " "}' > active_site_atoms_indices.dat
+```
 
 To get the indices in the ndx format:
 
-`cat active_site_correct_residues.pdb | grep " CA " | awk '{ if ( NR%15 == 0){ {printf "%4i", $2} {printf "\n"} } else {printf "%4i ", $2} }' > active_site.ndx`
+```
+cat active_site_correct_residues.pdb | grep " CA " | awk '{ if ( NR%15 == 0){ {printf "%4i", $2} {printf "\n"} } else {printf "%4i ", $2} }' > active_site.ndx
+```
 
 and
 
-`cat first_frame.pdb | grep " CA " | awk '{ if ( NR%15 == 0){ {printf "%4i", $2} {printf "\n"} } else {printf "%4i ", $2} }' > alpha_carbons_indices.ndx`
+```
+cat first_frame.pdb | grep " CA " | awk '{ if ( NR%15 == 0){ {printf "%4i", $2} {printf "\n"} } else {printf "%4i ", $2} }' > alpha_carbons_indices.ndx
+```
 
 ## Step 4: Create Gromacs-Compatible Atom-Selection File
 
@@ -118,7 +138,7 @@ XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 ```
-where the "XXXX" represent the indices of the atoms of that atom selection. If any index has fewer than four digits, it has to be right-justified by adding extra spaces (not tabs). We need to create two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.dat), and one containing the indices of all the active-site atoms (contained in the file active_site_atoms_indices.dat). An example file looks something like this:
+where the "XXXX" represent the indices of the atoms of that atom selection. If any index has fewer than four digits, it has to be right-justified by adding extra spaces (not tabs). We need to create two atom selections, one containing the indices of all the C-alpha carbons (contained in the file alpha_carbons_indices.dat), and one containing the indices of all the active-site atoms (contained in the file active_site_atoms_indices.dat). An example file looks like:
 
 ```
 [ C-alpha ]
