@@ -180,7 +180,7 @@ module load gromacs
 With all files above prepared correctly, you are now ready to cluster your trajectory.
 
 ```
-gromacs-3.3.1/src/tools/g_cluster -n selection.ndx -cutoff 0.125 -f trajectory.pdb -s first_frame.pdb -method gromos -o -g -dist -ev -sz -tr -ntr -clid -cl
+gromacs-5.0.3/bin/g_cluster -n selection.ndx -cutoff 0.125 -f trajectory.pdb -s first_frame.pdb -method gromos -o -g -dist -ev -sz -tr -ntr -clid -cl
 ```
 
 
