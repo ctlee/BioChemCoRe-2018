@@ -3,12 +3,12 @@ title: "RMSD-based Clustering Tutorial"
 permalink: /clustering/
 toc: true
 
-summary: "In this tutorial you will learn how to cluster your trajectories "
+summary: "In this tutorial you will learn how to cluster your trajectories with RMSD-based clustering"
 ---
 
 ## Why Cluster?
 
-We cluster our trajectories to reduce the number of frames that we have to look at ourselves.
+We cluster our trajectories to reduce the large number of frames in a typical trajectory file to a representative set of distinct frames.
 
 ## Generate Gromacs-compatible trajectory
 
@@ -22,6 +22,9 @@ First, we prepare the trajectory file. Gromacs does not read NETCDF (.NC) files,
 3.	Now right click on the trajectory name in the VMD main menu.
 4.	Select "Save Coordinates..."
 5.	In the "Selected Atoms" field, type `protein` or whatever selection of atoms you want to cluster.
+
+Note: If you have too many frames, you might choose a Stride larger than the default value of 1 (which means including all frames). And if you do, make sure you take note of your Stride value.
+
 6.  Click on the "Save..." button and save the PDB file trajectory.pdb
 7.  Now we need to edit the trajectory.pdb file to be Gromacs-compatible. First, we need to delete the VMD-generated header. Second, we need to replace the `END` delimiters used by VMD to separate frames by the `ENDMDL` delimiters that Gromacs uses. These two things could be done by any text editor, but it will be faster to do with command lines like below.
 
@@ -46,6 +49,42 @@ You also will need to prepare a separate PDB file for the first frame of your tr
 5.  Click on the "Save..." button and save the PDB file first_frame.pdb
 6.  Edit the PDB file in an editor like vi or gedit to remove the VMD-generated header.
 Now, your first frame is also ready for our clustering exercise.
+
+
+## Identify the Protein Residues that Line the Active Site
+
+Typically when clustering protein trajectories for drug-design purposes, you want to know about the various conformations of the protein active site. Thus, we must identify the residues that line the active site.
+
+While there are various methods to identify active-site residues, you can start with the first frame of your trajectory (first_frame.pdb) and use VMD to identify all protein residues within 10 Angstroms of the ligand.
+
+Example of VMD Selection:
+`same residue as protein within 10 of resname LIG`
+
+To get the indices of the atoms of the active-site residues, save a PDB file containing only the relevant active-site residues.
+
+Right click on the protein name in the VMD main menu.
+Select "Save Coordinates..."
+In the "Selected Atoms" field, type something like:
+`same residue as protein within 10 of resname LIG`
+
+Click on the "Save..." button to save the PDB file. Name your file active_site.pdb.
+Edit the PDB file in an editor to remove all lines but the coordinate data. (Remove all HEADER lines and END line).
+Unfortunately, VMD reindexes all the atoms when you save a new pdb file, so atom indices in your new file (active_site.pdb) do not match the indices in the original PDB containing the entire protein (trajectory.pdb or first_frame.pdb). Fortunately, the residue indices are not changed, so let's just save those. From the command line, extract just the residue index numbers like this:
+
+`cat active_site.pdb | awk '{print $6}' | sort -n | uniq > resid_activesite.dat`
+
+So now you have a file containing all the residue indices of the active-site residues. Let's pick out the lines of the original PDB file (first_frame.pdb) the have those same residue indices.
+
+`cat resid_activesite.dat | awk '{print "cat first_frame.pdb | awk STARTif ($6==" $1  ") print $0 END" }' | sed "s/START/'{/g" | sed "s/END/}'/g"  | csh > active_site_correct_residues.pdb`
+
+Note that you may get the following error:
+
+`awk: {if ($6==) print $0 }`
+`awk:          ^ syntax error`
+
+This error can be corrected if a blank line is removed from the resid_activesite.dat file.
+
+## Identify Key Atom Indices
 
 
 {% include image.html file="/clustering/science.png" alt="" caption="Figure 1. This is a test!" width=10 %}
