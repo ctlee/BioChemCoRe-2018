@@ -27,6 +27,7 @@ First, we prepare the trajectory file. Gromacs does not read NETCDF (.NC) files,
 To remove the VMD-generated header:
 
 `cat trajectory.pdb | grep -v CRYST1 > temp.pdb`
+
 `mv -f temp.pdb trajectory.pdb`
 
 To replace END delimiters between frames by ENDMDL delimiters:
