@@ -230,7 +230,7 @@ Select a group:
 
 Again, type "1" and press enter. Output will only be written for the active site alpha carbons. (You'll be obtaining all-atom information another way, as described below.)
 
-g_cluster now runs and generates an output file called `cluster.log`. Here's what the first couple of lines of that file looks like:
+Gromacs now runs and generates an output file called `cluster.log`. Here's what the first couple of lines of that file looks like:
 
 ```
 Using gromos method for clustering
