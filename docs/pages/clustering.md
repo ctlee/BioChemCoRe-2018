@@ -273,4 +273,4 @@ A RMSD cutoff should be chosen to satisfy the below conditions:
 
 In the example of the picture above, a cutoff of 0.14 was ultimately chosen.
 
-{% include tip.html content="You can generate `Number of clusters` versus `RMSD cutoff` for all your systems and try to choose an RMSD cutoff that works well for all. At the end of the day, it is a good idea to plot `Number of clusters` (at the same RMSD cutoff for all your systems) versus `IC50`." %}
+{% include tip.html content="You can generate plots of "Number of clusters" versus "RMSD cutoff" for all your systems and try to choose an RMSD cutoff that works well for all. At the end of the day, it is a good idea to plot `Number of clusters` (at the same RMSD cutoff for all your systems) versus `IC50`." %}
