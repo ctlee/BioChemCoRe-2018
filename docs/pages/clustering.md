@@ -14,7 +14,10 @@ We cluster our trajectories to reduce the large number of frames in a typical tr
 
 ## Gromos Clustering Algorithm in brief
 
-Algorithm as described in Daura et al. (Angew. Chem. Int. Ed. 1999, 38, pp 236-240). Count number of neighbors using cut-off, take structure with largest number of neighbors with all its neighbors as cluster and eliminate it from the pool of clusters. Repeat for remaining structures in pool.
+Algorithm as described in Daura et al. (Angew. Chem. Int. Ed. 1999, 38, pp 236-240): 
+1. Count number of neighbors using cut-off
+2. Take structure with largest number of neighbors with all its neighbors as cluster and eliminate it from the pool of clusters. 
+3. Repeat the same steps for the remaining structures.
 
 ## Step 1: Generate Gromacs-compatible trajectory
 
