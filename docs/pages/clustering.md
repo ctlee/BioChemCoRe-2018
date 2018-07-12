@@ -261,7 +261,7 @@ cl. | #st rmsd | middle rmsd | cluster members
 `cluster.log` is not the only file that is generated as output. There is a pdb file called `clusters.pdb` that contains the pdb files of all the cluster centroids. Also make sure to check out the several .xvg files generated as output files. You can open them and see the plots by typing:
 `xmgrace FILE.xvg &`
 
-If you don`t have `xmgrace` and need to plot .xvg files with `gnuplot` instead, remember to use
+If you dont have `xmgrace` and need to plot .xvg files with `gnuplot` instead, remember to use
 ```
 set datafile commentschars "#@&"
 ```
