@@ -57,6 +57,7 @@ Now, your Gromacs-compatible trajectory file is ready.
 
 {% include tip.html content="If you have too many frames, you might choose a Stride larger than the default value 1 (which means including all frames) while saving your trajectory in VMD. And if you do, make sure you take note of your Stride value." %}
 
+{% include tip.html content="Instead of generating multi-frame PDB files of the trajectories in VMD gui, you can alternatively use a cpptraj script to get the same output." %}
 
 #### You also will need to prepare a separate PDB file for the first frame of your trajectory.
 
