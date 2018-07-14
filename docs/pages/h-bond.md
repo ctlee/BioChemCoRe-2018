@@ -118,6 +118,10 @@ for frame in range(n_frames):
             Frame2hbond[frame].append(tuple(hbond))  
 ```
 
+#### Q5. How would you re-write this code to easily figure out all the frames which your favorite hbond is made in? 
+(Hint you probably want the dictionary to have hbonds as the "words" and frames as the "definitions") 
+This could be useful if you want to calculate a closest to average structure in order to show a representative figure of a hbond that is important for positioning your drug into an enzyme active site. 
+
 ### 7. Plot the total number of hydrogen bonds per frame
 ```
 x = [] # these are all the frames
@@ -133,14 +137,16 @@ plt.savefig('figure_name.png')
 plt.show()
 ```
 
-#### Q5. Plot the total number of H-bonds per frame for each replicate (md1, md2, md3) for each HSP90 system. 
-That's 18 plots! Find a way to put this information all together in one image or plot -- make it as clear and readable as possible.  
+#### Q6. Plot the total number of H-bonds per frame for each replicate (md1, md2, md3) for each HSP90 system. 
+That's 18 plots!
+You probably want to write a for loop so you don't have to do this 18 times! 
+Find a way to put this information all together in one image or plot -- make it as clear and readable as possible.  
 
-#### Q6. Now let's compare the systems and try to correlate the H-bond information with IC50 values. 
+#### Q7. Now let's compare the systems and try to correlate the H-bond information with IC50 values. 
 You were given the IC50 values (in nM) for each ligand. As you have done for the previous analyses, we will express IC50 as pIC50 (pIC50 = -log(IC50)). Think back to the Distance Analysis tutorial, where you plotted the standard deviation of the most stable conserved distance for each system against the pIC50. How would do the same thing in terms of H-bonds? Brainstorm a few ideas and find a way to turn this into an informative figure. Remember to account for the three replicates for each system. 
 
-#### Q7. Which H-bonds persist throughout the entire simulation? 
+#### Q8. Which H-bonds persist throughout the entire simulation? 
 Use your knowledge from the water residency tutorial and combine it with what you've learned today to figure out which H-bonds remain constant over time. 
 
-#### Q8. Summary figure. 
+#### Q9. Summary figure. 
 Prepare a slide with the most important results you have from this tutorial. Make sure to include an informative VMD figure and a plot correlating H-bonds and IC50s. Be ready to clearly explain what you found to someone who doesn't know anything about what you're doing! 
