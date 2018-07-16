@@ -13,9 +13,18 @@ Hydrogen bond analysis identifies the number and/or duration of hydrogen bonds i
 
 {% include image.html file="/distance-analysis/Figure_12.png" alt="" caption="Figure 1. Hydrogen bonds approximate distances" width=60 %}
 
-Hydrogen bonds facilitate molecular interactions and are ubiquitous in nature. The bond between a H on a water molecule and an O on another water molecule is resposible for the cohesive property of water. H-bonds are also important for the secondary structure of proteins: depending on the spacing of the amino acids, H-bonds formed between these residues create alpha helices or beta sheets. H-bonds also play a big role in the interaction of ligands and proteins (see Figure 2), which is what we'll be covering in this tutorial.  Make sure to answer all the questions and do this tutorial for each HSP90 system. 
+Hydrogen bonds facilitate molecular interactions and are ubiquitous in nature. The bond between a H on a water molecule and an O on another water molecule is resposible for the cohesive property of water.  H-bonds also play a big role in the interaction of ligands and proteins (see Figure 2), which is what we'll be covering in this tutorial.  Make sure to answer all the questions and do this tutorial for each HSP90 system. 
 
 {% include image.html file="/h-bond/Figure_2.png" alt="" caption="Figure 2. Frequency distribution of the most common non-covalent interactions in protein–ligands extracted from the PDBs REF: (R. F. de Freitasa and M. Schapira, Med. Chem. Commun., 2017, 8, 1970-1981)." width=60 %}
+
+H-bonds are also important for the secondary structure of proteins: depending on the spacing of the amino acids, H-bonds formed between these residues create alpha helices or beta sheets.
+
+{% include image.html file="/h-bond/AlphaBeta.png" alt="" caption="Figure 3. Hydrogen bonds are important for stabilizing protein secondary structure" width=60 %}
+
+A large portion of molecular dynamics simulations of protein-ligand complexes is for the purpose of drug discovery. Whether a drug binds to the active site or an allosteric site of an enzyme, some molecular forces are driving the binding. Hydrogen bonding is often critical to stabilizing these protein-ligand complexes. Below is an example of an HIV protease inhibitor binding to the active site of an HIV protease. 
+
+{% include image.html file="/h-bond/inhibitor.png" alt="" caption="Figure 4. Hydrogen bonds can stabilize inhibitors in active sites. REF: Nalam, M. N. L. et al. Evaluating the substrate-envelope hypothesis: structural analysis of novel HIV-1 protease inhibitors designed to be robust against drug resistance. J. Virol. 84, 5368–5378 (2010).
+" width=60 %}
 
 #### Q1: What role do you think H-bonds play in the interaction between a ligand and a protein? 
 
