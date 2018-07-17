@@ -167,6 +167,11 @@ Here are some ideas:
 
 Also, create an image or two that shows an interesting observation about a system's pocket.
 
+Other Ideas for the Future:
+1. Ligand-Based Pocket Definition
+2. POVME Clustering
+3. Pocket Similarity
+
 
 
 
