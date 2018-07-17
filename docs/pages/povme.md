@@ -144,8 +144,8 @@ Using the skills you have learned from previous exercises, you will automate the
 
 Here is an outline for what you will need to do:
 
-1. Remove all waters and align each trajectory to the reference .pdb file provided (use MDtraj)
-2. Save each trajectory out in **.pdb format!** (use MDtraj)
+1. Remove all waters and align each trajectory to a reference structure-- use the 6WCGO crystal structure (MDtraj)
+2. Save each trajectory out in **.pdb format!** (MDtraj)
 3. Create POVME input files that contain the correct path to your new trajectories.
 4. Each POVME input file needs to define the exact same inclusion and seed regions, so that we can compare between systems.
 5. Run POVME for each trajectory 
